@@ -182,7 +182,7 @@ const PropertyServices = () => {
                 ></div>
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
-                        <span className="text-skylink-gold font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Digital Infrastructure</span>
+                        <span className="text-skylink-black font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Digital Infrastructure</span>
                         <h2 className="text-4xl font-bold mb-6 font-serif text-white">ENTERPRISE-GRADE COMPLIANCE</h2>
                         <br></br><br></br><br></br><br></br><br></br>
                         {/* <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
