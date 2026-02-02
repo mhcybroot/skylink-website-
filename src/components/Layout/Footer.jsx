@@ -1,92 +1,74 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Linkedin, Mail, MapPin, Phone, ArrowUpRight } from 'lucide-react';
+import { Facebook, Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-slate-950 text-white pt-20 pb-10 border-t border-slate-900">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <footer className="bg-skylink-navy text-white pt-24 pb-12 border-t-4 border-skylink-gold">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
 
                     {/* Brand Column */}
-                    <div className="space-y-6">
-                        <h3 className="text-2xl font-bold text-white tracking-tight">Skylink Innovations Ltd.</h3>
-                        <p className="text-slate-400 leading-relaxed text-sm">
-                            Bridging the gap between physical asset management and digital process optimization.
+                    <div>
+                        <Link to="/" className="inline-block text-2xl font-bold tracking-tighter mb-6">
+                            SKYLINK<span className="text-skylink-gold">.</span>
+                        </Link>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-8">
+                            Premier asset management and BPO solutions for global enterprises. Bridging the gap between physical infrastructure and digital optimization.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-skylink-blue hover:text-white transition-all duration-300 shadow-lg shadow-black/20">
-                                <Facebook size={18} />
-                            </a>
-                            <a href="#" className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-skylink-blue hover:text-white transition-all duration-300 shadow-lg shadow-black/20">
-                                <Linkedin size={18} />
-                            </a>
+                            <a href="#" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
+                            <a href="#" className="text-slate-400 hover:text-white transition-colors"><Twitter size={20} /></a>
+                            <a href="#" className="text-slate-400 hover:text-white transition-colors"><Facebook size={20} /></a>
                         </div>
                     </div>
 
-                    {/* Vertical 1 */}
+                    {/* Solutions */}
                     <div>
-                        <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6 border-b border-skylink-blue/30 inline-block pb-2">Property Services</h4>
-                        <ul className="space-y-4">
-                            <li><Link to="/property" className="text-slate-400 hover:text-skylink-blue transition-colors text-sm flex items-center group">
-                                <span className="group-hover:translate-x-1 transition-transform">Preservation & Inspection</span>
-                            </Link></li>
-                            <li><Link to="/property" className="text-slate-400 hover:text-skylink-blue transition-colors text-sm flex items-center group">
-                                <span className="group-hover:translate-x-1 transition-transform">Renovation (Fix & Flip)</span>
-                            </Link></li>
-                            <li><Link to="/property" className="text-slate-400 hover:text-skylink-blue transition-colors text-sm flex items-center group">
-                                <span className="group-hover:translate-x-1 transition-transform">Maintenance & HVAC</span>
-                            </Link></li>
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-8">Solutions</h4>
+                        <ul className="space-y-4 text-sm font-medium">
+                            <li><Link to="/property" className="text-slate-300 hover:text-skylink-gold transition-colors">Property Preservation</Link></li>
+                            <li><Link to="/property" className="text-slate-300 hover:text-skylink-gold transition-colors">REO & Rehab</Link></li>
+                            <li><Link to="/ites" className="text-slate-300 hover:text-skylink-gold transition-colors">ITES & BPO</Link></li>
+                            <li><Link to="/ites" className="text-slate-300 hover:text-skylink-gold transition-colors">Digital Strategy</Link></li>
                         </ul>
                     </div>
 
-                    {/* Vertical 2 */}
+                    {/* Company */}
                     <div>
-                        <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6 border-b border-tech-cyan/30 inline-block pb-2">ITES & BPO Solutions</h4>
-                        <ul className="space-y-4">
-                            <li><Link to="/ites" className="text-slate-400 hover:text-tech-cyan transition-colors text-sm flex items-center group">
-                                <span className="group-hover:translate-x-1 transition-transform">Back Office Support</span>
-                            </Link></li>
-                            <li><Link to="/ites" className="text-slate-400 hover:text-tech-cyan transition-colors text-sm flex items-center group">
-                                <span className="group-hover:translate-x-1 transition-transform">Call Center Services</span>
-                            </Link></li>
-                            <li><Link to="/ites" className="text-slate-400 hover:text-tech-cyan transition-colors text-sm flex items-center group">
-                                <span className="group-hover:translate-x-1 transition-transform">Digital Transformation</span>
-                            </Link></li>
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-8">Company</h4>
+                        <ul className="space-y-4 text-sm font-medium">
+                            <li><Link to="/about" className="text-slate-300 hover:text-skylink-gold transition-colors">About Us</Link></li>
+                            <li><Link to="/careers" className="text-slate-300 hover:text-skylink-gold transition-colors">Careers</Link></li>
+                            <li><Link to="/contact" className="text-slate-300 hover:text-skylink-gold transition-colors">Contact</Link></li>
+                            <li><Link to="/privacy" className="text-slate-300 hover:text-skylink-gold transition-colors">Privacy Policy</Link></li>
                         </ul>
                     </div>
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-6 border-b border-slate-700 inline-block pb-2">Global HQ</h4>
-                        <ul className="space-y-4">
-                            <li className="flex items-start">
-                                <MapPin size={18} className="mr-3 mt-1 flex-shrink-0 text-skylink-blue" />
-                                <span className="text-slate-400 text-sm leading-relaxed">Bashundhara R/A, Dhaka<br />Bangladesh<br /><span className="text-xs text-slate-500 mt-1 block">Operating in USA & Australia</span></span>
-                            </li>
-                            <li className="flex items-center">
-                                <Mail size={18} className="mr-3 flex-shrink-0 text-skylink-blue" />
-                                <a href="mailto:hr@skylinkltd.ai" className="text-slate-400 hover:text-white text-sm transition-colors">hr@skylinkltd.ai</a>
-                            </li>
-                            <li className="flex items-center">
-                                <Phone size={18} className="mr-3 flex-shrink-0 text-skylink-blue" />
-                                <span className="text-slate-400 text-sm">+880 123 456 7890</span>
-                            </li>
-                        </ul>
+                        <h4 className="text-sm font-bold uppercase tracking-widest text-slate-500 mb-8">Headquarters</h4>
+                        <div className="space-y-6 text-sm text-slate-300">
+                            <div className="flex items-start">
+                                <MapPin size={18} className="mr-3 text-skylink-gold flex-shrink-0" />
+                                <span>123 Corporate Blvd, Suite 400<br />New York, NY 10001</span>
+                            </div>
+                            <div className="flex items-center">
+                                <Phone size={18} className="mr-3 text-skylink-gold flex-shrink-0" />
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div className="flex items-center">
+                                <Mail size={18} className="mr-3 text-skylink-gold flex-shrink-0" />
+                                <span>contact@skylink-innovations.com</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-                    <p className="text-slate-600 text-xs mb-4 md:mb-0">
-                        &copy; {new Date().getFullYear()} Skylink Innovations Ltd. All rights reserved.
-                    </p>
-                    <div className="flex items-center space-x-6">
-                        <Link to="/privacy" className="text-slate-600 hover:text-slate-400 text-xs transition-colors">Privacy Policy</Link>
-                        <Link to="/terms" className="text-slate-600 hover:text-slate-400 text-xs transition-colors">Terms of Service</Link>
-                        <span className="text-slate-700 text-xs">|</span>
-                        <span className="text-slate-600 text-xs flex items-center group">
-                            Group Entity: <a href="#" className="ml-1 text-slate-500 hover:text-white transition-colors group-hover:underline decoration-slate-500">NEXUS Netro Limited</a>
-                            <ArrowUpRight size={10} className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </span>
+                {/* Bottom Bar */}
+                <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+                    <p>&copy; {new Date().getFullYear()} Skylink Innovations Ltd. All rights reserved.</p>
+                    <div className="flex items-center space-x-6 mt-4 md:mt-0">
+                        <span>A NEXUS NETRO COMPANY</span>
                     </div>
                 </div>
             </div>

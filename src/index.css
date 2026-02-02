@@ -1,9 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply font-sans antialiased text-slate-800 bg-gray-50;
+    @apply font-sans antialiased text-slate-800 bg-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-bold tracking-tight text-skylink-navy;
+  }
+
+  /* Override rounded corners globally for a sharper look */
+  .rounded-2xl,
+  .rounded-3xl,
+  .rounded-xl {
+    @apply rounded-sm !important;
+  }
+
+  .rounded-lg {
+    @apply rounded-sm !important;
   }
 }
