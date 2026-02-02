@@ -11,10 +11,10 @@ const PropertyServices = () => {
             {/* 1. COMPACT INDUSTRIAL HERO */}
             <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold">
                 <div
-                    className="absolute inset-0 bg-cover bg-center grayscale-[50%] opacity-40 mix-blend-overlay"
+                    className="absolute inset-0 bg-cover bg-center grayscale-[50%] opacity-30"
                     style={{ backgroundImage: `url(${heroBg})` }}
                 ></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/80 to-transparent"></div>
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
                     <span className="inline-block py-1 px-3 border border-skylink-gold text-skylink-gold text-xs font-bold tracking-[0.2em] mb-6 uppercase">
                         Vertical 01
@@ -177,9 +177,10 @@ const PropertyServices = () => {
             {/* 5. TECHNOLOGY SUITE (DARK MODE) */}
             <section className="py-24 bg-skylink-navy text-white relative overflow-hidden">
                 <div
-                    className="absolute inset-0 bg-cover bg-center opacity-9"
+                    className="absolute inset-0 bg-cover bg-center opacity-20"
                     style={{ backgroundImage: `url(${techBg})` }}
                 ></div>
+
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
                         <span className="text-skylink-black font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Digital Infrastructure</span>
