@@ -6,7 +6,7 @@ import { Building, Monitor } from 'lucide-react';
 // Import images
 import hero1 from '../../assets/Photos/DSC05841.jpg'; // Corporate/Meeting
 import hero2 from '../../assets/Photos/DSC05810.jpg'; // Construction/Property
-import hero3 from '../../assets/Photos/DSC05822.jpg'; // Tech/Office
+import hero3 from '../../assets/Photos/DSC05839.jpg'; // Tech/Office
 
 const backgroundImages = [hero1, hero2, hero3];
 
