@@ -50,7 +50,7 @@ const Footer = () => {
                         <div className="space-y-6 text-sm text-slate-300">
                             <div className="flex items-start">
                                 <MapPin size={18} className="mr-3 text-skylink-gold flex-shrink-0" />
-                                <span>123 Corporate Blvd, Suite 400<br />New York, NY 10001</span>
+                                <span>7th Floor, Badar Heights, House# 262-263<br />Road# 1, Block# B, Bashundhara R/A<br />Dhaka-1229, Bangladesh</span>
                             </div>
                             <div className="flex items-center">
                                 <Phone size={18} className="mr-3 text-skylink-gold flex-shrink-0" />
@@ -58,7 +58,7 @@ const Footer = () => {
                             </div>
                             <div className="flex items-center">
                                 <Mail size={18} className="mr-3 text-skylink-gold flex-shrink-0" />
-                                <span>contact@skylink-innovations.com</span>
+                                <span>contact@skylink-ltd.com</span>
                             </div>
                         </div>
                     </div>
