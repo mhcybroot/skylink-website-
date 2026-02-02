@@ -177,33 +177,34 @@ const PropertyServices = () => {
             {/* 5. TECHNOLOGY SUITE (DARK MODE) */}
             <section className="py-24 bg-skylink-navy text-white relative overflow-hidden">
                 <div
-                    className="absolute inset-0 bg-cover bg-center opacity-10"
+                    className="absolute inset-0 bg-cover bg-center opacity-9"
                     style={{ backgroundImage: `url(${techBg})` }}
                 ></div>
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
                         <span className="text-skylink-gold font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Digital Infrastructure</span>
-                        <h2 className="text-4xl font-bold mb-6 font-serif">ENTERPRISE-GRADE COMPLIANCE</h2>
-                        <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                        <h2 className="text-4xl font-bold mb-6 font-serif text-white">ENTERPRISE-GRADE COMPLIANCE</h2>
+                        <br></br><br></br><br></br><br></br><br></br>
+                        {/* <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
                             We bridge the physical and digital worlds. Our proprietary portal integration ensures you have real-time visibility into every asset.
-                        </p>
+                        </p> */}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm">
                             <Server size={40} className="text-skylink-gold mb-6" />
-                            <h3 className="text-xl font-bold mb-4">API Integration</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed">Seamlessly connects with Aspen Grove, Equator, Res.net, and other major asset management platforms.</p>
+                            <h3 className="text-xl font-bold mb-4 text-white">API Integration</h3>
+                            <p className="text-slate-100 text-sm leading-relaxed">Seamlessly connects with Aspen Grove, Equator, Res.net, and other major asset management platforms.</p>
                         </div>
                         <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm">
                             <Lock size={40} className="text-skylink-gold mb-6" />
-                            <h3 className="text-xl font-bold mb-4">Data Security</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed">SOC 2 Type II compliant data handling. All photos and reports are geo-tagged and time-stamped for fraud prevention.</p>
+                            <h3 className="text-xl font-bold mb-4 text-white">Data Security</h3>
+                            <p className="text-slate-100 text-sm leading-relaxed">SOC 2 Type II compliant data handling. All photos and reports are geo-tagged and time-stamped for fraud prevention.</p>
                         </div>
                         <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm">
                             <Globe size={40} className="text-skylink-gold mb-6" />
-                            <h3 className="text-xl font-bold mb-4">Real-Time Reporting</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed">Live field updates allow you to approve bids and view completion photos instantly from your dashboard.</p>
+                            <h3 className="text-xl font-bold mb-4 text-white">Real-Time Reporting</h3>
+                            <p className="text-slate-100 text-sm leading-relaxed">Live field updates allow you to approve bids and view completion photos instantly from your dashboard.</p>
                         </div>
                     </div>
                 </div>
