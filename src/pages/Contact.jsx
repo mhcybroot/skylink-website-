@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../components/SEO';
 import { Mail, Phone, MapPin, MessageSquare, Briefcase, FileText, Globe, Clock, CheckCircle, ArrowRight } from 'lucide-react';
 import heroBg from '../assets/Photos/DSC05826.jpg'; // Meeting/Handshake context
 
@@ -25,6 +26,7 @@ const Contact = () => {
 
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
+            <SEO title="Contact Us" description="Partner with Excellence. Get 24/7 global support for your asset management and BPO needs." />
             {/* 1. HERO: PARTNER WITH EXCELLENCE */}
             <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-8 border-skylink-gold">
                 <div

@@ -1,4 +1,5 @@
 import { Headphones, Database, Shield, Zap, Globe, Users, TrendingUp, MessageSquare, FileText, CheckCircle, ArrowRight, Server, Cpu, Lock } from 'lucide-react';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/Photos/DSC05826.jpg'; // Office Team
 import introBg from '../assets/Photos/DSC05841.jpg'; // Meeting
@@ -9,6 +10,7 @@ import techBg from '../assets/Photos/DSC05839.jpg'; // Tech/Server
 const ITESServices = () => {
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
+            <SEO title="ITES & Global BPO" description="Scalable BPO, Omni-channel Support, and Digital Transformation solutions for global enterprises." />
             {/* 1. COMPACT INDUSTRIAL HERO */}
             <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold">
                 <div

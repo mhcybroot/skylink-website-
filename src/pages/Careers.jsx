@@ -1,4 +1,5 @@
 import { Rocket, Heart, Globe, Briefcase, ChevronRight, ArrowRight, CheckCircle, Users, Zap, Layout, Monitor, Phone } from 'lucide-react';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/Photos/DSC05856.jpg'; // Large Team Shot
 import cultureBg from '../assets/Photos/DSC05814.jpg'; // Office Environment
@@ -7,6 +8,7 @@ import benefitBg from '../assets/Photos/DSC05826.jpg'; // Collaborative Work
 const Careers = () => {
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
+            <SEO title="Careers" description="Build Your Legacy. Join a team that is redefining the standards of global asset management and digital operations." />
             {/* 1. HERO: BUILD YOUR LEGACY */}
             <section className="relative h-[600px] flex items-center bg-skylink-navy border-b-8 border-skylink-blue">
                 <div

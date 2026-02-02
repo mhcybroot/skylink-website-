@@ -1,4 +1,5 @@
 import { Hammer, Home, PenTool, Trash2, CheckCircle, ArrowRight, ShieldCheck, ClipboardCheck, ChevronRight, Server, Lock, Globe, Users, HardHat, FileCheck } from 'lucide-react';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/Photos/DSC05810.jpg';
 import preservationBg from '../assets/Photos/DSC05844.jpg';
@@ -8,6 +9,7 @@ import techBg from '../assets/Photos/DSC05839.jpg';
 const PropertyServices = () => {
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
+            <SEO title="Property Preservation" description="Nationwide property preservation, maintenance, and renovation services for asset managers." />
             {/* 1. COMPACT INDUSTRIAL HERO */}
             <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold">
                 <div

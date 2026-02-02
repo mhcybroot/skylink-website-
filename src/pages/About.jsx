@@ -1,4 +1,5 @@
 import { Shield, Target, Users, Award, Clock, Heart, ArrowRight, Share2, CheckCircle } from 'lucide-react';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/Photos/DSC05814.jpg'; // General Office
 import valuesBg from '../assets/Photos/DSC05841.jpg'; // Meeting
@@ -10,6 +11,7 @@ import mdImg from '../assets/managing-director.webp';
 const About = () => {
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
+            <SEO title="About Us" description="Built on Trust. Skylink Innovations is the strategic backbone for the nation's leading asset managers." />
             {/* 1. HERO: BUILT ON TRUST */}
             <section className="relative h-[600px] flex items-center bg-skylink-navy border-b-8 border-skylink-gold">
                 <div

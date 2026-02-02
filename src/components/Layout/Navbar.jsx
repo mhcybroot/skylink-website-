@@ -105,7 +105,7 @@ const Navbar = () => {
 
                     {/* Mobile Toggle */}
                     <div className="md:hidden flex items-center">
-                        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`${textColorClass} focus:outline-none p-2`}>
+                        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`${isMobileMenuOpen ? 'text-slate-900' : textColorClass} focus:outline-none p-2 transition-colors`}>
                             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                         </button>
                     </div>
