@@ -16,7 +16,7 @@ const Contact = () => {
         e.preventDefault();
         const subject = `Inquiry: ${formData.department} - ${formData.company}`;
         const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ACompany: ${formData.company}%0D%0ARole: ${formData.role}%0D%0ADepartment: ${formData.department}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-        window.location.href = `mailto:info@skylinkltd.ai?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:info@skylink-ltd.com?subject=${subject}&body=${body}`;
     };
 
     const handleChange = (e) => {
@@ -54,7 +54,7 @@ const Contact = () => {
                         <Briefcase size={32} className="text-skylink-gold mb-6" />
                         <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif">Enterprise Sales</h3>
                         <p className="text-slate-500 mb-6 text-sm">For asset management firms and financial institutions.</p>
-                        <a href="mailto:sales@skylinkltd.ai" className="text-skylink-navy font-bold border-b border-skylink-gold hover:text-skylink-gold transition-colors pb-1">sales@skylinkltd.ai</a>
+                        <a href="mailto:sales@skylink-ltd.com" className="text-skylink-navy font-bold border-b border-skylink-gold hover:text-skylink-gold transition-colors pb-1">sales@skylink-ltd.com</a>
                     </div>
 
                     {/* Vendor Relations */}
@@ -62,7 +62,7 @@ const Contact = () => {
                         <FileText size={32} className="text-skylink-navy mb-6" />
                         <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif">Vendor Network</h3>
                         <p className="text-slate-500 mb-6 text-sm">For contractors and field service professionals.</p>
-                        <a href="mailto:vendor@skylinkltd.ai" className="text-skylink-navy font-bold border-b border-skylink-navy hover:text-skylink-gold transition-colors pb-1">vendor@skylinkltd.ai</a>
+                        <a href="mailto:vendor@skylink-ltd.com" className="text-skylink-navy font-bold border-b border-skylink-navy hover:text-skylink-gold transition-colors pb-1">vendor@skylink-ltd.com</a>
                     </div>
 
                     {/* General Support */}
@@ -70,7 +70,7 @@ const Contact = () => {
                         <MessageSquare size={32} className="text-skylink-blue mb-6" />
                         <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif">24/7 Support</h3>
                         <p className="text-slate-500 mb-6 text-sm">For existing clients and operational inquiries.</p>
-                        <a href="mailto:support@skylinkltd.ai" className="text-skylink-navy font-bold border-b border-skylink-blue hover:text-skylink-gold transition-colors pb-1">support@skylinkltd.ai</a>
+                        <a href="mailto:support@skylink-ltd.com" className="text-skylink-navy font-bold border-b border-skylink-blue hover:text-skylink-gold transition-colors pb-1">support@skylink-ltd.com</a>
                     </div>
                 </div>
             </section>

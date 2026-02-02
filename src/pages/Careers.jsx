@@ -164,7 +164,7 @@ const Careers = () => {
                             <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
                                 We are always looking for exceptional talent. Send your resume and portfolio to our talent acquisition team.
                             </p>
-                            <a href="mailto:careers@skylink.com" className="inline-block px-8 py-3 border-2 border-white text-white font-bold uppercase tracking-widest hover:bg-white hover:text-skylink-navy transition-colors">
+                            <a href="mailto:careers@skylink-ltd.com" className="inline-block px-8 py-3 border-2 border-white text-white font-bold uppercase tracking-widest hover:bg-white hover:text-skylink-navy transition-colors">
                                 Email Us
                             </a>
                         </div>
