@@ -179,8 +179,8 @@ const Navbar = () => {
                             <Link
                                 to="/contact"
                                 className={`px-7 py-3 rounded-full font-bold text-sm transition-all shadow-lg ${isHome && !isScrolled
-                                        ? 'bg-white text-skylink-blue hover:bg-skylink-gold hover:text-white hover:shadow-glow-gold'
-                                        : 'bg-skylink-blue text-white hover:bg-blue-800 hover:shadow-glow-blue'
+                                    ? 'bg-white text-skylink-blue hover:bg-skylink-gold hover:text-white hover:shadow-glow-gold'
+                                    : 'bg-skylink-blue text-white hover:bg-blue-800 hover:shadow-glow-blue'
                                     }`}
                             >
                                 Contact Us
@@ -208,16 +208,34 @@ const Navbar = () => {
                         initial={{ opacity: 0, x: '100%' }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: '100%' }}
-                        transition={{ duration: 0.3, ease: 'easeInOut' }}
-                        className="md:hidden bg-white fixed inset-0 z-40 pt-24 px-6 flex flex-col"
+                        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="md:hidden fixed inset-0 z-40 pt-24 px-6 flex flex-col overflow-hidden"
                     >
-                        {/* Decorative background */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white -z-10" />
+                        {/* Gradient background with blur */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-skylink-navy via-skylink-blue to-skylink-navy -z-10" />
 
-                        <nav className="flex flex-col space-y-2">
+                        {/* Animated floating shapes */}
+                        <motion.div
+                            className="absolute top-1/4 -right-20 w-64 h-64 rounded-full bg-tech-cyan/10 blur-3xl"
+                            animate={{
+                                scale: [1, 1.2, 1],
+                                opacity: [0.3, 0.5, 0.3]
+                            }}
+                            transition={{ duration: 4, repeat: Infinity }}
+                        />
+                        <motion.div
+                            className="absolute bottom-1/4 -left-20 w-48 h-48 rounded-full bg-skylink-gold/10 blur-3xl"
+                            animate={{
+                                scale: [1.2, 1, 1.2],
+                                opacity: [0.3, 0.5, 0.3]
+                            }}
+                            transition={{ duration: 5, repeat: Infinity }}
+                        />
+
+                        <nav className="flex flex-col space-y-2 relative z-10">
                             {[
                                 { to: '/', label: 'Home', icon: null },
-                                { to: '/property', label: 'Property Services', icon: Building, color: 'text-skylink-blue' },
+                                { to: '/property', label: 'Property Services', icon: Building, color: 'text-skylink-gold' },
                                 { to: '/ites', label: 'ITES & BPO', icon: Monitor, color: 'text-tech-cyan' },
                                 { to: '/about', label: 'About Us', icon: null },
                                 { to: '/careers', label: 'Careers', icon: null },
@@ -226,37 +244,47 @@ const Navbar = () => {
                                     key={item.to}
                                     initial={{ opacity: 0, x: 50 }}
                                     animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.08, duration: 0.3 }}
+                                    transition={{ delay: index * 0.1, duration: 0.4, ease: 'easeOut' }}
                                 >
                                     <Link
                                         to={item.to}
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className={`flex items-center text-xl font-bold py-4 border-b border-slate-100 transition-colors ${isActivePath(item.to) ? 'text-skylink-blue' : 'text-slate-900'
+                                        className={`flex items-center text-xl font-bold py-4 border-b border-white/10 transition-all group ${isActivePath(item.to) ? 'text-skylink-gold' : 'text-white hover:text-skylink-gold'
                                             }`}
                                     >
                                         {item.icon && <item.icon className={`mr-3 ${item.color}`} size={24} />}
-                                        {item.label}
+                                        <span className="group-hover:translate-x-2 transition-transform duration-300">{item.label}</span>
                                         {isActivePath(item.to) && (
-                                            <div className="ml-auto w-2 h-2 rounded-full bg-skylink-gold" />
+                                            <motion.div
+                                                layoutId="mobileActiveIndicator"
+                                                className="ml-auto w-2 h-2 rounded-full bg-skylink-gold"
+                                            />
                                         )}
+                                        <ArrowRight className="ml-auto w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-skylink-gold" />
                                     </Link>
                                 </motion.div>
                             ))}
                         </nav>
 
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4, duration: 0.3 }}
-                            className="mt-8"
+                            transition={{ delay: 0.5, duration: 0.4 }}
+                            className="mt-auto mb-8"
                         >
                             <Link
                                 to="/contact"
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="block bg-gradient-to-r from-skylink-blue to-blue-700 text-white text-center py-4 rounded-xl text-lg font-bold shadow-lg"
+                                className="block bg-gradient-to-r from-skylink-gold to-amber-500 text-white text-center py-4 rounded-xl text-lg font-bold shadow-lg hover:shadow-xl transition-shadow"
                             >
                                 Contact Us
                             </Link>
+
+                            {/* Social/Contact info */}
+                            <div className="mt-6 text-center">
+                                <p className="text-white/60 text-sm">24/7 Global Support</p>
+                                <p className="text-tech-cyan font-bold">+1 (212) 555-0123</p>
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}
@@ -266,4 +294,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 

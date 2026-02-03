@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import LoadingScreen from './components/UI/LoadingScreen';
 import FloatingCTA from './components/UI/FloatingCTA';
 import ScrollProgress from './components/UI/ScrollProgress';
+import BackToTop from './components/UI/BackToTop';
 
 // Page transition variants
 const pageVariants = {
@@ -86,11 +87,15 @@ function App() {
         <Footer />
 
         {/* Floating CTA Button */}
-        <FloatingCTA />
+        {/* <FloatingCTA /> */}
+
+        {/* Back to Top Button with Progress */}
+        <BackToTop showAfter={500} showProgress={true} />
       </div>
     </>
   );
 }
 
 export default App;
+
 
