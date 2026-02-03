@@ -7,6 +7,8 @@ import heroBg from '../assets/Photos/DSC05810.jpg';
 import preservationBg from '../assets/Photos/DSC05844.jpg';
 import renoBg from '../assets/Photos/DSC05809.jpg';
 import techBg from '../assets/Photos/DSC05839.jpg';
+import LottieAnimation from '../components/Common/LottieAnimation';
+import placeholderAnimation from '../assets/animations/placeholder.json';
 
 const PropertyServices = () => {
     const introRef = useRef(null);
@@ -36,27 +38,12 @@ const PropertyServices = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/80 to-transparent" />
 
-                {/* Floating particles */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(6)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute w-2 h-2 rounded-full bg-skylink-gold/30"
-                            style={{
-                                left: `${15 + i * 14}%`,
-                                top: `${25 + (i % 3) * 20}%`,
-                            }}
-                            animate={{
-                                y: [0, -25, 0],
-                                opacity: [0.2, 0.5, 0.2],
-                            }}
-                            transition={{
-                                duration: 3 + i * 0.5,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                        />
-                    ))}
+                {/* Lottie Background Overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-30 mix-blend-overlay">
+                    <LottieAnimation
+                        animationData={placeholderAnimation}
+                        className="w-full h-full object-cover"
+                    />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">

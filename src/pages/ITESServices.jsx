@@ -8,6 +8,8 @@ import introBg from '../assets/Photos/DSC05841.jpg'; // Meeting
 import cxBg from '../assets/Photos/DSC05848.jpg'; // Workstation
 import boBg from '../assets/Photos/DSC05814.jpg'; // General Office
 import techBg from '../assets/Photos/DSC05839.jpg'; // Tech/Server
+import LottieAnimation from '../components/Common/LottieAnimation';
+import placeholderAnimation from '../assets/animations/placeholder.json';
 
 const ITESServices = () => {
     const introRef = useRef(null);
@@ -37,27 +39,12 @@ const ITESServices = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent" />
 
-                {/* Floating particles */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(8)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute w-2 h-2 rounded-full bg-tech-cyan/30"
-                            style={{
-                                left: `${10 + i * 11}%`,
-                                top: `${20 + (i % 4) * 18}%`,
-                            }}
-                            animate={{
-                                y: [0, -30, 0],
-                                opacity: [0.2, 0.6, 0.2],
-                            }}
-                            transition={{
-                                duration: 3 + i * 0.4,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                        />
-                    ))}
+                {/* Lottie Background Overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-30 mix-blend-overlay">
+                    <LottieAnimation
+                        animationData={placeholderAnimation}
+                        className="w-full h-full object-cover"
+                    />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">

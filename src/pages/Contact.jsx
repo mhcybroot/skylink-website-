@@ -3,6 +3,8 @@ import { motion, useInView } from 'framer-motion';
 import { MapPin, Phone, Mail, ArrowRight, Loader2, CheckCircle2, Send, Clock, Building } from 'lucide-react';
 import SEO from '../components/SEO';
 import heroBg from '../assets/Photos/DSC05810.jpg';
+import LottieAnimation from '../components/Common/LottieAnimation';
+import placeholderAnimation from '../assets/animations/placeholder.json';
 
 const Contact = () => {
     const formRef = useRef(null);
@@ -71,27 +73,12 @@ const Contact = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent" />
 
-                {/* Floating particles */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(6)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute w-2 h-2 rounded-full bg-tech-cyan/30"
-                            style={{
-                                left: `${15 + i * 14}%`,
-                                top: `${25 + (i % 3) * 20}%`,
-                            }}
-                            animate={{
-                                y: [0, -25, 0],
-                                opacity: [0.2, 0.5, 0.2],
-                            }}
-                            transition={{
-                                duration: 3 + i * 0.5,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                        />
-                    ))}
+                {/* Lottie Background Overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay">
+                    <LottieAnimation
+                        animationData={placeholderAnimation}
+                        className="w-full h-full object-cover"
+                    />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
@@ -214,8 +201,8 @@ const Contact = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 className={`w-full md:w-auto px-10 py-4 font-bold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${formStatus === 'success'
-                                        ? 'bg-green-500 text-white'
-                                        : 'bg-skylink-navy text-white hover:bg-skylink-blue hover:shadow-glow'
+                                    ? 'bg-green-500 text-white'
+                                    : 'bg-skylink-navy text-white hover:bg-skylink-blue hover:shadow-glow'
                                     }`}
                             >
                                 {formStatus === 'loading' && <Loader2 className="w-5 h-5 animate-spin" />}

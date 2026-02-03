@@ -7,6 +7,8 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import hero1 from '../../assets/Photos/DSC05841.jpg'; // Meeting
 import hero2 from '../../assets/Photos/DSC05810.jpg'; // Construction
 import hero3 from '../../assets/Photos/DSC05839.jpg'; // Tech
+import LottieAnimation from '../Common/LottieAnimation';
+import placeholderAnimation from '../../assets/animations/placeholder.json';
 
 const slides = [
     {
@@ -164,7 +166,7 @@ const CorporateHero = () => {
             {/* Content Container */}
             <motion.div
                 style={{ opacity }}
-                className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20"
+                className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full"
             >
                 <div className="max-w-4xl border-l-4 border-skylink-gold pl-8 md:pl-12 py-4">
                     <AnimatePresence mode="wait">
@@ -226,6 +228,14 @@ const CorporateHero = () => {
                             </motion.div>
                         </motion.div>
                     </AnimatePresence>
+                </div>
+
+                {/* Right Side Animation (Hidden on mobile) */}
+                <div className="hidden lg:block opacity-60 mix-blend-screen pointer-events-none">
+                    <LottieAnimation
+                        animationData={placeholderAnimation}
+                        className="w-full max-w-lg mx-auto"
+                    />
                 </div>
             </motion.div>
 

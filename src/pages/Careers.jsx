@@ -5,6 +5,8 @@ import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/Photos/DSC05856.jpg';
 import cultureBg from '../assets/Photos/DSC05814.jpg';
+import LottieAnimation from '../components/Common/LottieAnimation';
+import placeholderAnimation from '../assets/animations/placeholder.json';
 
 const Careers = () => {
     const cultureRef = useRef(null);
@@ -74,27 +76,12 @@ const Careers = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent" />
 
-                {/* Floating particles */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(6)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute w-2 h-2 rounded-full bg-skylink-blue/30"
-                            style={{
-                                left: `${15 + i * 15}%`,
-                                top: `${20 + (i % 3) * 25}%`,
-                            }}
-                            animate={{
-                                y: [0, -30, 0],
-                                opacity: [0.3, 0.6, 0.3],
-                            }}
-                            transition={{
-                                duration: 4 + i,
-                                repeat: Infinity,
-                                ease: 'easeInOut',
-                            }}
-                        />
-                    ))}
+                {/* Lottie Background Overlay */}
+                <div className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay">
+                    <LottieAnimation
+                        animationData={placeholderAnimation}
+                        className="w-full h-full object-cover"
+                    />
                 </div>
 
                 <div className="relative z-10 max-w-7xl mx-auto px-6">
