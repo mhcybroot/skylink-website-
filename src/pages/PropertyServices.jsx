@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Hammer, Home, PenTool, Trash2, CheckCircle, ArrowRight, ShieldCheck, ClipboardCheck, ChevronRight, Server, Lock, Globe, Users, HardHat, FileCheck } from 'lucide-react';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
@@ -7,63 +9,147 @@ import renoBg from '../assets/Photos/DSC05809.jpg';
 import techBg from '../assets/Photos/DSC05839.jpg';
 
 const PropertyServices = () => {
+    const introRef = useRef(null);
+    const introInView = useInView(introRef, { once: true, margin: '-100px' });
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, x: -20 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+    };
+
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
             <SEO title="Property Preservation" description="Nationwide property preservation, maintenance, and renovation services for asset managers." />
             {/* 1. COMPACT INDUSTRIAL HERO */}
-            <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold">
-                <div
-                    className="absolute inset-0 bg-cover bg-center grayscale-[50%] opacity-30"
+            <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold overflow-hidden">
+                <motion.div
+                    initial={{ scale: 1.1, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 0.3 }}
+                    transition={{ duration: 1.5 }}
+                    className="absolute inset-0 bg-cover bg-center grayscale-[50%]"
                     style={{ backgroundImage: `url(${heroBg})` }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/80 to-transparent"></div>
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/80 to-transparent" />
+
+                {/* Floating particles */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(6)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 rounded-full bg-skylink-gold/30"
+                            style={{
+                                left: `${15 + i * 14}%`,
+                                top: `${25 + (i % 3) * 20}%`,
+                            }}
+                            animate={{
+                                y: [0, -25, 0],
+                                opacity: [0.2, 0.5, 0.2],
+                            }}
+                            transition={{
+                                duration: 3 + i * 0.5,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                            }}
+                        />
+                    ))}
+                </div>
+
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-                    <span className="inline-block py-1 px-3 border border-skylink-gold text-skylink-gold text-xs font-bold tracking-[0.2em] mb-6 uppercase">
+                    <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="inline-flex items-center gap-2 py-2 px-4 bg-skylink-gold/20 backdrop-blur-sm border border-skylink-gold/50 text-skylink-gold text-xs font-bold tracking-[0.2em] mb-6 uppercase rounded-full"
+                    >
                         Vertical 01
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight font-serif leading-none">
-                        PROPERTY<br />PRESERVATION
-                    </h1>
-                    <p className="text-xl text-slate-300 font-light max-w-2xl leading-relaxed border-l-2 border-slate-500 pl-6">
+                    </motion.span>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight font-serif leading-none"
+                    >
+                        PROPERTY<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-skylink-gold to-yellow-400">PRESERVATION</span>
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="text-xl text-slate-300 font-light max-w-2xl leading-relaxed border-l-2 border-skylink-gold pl-6"
+                    >
                         Protecting, Maintaining, and Enhancing Real Estate Assets across the Continental United States.
-                    </p>
+                    </motion.p>
                 </div>
             </section>
 
             {/* 2. THE SKYLINK STANDARD (INTRO) */}
-            <section className="py-24 bg-white">
+            <section ref={introRef} className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={introInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.6 }}
+                    >
                         <h2 className="text-4xl font-bold text-skylink-navy mb-6 font-serif">THE SKYLINK STANDARD</h2>
-                        <div className="w-20 h-1 bg-skylink-gold mb-8"></div>
+                        <motion.div
+                            initial={{ width: 0 }}
+                            animate={introInView ? { width: 80 } : {}}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="h-1 bg-skylink-gold mb-8"
+                        />
                         <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                             In a fragmented industry, stability is the ultimate asset. Skylink Innovations delivers a unified, enterprise-grade solution for asset managers, tackling the complex logistics of property preservation with military precision.
                         </p>
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
                             We don't just maintain properties; we mitigate risk, accelerate turnaround times, and maximize ROI through data-driven field operations.
                         </p>
-                        <ul className="space-y-4">
+                        <motion.ul
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate={introInView ? "visible" : "hidden"}
+                            className="space-y-4"
+                        >
                             {[
                                 "100% W-9 Compliant Vendor Network",
                                 "HUD/FHA/VA Guideline Adherence",
                                 "API-Integrated Workflow Management",
                                 "$2M General Liability Insurance"
                             ].map((item, idx) => (
-                                <li key={idx} className="flex items-center text-skylink-navy font-bold text-sm uppercase tracking-wide">
+                                <motion.li
+                                    key={idx}
+                                    variants={itemVariants}
+                                    className="flex items-center text-skylink-navy font-bold text-sm uppercase tracking-wide"
+                                >
                                     <CheckCircle size={18} className="text-skylink-gold mr-3" />
                                     {item}
-                                </li>
+                                </motion.li>
                             ))}
-                        </ul>
-                    </div>
-                    <div className="relative h-[500px] border border-slate-200 p-2">
-                        <div className="absolute inset-2 border border-slate-100"></div>
-                        <img src={heroBg} alt="Standard" className="w-full h-full object-cover grayscale-[20%]" />
-                        <div className="absolute bottom-10 -left-6 bg-skylink-navy p-8 text-white shadow-2xl max-w-xs">
+                        </motion.ul>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={introInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="relative h-[500px] border border-slate-200 p-2 group"
+                    >
+                        <div className="absolute inset-2 border border-slate-100" />
+                        <img src={heroBg} alt="Standard" className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" />
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={introInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            className="absolute bottom-10 -left-6 bg-skylink-navy p-8 text-white shadow-2xl max-w-xs"
+                        >
                             <div className="text-4xl font-bold text-skylink-gold mb-2">15+</div>
                             <div className="text-sm font-bold tracking-widest uppercase">Years of Field Expertise</div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </section>
 

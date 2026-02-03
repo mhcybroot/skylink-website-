@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Headphones, Database, Shield, Zap, Globe, Users, TrendingUp, MessageSquare, FileText, CheckCircle, ArrowRight, Server, Cpu, Lock } from 'lucide-react';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
@@ -8,63 +10,148 @@ import boBg from '../assets/Photos/DSC05814.jpg'; // General Office
 import techBg from '../assets/Photos/DSC05839.jpg'; // Tech/Server
 
 const ITESServices = () => {
+    const introRef = useRef(null);
+    const introInView = useInView(introRef, { once: true, margin: '-100px' });
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, x: -20 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+    };
+
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
             <SEO title="ITES & Global BPO" description="Scalable BPO, Omni-channel Support, and Digital Transformation solutions for global enterprises." />
             {/* 1. COMPACT INDUSTRIAL HERO */}
-            <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold">
-                <div
-                    className="absolute inset-0 bg-cover bg-center grayscale-[50%] opacity-30"
+            <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold overflow-hidden">
+                <motion.div
+                    initial={{ scale: 1.1, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 0.3 }}
+                    transition={{ duration: 1.5 }}
+                    className="absolute inset-0 bg-cover bg-center grayscale-[50%]"
                     style={{ backgroundImage: `url(${heroBg})` }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent"></div>
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent" />
+
+                {/* Floating particles */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(8)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 rounded-full bg-tech-cyan/30"
+                            style={{
+                                left: `${10 + i * 11}%`,
+                                top: `${20 + (i % 4) * 18}%`,
+                            }}
+                            animate={{
+                                y: [0, -30, 0],
+                                opacity: [0.2, 0.6, 0.2],
+                            }}
+                            transition={{
+                                duration: 3 + i * 0.4,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                            }}
+                        />
+                    ))}
+                </div>
+
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-                    <span className="inline-block py-1 px-3 border border-skylink-gold text-skylink-gold text-xs font-bold tracking-[0.2em] mb-6 uppercase">
+                    <motion.span
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="inline-flex items-center gap-2 py-2 px-4 bg-tech-cyan/20 backdrop-blur-sm border border-tech-cyan/50 text-tech-cyan text-xs font-bold tracking-[0.2em] mb-6 uppercase rounded-full"
+                    >
+                        <span className="w-2 h-2 rounded-full bg-tech-cyan animate-pulse" />
                         Vertical 02
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight font-serif leading-none">
-                        GLOBAL<br />WORKFLOW
-                    </h1>
-                    <p className="text-xl text-slate-300 font-light max-w-2xl leading-relaxed border-l-2 border-slate-500 pl-6">
+                    </motion.span>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight font-serif leading-none"
+                    >
+                        GLOBAL<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-tech-cyan to-blue-400">WORKFLOW</span>
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="text-xl text-slate-300 font-light max-w-2xl leading-relaxed border-l-2 border-tech-cyan pl-6"
+                    >
                         Scalable BPO, Omni-channel Support, and Digital Transformation solutions for the modern enterprise.
-                    </p>
+                    </motion.p>
                 </div>
             </section>
 
             {/* 2. THE 24/7 ADVANTAGE (INTRO) */}
-            <section className="py-24 bg-white">
+            <section ref={introRef} className="py-24 bg-white">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={introInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.6 }}
+                    >
                         <h2 className="text-4xl font-bold text-skylink-navy mb-6 font-serif">THE 24/7 ADVANTAGE</h2>
-                        <div className="w-20 h-1 bg-skylink-gold mb-8"></div>
+                        <motion.div
+                            initial={{ width: 0 }}
+                            animate={introInView ? { width: 80 } : {}}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="h-1 bg-tech-cyan mb-8"
+                        />
                         <p className="text-lg text-slate-600 mb-6 leading-relaxed">
                             In today's "always-on" economy, downtime is not an option. Skylink Innovations provides a seamless extension of your workforce, operating across multiple time zones to ensure continuous business velocity.
                         </p>
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
                             We combine human empathy with AI-driven efficiency to reduce operational costs while significantly elevating customer satisfaction scores (CSAT).
                         </p>
-                        <ul className="space-y-4">
+                        <motion.ul
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate={introInView ? "visible" : "hidden"}
+                            className="space-y-4"
+                        >
                             {[
                                 "Follow-the-Sun Delivery Model",
                                 "ISO 27001 Information Security",
                                 "Multilingual Support Teams",
                                 "AI-Augmented Quality Assurance"
                             ].map((item, idx) => (
-                                <li key={idx} className="flex items-center text-skylink-navy font-bold text-sm uppercase tracking-wide">
-                                    <CheckCircle size={18} className="text-skylink-gold mr-3" />
+                                <motion.li
+                                    key={idx}
+                                    variants={itemVariants}
+                                    className="flex items-center text-skylink-navy font-bold text-sm uppercase tracking-wide"
+                                >
+                                    <CheckCircle size={18} className="text-tech-cyan mr-3" />
                                     {item}
-                                </li>
+                                </motion.li>
                             ))}
-                        </ul>
-                    </div>
-                    <div className="relative h-[500px] border border-slate-200 p-2">
-                        <div className="absolute inset-2 border border-slate-100"></div>
-                        <img src={introBg} alt="Advantage" className="w-full h-full object-cover grayscale-[20%]" />
-                        <div className="absolute bottom-10 -left-6 bg-skylink-navy p-8 text-white shadow-2xl max-w-xs">
-                            <div className="text-4xl font-bold text-skylink-gold mb-2">99.9%</div>
+                        </motion.ul>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={introInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="relative h-[500px] border border-slate-200 p-2 group"
+                    >
+                        <div className="absolute inset-2 border border-slate-100" />
+                        <img src={introBg} alt="Advantage" className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" />
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={introInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            className="absolute bottom-10 -left-6 bg-skylink-navy p-8 text-white shadow-2xl max-w-xs"
+                        >
+                            <div className="text-4xl font-bold text-tech-cyan mb-2">99.9%</div>
                             <div className="text-sm font-bold tracking-widest uppercase">Uptime Guarantee</div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </section>
 

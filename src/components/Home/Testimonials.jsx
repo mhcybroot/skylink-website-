@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, Star, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 const Testimonials = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+    const [direction, setDirection] = useState(1);
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true });
 
@@ -15,6 +16,8 @@ const Testimonials = () => {
             role: "Asset Manager",
             company: "NY Asset Corp",
             initials: "SJ",
+            rating: 5,
+            gradient: "from-blue-500 to-purple-600",
         },
         {
             quote: "We outsourced our entire Tier-1 support to Skylink's BPO division. The transition was seamless and CSAT scores went up 15%.",
@@ -22,6 +25,8 @@ const Testimonials = () => {
             role: "CTO",
             company: "TechFlow Solutions",
             initials: "JC",
+            rating: 5,
+            gradient: "from-cyan-500 to-blue-600",
         },
         {
             quote: "The renovation team transformed our distressed property into a market-ready gem in just 3 weeks. Incredible efficiency.",
@@ -29,6 +34,8 @@ const Testimonials = () => {
             role: "Investment Director",
             company: "Ross Capital",
             initials: "MR",
+            rating: 5,
+            gradient: "from-amber-500 to-orange-600",
         },
         {
             quote: "Their 24/7 global support model has been instrumental in improving our customer satisfaction across time zones.",
@@ -36,6 +43,8 @@ const Testimonials = () => {
             role: "VP Operations",
             company: "Global Ventures Inc",
             initials: "ER",
+            rating: 5,
+            gradient: "from-emerald-500 to-teal-600",
         },
     ];
 
@@ -178,8 +187,8 @@ const Testimonials = () => {
                         >
                             <span
                                 className={`absolute inset-0 rounded-full transition-colors duration-300 ${i === activeIndex
-                                        ? 'bg-skylink-gold'
-                                        : 'bg-slate-300 hover:bg-slate-400'
+                                    ? 'bg-skylink-gold'
+                                    : 'bg-slate-300 hover:bg-slate-400'
                                     }`}
                             />
                             {i === activeIndex && (
