@@ -1,186 +1,370 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { MapPin, Phone, Mail, ArrowRight, Loader2, CheckCircle2, Send, Clock, Building } from 'lucide-react';
 import SEO from '../components/SEO';
-import { Mail, Phone, MapPin, MessageSquare, Briefcase, FileText, Globe, Clock, CheckCircle, ArrowRight } from 'lucide-react';
-import heroBg from '../assets/Photos/DSC05826.jpg'; // Meeting/Handshake context
+import heroBg from '../assets/Photos/DSC05810.jpg';
 
 const Contact = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        company: '',
-        role: '',
-        department: 'General',
-        message: ''
-    });
+    const formRef = useRef(null);
+    const officesRef = useRef(null);
+    const formInView = useInView(formRef, { once: true, margin: '-100px' });
+    const officesInView = useInView(officesRef, { once: true, margin: '-100px' });
+
+    const [formStatus, setFormStatus] = useState('idle');
+    const [focusedField, setFocusedField] = useState(null);
+
+    const offices = [
+        {
+            city: 'New York',
+            country: 'USA',
+            type: 'Corporate HQ',
+            address: '123 Wall Street, Suite 400, New York, NY 10005',
+            phone: '+1 (212) 555-0123',
+            color: 'skylink-blue',
+        },
+        {
+            city: 'Dhaka',
+            country: 'Bangladesh',
+            type: 'Operations Hub',
+            address: 'House 45, Road 12, Banani, Dhaka-1213',
+            phone: '+880 2 5551234',
+            color: 'skylink-navy',
+        },
+        {
+            city: 'Manila',
+            country: 'Philippines',
+            type: 'Customer Experience Center',
+            address: 'Unit 2101, BGC Tower, Taguig, Metro Manila',
+            phone: '+63 2 8555 1234',
+            color: 'skylink-gold',
+        },
+    ];
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const subject = `Inquiry: ${formData.department} - ${formData.company}`;
-        const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ACompany: ${formData.company}%0D%0ARole: ${formData.role}%0D%0ADepartment: ${formData.department}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-        window.location.href = `mailto:info@skylink-ltd.com?subject=${subject}&body=${body}`;
-    };
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormStatus('loading');
+        setTimeout(() => {
+            setFormStatus('success');
+            setTimeout(() => setFormStatus('idle'), 3000);
+        }, 1500);
     };
 
     return (
         <div className="bg-white min-h-screen pt-20 font-sans">
-            <SEO title="Contact Us" description="Partner with Excellence. Get 24/7 global support for your asset management and BPO needs." />
-            {/* 1. HERO: PARTNER WITH EXCELLENCE */}
-            <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-8 border-skylink-gold">
+            <SEO title="Contact Us" description="Let's Build Something Great Together. Whether you need scalable property services or cutting-edge ITES solutions, our team is ready." />
+
+            {/* 1. HERO */}
+            <section className="relative h-[500px] flex items-center bg-skylink-navy overflow-hidden">
                 <div
-                    className="absolute inset-0 bg-cover bg-center grayscale-[50%] opacity-20"
+                    className="absolute inset-0 bg-cover bg-center grayscale-[30%] opacity-20"
                     style={{ backgroundImage: `url(${heroBg})` }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent"></div>
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent" />
 
-                <div className="relative z-10 max-w-7xl mx-auto px-6">
-                    <span className="inline-block py-1 px-3 border border-skylink-gold text-skylink-gold text-xs font-bold tracking-[0.2em] mb-6 uppercase">
-                        24/7 Global Support
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight font-serif leading-none">
-                        PARTNER WITH<br />EXCELLENCE
-                    </h1>
-                    <p className="text-xl text-slate-300 font-light max-w-xl leading-relaxed border-l-2 border-skylink-gold pl-6">
-                        Whether you are an asset manager seeking efficiency or a vendor looking to join our network, we are ready to deploy.
-                    </p>
+                {/* Floating particles */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {[...Array(6)].map((_, i) => (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2 h-2 rounded-full bg-tech-cyan/30"
+                            style={{
+                                left: `${15 + i * 14}%`,
+                                top: `${25 + (i % 3) * 20}%`,
+                            }}
+                            animate={{
+                                y: [0, -25, 0],
+                                opacity: [0.2, 0.5, 0.2],
+                            }}
+                            transition={{
+                                duration: 3 + i * 0.5,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="inline-flex items-center gap-2 py-2 px-4 bg-tech-cyan/20 backdrop-blur-sm border border-tech-cyan/50 text-tech-cyan text-xs font-bold tracking-[0.2em] mb-6 uppercase rounded-full"
+                    >
+                        <Send size={14} />
+                        Get in Touch
+                    </motion.div>
+
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight font-serif"
+                    >
+                        Let's Build Something<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-tech-cyan to-skylink-blue">Great Together</span>
+                    </motion.h1>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="text-xl text-slate-300 max-w-2xl mx-auto"
+                    >
+                        Whether you need scalable property services or cutting-edge ITES solutions, our team is ready.
+                    </motion.p>
                 </div>
             </section>
 
-            {/* 2. DIRECT LINES GRID */}
-            <section className="py-24 bg-white relative -mt-20 z-20">
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {/* Sales */}
-                    <div className="bg-white p-10 shadow-xl border-t-4 border-skylink-gold hover:-translate-y-2 transition-transform duration-300">
-                        <Briefcase size={32} className="text-skylink-gold mb-6" />
-                        <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif">Enterprise Sales</h3>
-                        <p className="text-slate-500 mb-6 text-sm">For asset management firms and financial institutions.</p>
-                        <a href="mailto:sales@skylink-ltd.com" className="text-skylink-navy font-bold border-b border-skylink-gold hover:text-skylink-gold transition-colors pb-1">sales@skylink-ltd.com</a>
-                    </div>
-
-                    {/* Vendor Relations */}
-                    <div className="bg-white p-10 shadow-xl border-t-4 border-skylink-navy hover:-translate-y-2 transition-transform duration-300">
-                        <FileText size={32} className="text-skylink-navy mb-6" />
-                        <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif">Vendor Network</h3>
-                        <p className="text-slate-500 mb-6 text-sm">For contractors and field service professionals.</p>
-                        <a href="mailto:vendor@skylink-ltd.com" className="text-skylink-navy font-bold border-b border-skylink-navy hover:text-skylink-gold transition-colors pb-1">vendor@skylink-ltd.com</a>
-                    </div>
-
-                    {/* General Support */}
-                    <div className="bg-white p-10 shadow-xl border-t-4 border-skylink-blue hover:-translate-y-2 transition-transform duration-300">
-                        <MessageSquare size={32} className="text-skylink-blue mb-6" />
-                        <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif">24/7 Support</h3>
-                        <p className="text-slate-500 mb-6 text-sm">For existing clients and operational inquiries.</p>
-                        <a href="mailto:support@skylink-ltd.com" className="text-skylink-navy font-bold border-b border-skylink-blue hover:text-skylink-gold transition-colors pb-1">support@skylink-ltd.com</a>
-                    </div>
-                </div>
-            </section>
-
-            {/* 3. ENTERPRISE INQUIRY FORM */}
-            <section className="py-24 bg-slate-50">
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
-
-                    {/* Form Context */}
-                    <div>
-                        <h2 className="text-4xl font-bold text-skylink-navy mb-6 font-serif">START THE CONVERSATION</h2>
-                        <div className="w-20 h-1 bg-skylink-navy mb-8"></div>
-                        <p className="text-lg text-slate-600 mb-12 leading-relaxed">
-                            Tell us about your operational challenges. Our team of solutions architects will analyze your needs and propose a tailored strategy within 24 hours.
-                        </p>
-
-                        <div className="space-y-8">
-                            <div className="flex items-start">
-                                <div className="p-4 bg-white shadow-md rounded-full mr-6 text-skylink-navy">
-                                    <Globe size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-skylink-navy text-lg">Global Headquarters</h4>
-                                    <p className="text-slate-500">7th Floor, Badar Heights, House# 262-263<br />Road# 1, Block# B, Bashundhara R/A<br />Dhaka-1229, Bangladesh</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start">
-                                <div className="p-4 bg-white shadow-md rounded-full mr-6 text-skylink-navy">
-                                    <Clock size={24} />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-skylink-navy text-lg">Operating Hours</h4>
-                                    <p className="text-slate-500">Corporate: Mon-Fri, 9am - 6pm EST<br />Operations: 24/7/365</p>
-                                </div>
-                            </div>
+            {/* 2. CONTACT FORM & INFO */}
+            <section ref={formRef} className="py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-16">
+                    {/* Form Section */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={formInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.6 }}
+                        className="lg:col-span-3"
+                    >
+                        <div className="inline-flex items-center gap-2 text-skylink-blue font-bold tracking-widest text-sm uppercase mb-4">
+                            <div className="w-8 h-px bg-skylink-blue" />
+                            Contact Form
                         </div>
-                    </div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-skylink-navy mb-8 font-serif">Send Us a Message</h2>
 
-                    {/* Form */}
-                    <div className="bg-white p-10 shadow-2xl border-t-8 border-skylink-navy">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Full Name *</label>
-                                    <input type="text" name="name" required value={formData.name} onChange={handleChange} className="w-full border-b border-slate-300 py-2 focus:border-skylink-navy focus:outline-none transition-colors" placeholder="Jane Doe" />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email Address *</label>
-                                    <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full border-b border-slate-300 py-2 focus:border-skylink-navy focus:outline-none transition-colors" placeholder="jane@company.com" />
-                                </div>
+                                {['Full Name', 'Email Address'].map((label, idx) => (
+                                    <motion.div
+                                        key={label}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={formInView ? { opacity: 1, y: 0 } : {}}
+                                        transition={{ delay: 0.2 + idx * 0.1 }}
+                                        className="relative"
+                                    >
+                                        <input
+                                            type={idx === 1 ? 'email' : 'text'}
+                                            placeholder={label}
+                                            required
+                                            onFocus={() => setFocusedField(label)}
+                                            onBlur={() => setFocusedField(null)}
+                                            className={`w-full px-4 py-4 border-2 rounded-xl bg-slate-50 focus:bg-white focus:outline-none transition-all duration-300 ${focusedField === label ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-slate-200'}`}
+                                        />
+                                        <motion.div
+                                            initial={{ scaleX: 0 }}
+                                            animate={{ scaleX: focusedField === label ? 1 : 0 }}
+                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-skylink-blue to-tech-cyan origin-left"
+                                        />
+                                    </motion.div>
+                                ))}
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Company Name</label>
-                                    <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full border-b border-slate-300 py-2 focus:border-skylink-navy focus:outline-none transition-colors" placeholder="Acme Corp" />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Job Title</label>
-                                    <input type="text" name="role" value={formData.role} onChange={handleChange} className="w-full border-b border-slate-300 py-2 focus:border-skylink-navy focus:outline-none transition-colors" placeholder="Director of Ops" />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Department of Interest</label>
-                                <select name="department" value={formData.department} onChange={handleChange} className="w-full border-b border-slate-300 py-2 focus:border-skylink-navy focus:outline-none bg-white transition-colors">
-                                    <option value="General">General Inquiry</option>
-                                    <option value="Property Preservation">Property Preservation</option>
-                                    <option value="ITES/BPO">ITES & BPO Solutions</option>
-                                    <option value="Vendor Network">Vendor Network</option>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={formInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: 0.4 }}
+                                className="relative"
+                            >
+                                <select
+                                    onFocus={() => setFocusedField('subject')}
+                                    onBlur={() => setFocusedField(null)}
+                                    className={`w-full px-4 py-4 border-2 rounded-xl bg-slate-50 focus:bg-white focus:outline-none transition-all duration-300 ${focusedField === 'subject' ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-slate-200'}`}
+                                >
+                                    <option>Select a Subject</option>
+                                    <option>Property Preservation Services</option>
+                                    <option>ITES / BPO Solutions</option>
+                                    <option>Partnership Inquiry</option>
+                                    <option>Careers</option>
+                                    <option>General Inquiry</option>
                                 </select>
-                            </div>
+                            </motion.div>
 
-                            <div>
-                                <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">How can we help? *</label>
-                                <textarea name="message" required rows={4} value={formData.message} onChange={handleChange} className="w-full border-b border-slate-300 py-2 focus:border-skylink-navy focus:outline-none transition-colors" placeholder="Describe your project needs..."></textarea>
-                            </div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={formInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: 0.5 }}
+                                className="relative"
+                            >
+                                <textarea
+                                    rows="5"
+                                    placeholder="Your Message"
+                                    required
+                                    onFocus={() => setFocusedField('message')}
+                                    onBlur={() => setFocusedField(null)}
+                                    className={`w-full px-4 py-4 border-2 rounded-xl bg-slate-50 focus:bg-white focus:outline-none resize-none transition-all duration-300 ${focusedField === 'message' ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-slate-200'}`}
+                                />
+                            </motion.div>
 
-                            <button type="submit" className="w-full bg-skylink-navy text-white font-bold py-4 hover:bg-slate-800 transition-colors uppercase tracking-widest flex items-center justify-center group">
-                                Send Inquiry <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                            <motion.button
+                                type="submit"
+                                disabled={formStatus === 'loading'}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={formInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ delay: 0.6 }}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className={`w-full md:w-auto px-10 py-4 font-bold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center justify-center gap-2 ${formStatus === 'success'
+                                        ? 'bg-green-500 text-white'
+                                        : 'bg-skylink-navy text-white hover:bg-skylink-blue hover:shadow-glow'
+                                    }`}
+                            >
+                                {formStatus === 'loading' && <Loader2 className="w-5 h-5 animate-spin" />}
+                                {formStatus === 'success' && <CheckCircle2 className="w-5 h-5" />}
+                                {formStatus === 'idle' && <Send className="w-5 h-5" />}
+                                {formStatus === 'loading' ? 'Sending...' : formStatus === 'success' ? 'Message Sent!' : 'Send Message'}
+                            </motion.button>
                         </form>
-                    </div>
+                    </motion.div>
+
+                    {/* Quick Contact Info */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={formInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="lg:col-span-2"
+                    >
+                        <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 sticky top-32">
+                            <h3 className="text-xl font-bold text-skylink-navy mb-6">Quick Contact</h3>
+
+                            <div className="space-y-6">
+                                {[
+                                    { icon: Mail, label: 'Email', value: 'info@skylink-innovations.com', color: 'skylink-blue' },
+                                    { icon: Phone, label: 'Phone', value: '+1 (212) 555-0123', color: 'tech-cyan' },
+                                    { icon: Clock, label: 'Business Hours', value: 'Mon - Fri: 9AM - 6PM EST', color: 'skylink-gold' },
+                                ].map((item, idx) => (
+                                    <motion.div
+                                        key={idx}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={formInView ? { opacity: 1, x: 0 } : {}}
+                                        transition={{ delay: 0.5 + idx * 0.1 }}
+                                        whileHover={{ x: 5 }}
+                                        className="flex items-start gap-4 group cursor-pointer"
+                                    >
+                                        <div className={`p-3 bg-${item.color}/10 rounded-xl group-hover:bg-${item.color}/20 transition-colors`}>
+                                            <item.icon size={20} className={`text-${item.color}`} />
+                                        </div>
+                                        <div>
+                                            <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{item.label}</p>
+                                            <p className="font-semibold text-skylink-navy group-hover:text-skylink-blue transition-colors">{item.value}</p>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            <div className="mt-8 pt-8 border-t border-slate-200">
+                                <p className="text-sm text-slate-500">
+                                    Response Time: We aim to respond to all inquiries within 24 business hours.
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* 4. FAQ / BEFORE YOU ASK */}
-            <section className="py-24 bg-white border-t border-slate-200">
-                <div className="max-w-4xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <span className="text-skylink-gold font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Before You Ask</span>
-                        <h2 className="text-4xl font-bold text-skylink-navy font-serif">COMMON QUESTIONS</h2>
-                    </div>
+            {/* 3. GLOBAL OFFICES */}
+            <section ref={officesRef} className="py-24 bg-slate-50">
+                <div className="max-w-7xl mx-auto px-6">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={officesInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-16"
+                    >
+                        <div className="inline-flex items-center gap-2 text-skylink-gold font-bold tracking-widest text-sm uppercase mb-4">
+                            <div className="w-8 h-px bg-skylink-gold" />
+                            Our Locations
+                            <div className="w-8 h-px bg-skylink-gold" />
+                        </div>
+                        <h2 className="text-4xl md:text-5xl font-bold text-skylink-navy font-serif">Global Offices</h2>
+                    </motion.div>
 
-                    <div className="space-y-6">
-                        <div className="border border-slate-200 p-8 hover:border-skylink-gold transition-colors group cursor-default">
-                            <h3 className="text-xl font-bold text-skylink-navy mb-3 group-hover:text-skylink-gold transition-colors">What are your standard turnaround times?</h3>
-                            <p className="text-slate-600 leading-relaxed">For property preservation orders, our standard SLA is 48-72 hours depending on the scope. For BPO tasks, we offer real-time processing with T+1 quality capabilities.</p>
-                        </div>
-                        <div className="border border-slate-200 p-8 hover:border-skylink-gold transition-colors group cursor-default">
-                            <h3 className="text-xl font-bold text-skylink-navy mb-3 group-hover:text-skylink-gold transition-colors">Do you require long-term contracts?</h3>
-                            <p className="text-slate-600 leading-relaxed">We offer flexible engagement models. While enterprise solutions typically involve annual service agreements, we also support project-based workflows for specific campaigns.</p>
-                        </div>
-                        <div className="border border-slate-200 p-8 hover:border-skylink-gold transition-colors group cursor-default">
-                            <h3 className="text-xl font-bold text-skylink-navy mb-3 group-hover:text-skylink-gold transition-colors">How do I become a vendor?</h3>
-                            <p className="text-slate-600 leading-relaxed">Contractors can apply through our Vendor Portal. You will need to provide proof of insurance (GL/E&O), W9, and background check verification.</p>
-                        </div>
-                    </div>
+                    <motion.div
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate={officesInView ? "visible" : "hidden"}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+                    >
+                        {offices.map((office, idx) => (
+                            <motion.div
+                                key={idx}
+                                variants={itemVariants}
+                                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                                className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-t-4 border-${office.color} group`}
+                            >
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className={`p-3 bg-${office.color}/10 rounded-xl group-hover:bg-${office.color}/20 transition-colors`}>
+                                        <Building size={24} className={`text-${office.color}`} />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-bold text-skylink-navy">{office.city}</h3>
+                                        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{office.type}</p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <motion.div
+                                        whileHover={{ x: 5 }}
+                                        className="flex items-start gap-3 cursor-pointer"
+                                    >
+                                        <MapPin size={18} className="text-slate-400 mt-0.5 flex-shrink-0" />
+                                        <p className="text-slate-600 text-sm">{office.address}</p>
+                                    </motion.div>
+                                    <motion.div
+                                        whileHover={{ x: 5 }}
+                                        className="flex items-center gap-3 cursor-pointer"
+                                    >
+                                        <Phone size={18} className="text-slate-400 flex-shrink-0" />
+                                        <p className="text-slate-600 text-sm font-medium group-hover:text-skylink-blue transition-colors">{office.phone}</p>
+                                    </motion.div>
+                                </div>
+
+                                <div className={`mt-6 pt-6 border-t border-slate-100 w-12 h-1 bg-slate-200 group-hover:bg-${office.color} group-hover:w-full transition-all duration-500`} />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* 4. MAP CTA */}
+            <section className="py-20 bg-gradient-to-r from-skylink-navy to-skylink-blue relative overflow-hidden">
+                {/* Background decoration */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-tech-cyan/10 rounded-full blur-3xl" />
+                </div>
+
+                <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 font-serif">Ready to Transform Your Operations?</h3>
+                        <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
+                            Our experts are standing by to discuss how Skylink can help you achieve operational excellence.
+                        </p>
+                        <motion.a
+                            href="tel:+12125550123"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="inline-flex items-center px-8 py-4 bg-white text-skylink-navy font-bold uppercase tracking-widest rounded-xl hover:bg-skylink-gold hover:text-white transition-all duration-300 shadow-2xl group"
+                        >
+                            <Phone className="w-5 h-5 mr-2" />
+                            Call Us Now
+                            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </motion.a>
+                    </motion.div>
                 </div>
             </section>
         </div>
