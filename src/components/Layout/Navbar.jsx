@@ -175,6 +175,16 @@ const Navbar = () => {
                         <NavLink to="/about">About</NavLink>
                         <NavLink to="/careers">Careers</NavLink>
 
+                        <a
+                            href="http://76.13.221.43:8083"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`relative text-sm font-semibold tracking-wide uppercase transition-colors group ${textColorClass} hover:text-skylink-gold`}
+                        >
+                            Login
+                            <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-skylink-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                        </a>
+
                         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                             <Link
                                 to="/contact"
@@ -239,29 +249,44 @@ const Navbar = () => {
                                 { to: '/ites', label: 'ITES & BPO', icon: Monitor, color: 'text-tech-cyan' },
                                 { to: '/about', label: 'About Us', icon: null },
                                 { to: '/careers', label: 'Careers', icon: null },
+                                { isExternal: true, href: 'http://76.13.221.43:8083', label: 'Login', icon: null }
                             ].map((item, index) => (
                                 <motion.div
-                                    key={item.to}
+                                    key={item.to || item.href}
                                     initial={{ opacity: 0, x: 50 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: index * 0.1, duration: 0.4, ease: 'easeOut' }}
                                 >
-                                    <Link
-                                        to={item.to}
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className={`flex items-center text-xl font-bold py-4 border-b border-white/10 transition-all group ${isActivePath(item.to) ? 'text-skylink-gold' : 'text-white hover:text-skylink-gold'
-                                            }`}
-                                    >
-                                        {item.icon && <item.icon className={`mr-3 ${item.color}`} size={24} />}
-                                        <span className="group-hover:translate-x-2 transition-transform duration-300">{item.label}</span>
-                                        {isActivePath(item.to) && (
-                                            <motion.div
-                                                layoutId="mobileActiveIndicator"
-                                                className="ml-auto w-2 h-2 rounded-full bg-skylink-gold"
-                                            />
-                                        )}
-                                        <ArrowRight className="ml-auto w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-skylink-gold" />
-                                    </Link>
+                                    {item.isExternal ? (
+                                        <a
+                                            href={item.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="flex items-center text-xl font-bold py-4 border-b border-white/10 transition-all group text-white hover:text-skylink-gold"
+                                        >
+                                            {item.icon && <item.icon className={`mr-3 ${item.color}`} size={24} />}
+                                            <span className="group-hover:translate-x-2 transition-transform duration-300">{item.label}</span>
+                                            <ArrowRight className="ml-auto w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-skylink-gold" />
+                                        </a>
+                                    ) : (
+                                        <Link
+                                            to={item.to}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className={`flex items-center text-xl font-bold py-4 border-b border-white/10 transition-all group ${isActivePath(item.to) ? 'text-skylink-gold' : 'text-white hover:text-skylink-gold'
+                                                }`}
+                                        >
+                                            {item.icon && <item.icon className={`mr-3 ${item.color}`} size={24} />}
+                                            <span className="group-hover:translate-x-2 transition-transform duration-300">{item.label}</span>
+                                            {isActivePath(item.to) && (
+                                                <motion.div
+                                                    layoutId="mobileActiveIndicator"
+                                                    className="ml-auto w-2 h-2 rounded-full bg-skylink-gold"
+                                                />
+                                            )}
+                                            <ArrowRight className="ml-auto w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-skylink-gold" />
+                                        </Link>
+                                    )}
                                 </motion.div>
                             ))}
                         </nav>
