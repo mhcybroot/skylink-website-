@@ -1,16 +1,27 @@
-# React + Vite
+# skylink-website-
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About
+A project by Mahmudul Hasan - Diploma in Computer Science, Dhaka Polytechnic.
 
-Currently, two official plugins are available:
+## Tech Stack & Keywords
+- **Language:** JavaScript
+- **Keywords:** angular | api | backend | express | frontend | javascript | js | mongodb | mongoose | node | nodejs | npm | react | realtime | rest | skylink | vue | websocket
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Modern architecture
+- Production-ready code
+- Clean, maintainable structure
 
-## React Compiler
+## Getting Started
+```bash
+git clone https://github.com/mhcybroot/skylink-website-.git
+cd skylink-website-
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Author
+**Mahmudul Hasan** — IT Executive @ SKYLINK INNOVATIONS LTD.  
+📧 eng.mahmudulhasan.bd@gmail.com | 📱 +880 1537-749454  
+🔗 [GitHub](https://github.com/mhcybroot) | [LinkedIn](https://linkedin.com/in/engineermahmudulhasan)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+🔍 SEO: angular, api, backend, express, frontend, javascript, js, mongodb, mongoose, node, nodejs, npm | Updated: 2026-05-19 15:21
