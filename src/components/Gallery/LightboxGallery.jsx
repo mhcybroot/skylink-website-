@@ -95,7 +95,7 @@ const LightboxGallery = ({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm"
+                className="fixed inset-0 z-[150] bg-slate-950/95 backdrop-blur-md perspective-1000"
                 onClick={onClose}
             >
                 {/* Close button */}
@@ -165,16 +165,26 @@ const LightboxGallery = ({
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentIndex}
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.9 }}
-                            transition={{ duration: 0.3 }}
-                            className="relative max-w-full max-h-full"
+                            initial={{ opacity: 0, scale: 0.9, rotateY: 10, z: -50 }}
+                            animate={{ opacity: 1, scale: 1, rotateY: 0, z: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, rotateY: -10, z: -50 }}
+                            transition={{ type: 'spring', stiffness: 280, damping: 25 }}
+                            className="relative max-w-4xl max-h-full border border-skylink-gold/30 rounded-2xl p-2 bg-slate-900/50 shadow-[0_0_50px_rgba(194,155,64,0.15)]"
+                            style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
                         >
+                            {/* Telemetry corners */}
+                            <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-skylink-gold/60 rounded-tl pointer-events-none" />
+                            <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-skylink-gold/60 rounded-tr pointer-events-none" />
+                            <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-skylink-gold/60 rounded-bl pointer-events-none" />
+                            <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-skylink-gold/60 rounded-br pointer-events-none" />
+                            
+                            {/* Inner tech scan lines */}
+                            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(6,182,212,0.02)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none z-20 rounded-lg" />
+
                             <motion.img
                                 src={currentImage.src}
                                 alt={currentImage.alt || ''}
-                                className={`max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 ${isZoomed ? 'scale-150 cursor-zoom-out' : 'cursor-zoom-in'
+                                className={`max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-transform duration-300 relative z-10 ${isZoomed ? 'scale-[1.6] cursor-zoom-out' : 'cursor-zoom-in'
                                     }`}
                                 onClick={() => setIsZoomed(!isZoomed)}
                             />

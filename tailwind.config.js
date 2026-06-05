@@ -10,11 +10,11 @@ export default {
       colors: {
         'skylink-navy': '#0a192f', // Deepest Navy
         'skylink-slate': '#334155', // Corporate Slate
-        'skylink-blue': '#1e3a8a', // Traditional Trust Blue (Darker)
-        'skylink-gold': '#c29b40', // Executive Accent
-        'tech-cyan': '#06b6d4', // Digital/ITES Accent (Tailwind cyan-500)
-        'tech-cyan-light': '#22d3ee', // Lighter variant for hover states
-        'tech-cyan-dark': '#0891b2', // Darker variant
+        'skylink-blue': 'var(--skylink-blue, #1e3a8a)',
+        'skylink-gold': 'var(--skylink-gold, #c29b40)',
+        'tech-cyan': 'var(--tech-cyan, #06b6d4)',
+        'tech-cyan-light': 'var(--tech-cyan-light, #22d3ee)',
+        'tech-cyan-dark': 'var(--tech-cyan-dark, #0891b2)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

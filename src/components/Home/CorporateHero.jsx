@@ -76,7 +76,11 @@ const CorporateHero = () => {
         target: heroRef,
         offset: ["start start", "end start"]
     });
-    const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+    // Background moves down slowly
+    const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+    // Text moves up and scales slightly
+    const textY = useTransform(scrollYProgress, [0, 1], ['0%', '-50%']);
+    const textScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
     // Mouse tracking for spotlight effect
@@ -135,37 +139,55 @@ const CorporateHero = () => {
             <AnimatePresence mode='popLayout'>
                 <motion.div
                     key={currentIndex}
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 0.6, scale: 1 }}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 0.5, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 1.5 }}
                     className="absolute inset-0 bg-cover bg-center grayscale-[30%] contrast-125"
-                    style={{ y, backgroundImage: `url(${slides[currentIndex].image})` }}
+                    style={{
+                        x: (mousePosition.x - 50) * 0.04,
+                        y: (mousePosition.y - 50) * 0.04,
+                        backgroundImage: `url(${slides[currentIndex].image})`
+                    }}
                 />
             </AnimatePresence>
 
             {/* Mouse-following spotlight effect */}
             <div
-                className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+                className="absolute inset-0 pointer-events-none transition-opacity duration-500 z-10"
                 style={{
-                    background: `radial-gradient(circle 400px at ${mousePosition.x}% ${mousePosition.y}%, rgba(6, 182, 212, 0.15), transparent 60%)`,
+                    background: `radial-gradient(circle 450px at ${mousePosition.x}% ${mousePosition.y}%, rgba(6, 182, 212, 0.15), transparent 60%)`,
                 }}
+            />
+
+            {/* Tech Grid Background Parallax */}
+            <motion.div
+                style={{
+                    x: (mousePosition.x - 50) * -0.15,
+                    y: (mousePosition.y - 50) * -0.15,
+                    backgroundImage: `
+                        linear-gradient(to right, rgba(6, 182, 212, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(6, 182, 212, 0.03) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '40px 40px'
+                }}
+                className="absolute inset-0 pointer-events-none z-0 opacity-50"
             />
 
             {/* Floating Particles */}
             <FloatingParticles />
 
             {/* Industrial Overlay Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] z-10 pointer-events-none"></div>
 
-            {/* Gradient Fade */}
-            <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/80 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-skylink-navy via-transparent to-transparent"></div>
+            {/* Gradient Fades */}
+            <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/80 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-skylink-navy via-transparent to-transparent z-10 pointer-events-none"></div>
 
             {/* Content Container */}
             <motion.div
-                style={{ opacity }}
-                className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full"
+                style={{ opacity, y: textY, scale: textScale }}
+                className="relative z-20 max-w-7xl mx-auto px-6 w-full pt-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full"
             >
                 <div className="max-w-4xl border-l-4 border-skylink-gold pl-8 md:pl-12 py-4">
                     <AnimatePresence mode="wait">
@@ -178,7 +200,7 @@ const CorporateHero = () => {
                             {/* Animated Title */}
                             <motion.h1
                                 variants={titleVariants}
-                                className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter leading-none"
+                                className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter leading-none font-serif"
                             >
                                 {slides[currentIndex].title.split('').map((char, index) => (
                                     <motion.span
@@ -209,18 +231,18 @@ const CorporateHero = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.7, duration: 0.6 }}
-                                className="flex flex-col sm:flex-row gap-6"
+                                className="flex flex-col sm:flex-row gap-6 relative z-30"
                             >
                                 <Link
                                     to="/contact"
-                                    className="group inline-flex items-center px-8 py-4 bg-white text-skylink-navy font-bold text-lg hover:bg-skylink-gold hover:text-white transition-all duration-300 shadow-lg hover:shadow-glow-gold"
+                                    className="group inline-flex items-center px-8 py-4 bg-white text-skylink-navy font-bold text-lg hover:bg-skylink-gold hover:text-white transition-all duration-300 shadow-lg hover:shadow-glow-gold glow-hover rounded-lg"
                                 >
                                     PARTNER WITH US
                                     <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
                                 </Link>
                                 <Link
                                     to="/property"
-                                    className="inline-flex items-center px-8 py-4 border border-slate-500 text-white font-medium text-lg hover:border-tech-cyan hover:text-tech-cyan transition-all duration-300"
+                                    className="inline-flex items-center px-8 py-4 border border-slate-500 text-white font-medium text-lg hover:border-tech-cyan hover:text-tech-cyan transition-all duration-300 glow-hover rounded-lg"
                                 >
                                     EXPLORE CAPABILITIES
                                 </Link>
@@ -230,8 +252,12 @@ const CorporateHero = () => {
                 </div>
 
                 {/* Right Side Animation */}
-                <div className="hidden lg:block absolute right-0 top-0 w-1/2 h-full pointer-events-none">
-                    <Hero3DScene mousePosition={mousePosition} />
+                <div className="hidden lg:block absolute right-0 top-0 w-1/2 h-full pointer-events-auto z-20">
+                    <Hero3DScene 
+                        mousePosition={mousePosition} 
+                        currentIndex={currentIndex} 
+                        setCurrentIndex={setCurrentIndex} 
+                    />
                 </div>
             </motion.div>
 

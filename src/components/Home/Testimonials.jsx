@@ -1,11 +1,226 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { Quote, Star, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { motion, useMotionValue, useTransform, useSpring, useInView, AnimatePresence } from 'framer-motion';
+import { Quote, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
+// ============================================
+// FEATURE 7: 3D TESTIMONIAL SENTIMENT SPHERE
+// ============================================
+const SentimentSphere = ({ activeIndex }) => {
+    const groupRef = useRef();
+    const coreRef = useRef();
+
+    useFrame((state) => {
+        const time = state.clock.getElapsedTime();
+        const speedFactor = [1.2, 2.0, 1.0, 1.6][activeIndex] || 1.0;
+
+        if (groupRef.current) {
+            groupRef.current.rotation.y = time * 0.15 * speedFactor;
+            groupRef.current.rotation.x = time * 0.08 * speedFactor;
+        }
+
+        if (coreRef.current) {
+            coreRef.current.rotation.z = -time * 0.25 * speedFactor;
+            // Beating pulse effect
+            const pulse = 1.0 + Math.sin(time * 2.5 * speedFactor) * 0.06;
+            coreRef.current.scale.setScalar(pulse);
+        }
+    });
+
+    const colors = ["#c29b40", "#06b6d4", "#eab308", "#10b981"];
+    const activeColor = colors[activeIndex] || "#c29b40";
+
+    return (
+        <group ref={groupRef}>
+            {/* Outer wireframe shell */}
+            <mesh>
+                <sphereGeometry args={[1.35, 12, 12]} />
+                <meshStandardMaterial 
+                    color={activeColor} 
+                    wireframe 
+                    transparent 
+                    opacity={0.3} 
+                    emissive={activeColor}
+                    emissiveIntensity={0.2}
+                />
+            </mesh>
+
+            {/* Inner morphing core */}
+            <mesh ref={coreRef}>
+                <dodecahedronGeometry args={[0.9, 1]} />
+                <meshStandardMaterial 
+                    color={activeColor}
+                    wireframe
+                    roughness={0.1}
+                    metalness={0.9}
+                    emissive={activeColor}
+                    emissiveIntensity={0.4}
+                />
+            </mesh>
+
+            {/* Glowing envelope points */}
+            <mesh position={[0, 1.35, 0]}>
+                <sphereGeometry args={[0.04, 8, 8]} />
+                <meshBasicMaterial color={activeColor} />
+            </mesh>
+            <mesh position={[0, -1.35, 0]}>
+                <sphereGeometry args={[0.04, 8, 8]} />
+                <meshBasicMaterial color={activeColor} />
+            </mesh>
+        </group>
+    );
+};
+
+const SentimentSphereCanvas = ({ activeIndex }) => {
+    return (
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-10 flex items-center justify-center">
+            <Canvas camera={{ position: [0, 0, 3.2], fov: 45 }}>
+                <ambientLight intensity={0.5} />
+                <pointLight position={[5, 5, 5]} intensity={1.5} />
+                <SentimentSphere activeIndex={activeIndex} />
+            </Canvas>
+        </div>
+    );
+};
+
+// FEATURE 5: TESTIMONIALS RATINGS PARTICLE BURST
+const StarBurst = ({ activeIndex }) => {
+    const particles = useMemo(() => {
+        return Array.from({ length: 8 }).map((_, i) => {
+            const angle = (i * Math.PI) / 4 + (Math.random() - 0.5) * 0.25;
+            const distance = Math.random() * 50 + 40;
+            return {
+                x: Math.cos(angle) * distance,
+                y: Math.sin(angle) * distance,
+                size: Math.random() * 3 + 2,
+                delay: Math.random() * 0.08
+            };
+        });
+    }, [activeIndex]);
+
+    return (
+        <div className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center">
+            {particles.map((p, i) => (
+                <motion.div
+                    key={i}
+                    initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                    animate={{ x: p.x, y: p.y, opacity: 0, scale: 0 }}
+                    transition={{ duration: 0.7, delay: p.delay, ease: 'easeOut' }}
+                    className="absolute bg-skylink-gold rounded-full"
+                    style={{
+                        width: p.size,
+                        height: p.size,
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
+
+const TestimonialEqualizer = ({ activeIndex }) => {
+    const [barHeights, setBarHeights] = useState(Array(18).fill(12));
+    
+    useEffect(() => {
+        let ticks = 0;
+        const interval = setInterval(() => {
+            setBarHeights(Array.from({ length: 18 }, () => Math.floor(Math.random() * 38) + 4));
+            ticks++;
+            if (ticks > 10) {
+                clearInterval(interval);
+            }
+        }, 80);
+
+        const ambientInterval = setInterval(() => {
+            if (ticks > 10) {
+                setBarHeights(Array.from({ length: 18 }, (_, i) => {
+                    const base = 8 + Math.sin(Date.now() / 200 + i) * 6;
+                    return Math.max(3, Math.floor(base + Math.random() * 4));
+                }));
+            }
+        }, 100);
+
+        return () => {
+            clearInterval(interval);
+            clearInterval(ambientInterval);
+        };
+    }, [activeIndex]);
+
+    return (
+        <div className="absolute bottom-2 left-0 right-0 flex items-end justify-center gap-1 h-12 z-20 pointer-events-none">
+            {barHeights.map((height, i) => (
+                <motion.div
+                    key={i}
+                    animate={{ height }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    className="w-1.5 rounded-full"
+                    style={{
+                        background: activeIndex === 0 
+                            ? 'linear-gradient(to top, rgba(194, 155, 64, 0.2), #c29b40)' 
+                            : activeIndex === 1
+                            ? 'linear-gradient(to top, rgba(6, 182, 212, 0.2), #06b6d4)'
+                            : activeIndex === 2
+                            ? 'linear-gradient(to top, rgba(234, 179, 8, 0.2), #eab308)'
+                            : 'linear-gradient(to top, rgba(16, 185, 129, 0.2), #10b981)'
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
+
+// ============================================
+// TILT CARD — mouse-reactive 3D tilt on active card
+// ============================================
+const TiltTestimonialCard = ({ children, isActive }) => {
+    const cardRef = useRef(null);
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), { stiffness: 200, damping: 20 });
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), { stiffness: 200, damping: 20 });
+
+    const handleMouseMove = (e) => {
+        if (!isActive || !cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        mouseX.set(x / rect.width - 0.5);
+        mouseY.set(y / rect.height - 0.5);
+
+        cardRef.current.style.setProperty('--x', `${x}px`);
+        cardRef.current.style.setProperty('--y', `${y}px`);
+    };
+
+    const handleMouseLeave = () => {
+        mouseX.set(0);
+        mouseY.set(0);
+    };
+
+    return (
+        <motion.div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                rotateX: isActive ? rotateX : 0,
+                rotateY: isActive ? rotateY : 0,
+                transformStyle: 'preserve-3d',
+            }}
+        >
+            {children}
+        </motion.div>
+    );
+};
+
+// ============================================
+// TESTIMONIALS SECTION
+// ============================================
 const Testimonials = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-    const [direction, setDirection] = useState(1);
+    const [dragStartX, setDragStartX] = useState(0);
     const sectionRef = useRef(null);
     const isInView = useInView(sectionRef, { once: true });
 
@@ -48,26 +263,55 @@ const Testimonials = () => {
         },
     ];
 
-    // Auto-rotate testimonials
+    const count = testimonials.length;
+
     useEffect(() => {
         if (!isAutoPlaying) return;
-
         const timer = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % testimonials.length);
+            setActiveIndex((prev) => (prev + 1) % count);
         }, 5000);
-
         return () => clearInterval(timer);
-    }, [isAutoPlaying, testimonials.length]);
+    }, [isAutoPlaying, count]);
 
-    const navigate = (direction) => {
+    const navigate = useCallback((dir) => {
         setIsAutoPlaying(false);
-        if (direction === 'next') {
-            setActiveIndex((prev) => (prev + 1) % testimonials.length);
-        } else {
-            setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-        }
-        // Resume auto-play after 10 seconds of no interaction
+        setActiveIndex((prev) => {
+            if (dir === 'next') return (prev + 1) % count;
+            return (prev - 1 + count) % count;
+        });
         setTimeout(() => setIsAutoPlaying(true), 10000);
+    }, [count]);
+
+    const handleDragStart = (e) => {
+        const x = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        setDragStartX(x);
+    };
+
+    const handleDragEnd = (e) => {
+        const x = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
+        const diff = dragStartX - x;
+        if (Math.abs(diff) > 50) {
+            navigate(diff > 0 ? 'next' : 'prev');
+        }
+    };
+
+    const getCardStyle = (index) => {
+        let offset = index - activeIndex;
+        if (offset > count / 2) offset -= count;
+        if (offset < -count / 2) offset += count;
+
+        const isActive = offset === 0;
+        const absOffset = Math.abs(offset);
+
+        return {
+            x: offset * 260,
+            scale: isActive ? 1 : Math.max(0.72 - absOffset * 0.1, 0.45),
+            rotateY: offset * -15,
+            z: isActive ? 50 : -absOffset * 100,
+            opacity: absOffset <= 1 ? 1 : 0.25,
+            zIndex: count - absOffset,
+            isActive,
+        };
     };
 
     return (
@@ -78,7 +322,7 @@ const Testimonials = () => {
                 <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-tech-cyan/5 rounded-full blur-3xl" />
             </div>
 
-            <div className="max-w-6xl mx-auto px-6 relative z-10">
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -91,114 +335,158 @@ const Testimonials = () => {
                         Testimonials
                         <div className="w-8 h-px bg-skylink-gold" />
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-white">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white font-serif">
                         Trusted by Industry Leaders
                     </h2>
                 </motion.div>
 
-                {/* Testimonial Carousel */}
-                <div className="relative max-w-4xl mx-auto">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeIndex}
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -50 }}
-                            transition={{ duration: 0.5, ease: 'easeInOut' }}
-                            className="glass-dark rounded-2xl shadow-xl p-8 md:p-12 border border-white/10 relative"
+                {/* Grid Layout containing Sentiment Sphere (Left) and Card Stack (Right) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    {/* Left: Sentiment Sphere column */}
+                    <div className="lg:col-span-4 h-64 lg:h-[380px] relative w-full flex items-center justify-center">
+                        <SentimentSphereCanvas activeIndex={activeIndex} />
+                        <TestimonialEqualizer activeIndex={activeIndex} />
+                    </div>
+
+                    {/* Right: Card Stack column */}
+                    <div className="lg:col-span-8">
+                        <div
+                            className="relative h-[400px] md:h-[350px] flex items-center justify-center perspective-1000"
+                            onMouseDown={handleDragStart}
+                            onMouseUp={handleDragEnd}
+                            onTouchStart={handleDragStart}
+                            onTouchEnd={handleDragEnd}
+                            style={{ cursor: 'grab' }}
                         >
-                            {/* Quote icon */}
-                            <motion.div
-                                initial={{ scale: 0, rotate: -20 }}
-                                animate={{ scale: 1, rotate: 0 }}
-                                transition={{ delay: 0.2, type: 'spring' }}
-                                className="absolute -top-6 left-8 w-12 h-12 bg-skylink-gold rounded-full flex items-center justify-center shadow-lg"
-                            >
-                                <Quote size={20} className="text-white" />
-                            </motion.div>
+                            {testimonials.map((t, index) => {
+                                const style = getCardStyle(index);
 
-                            {/* Stars */}
-                            <div className="flex gap-1 mb-6">
-                                {[...Array(5)].map((_, i) => (
+                                return (
                                     <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, scale: 0 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ delay: 0.3 + i * 0.1 }}
+                                        key={index}
+                                        animate={{
+                                            x: style.x,
+                                            scale: style.scale,
+                                            rotateY: style.rotateY,
+                                            opacity: style.opacity,
+                                        }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 200,
+                                            damping: 24,
+                                            mass: 0.8,
+                                        }}
+                                        className="absolute w-full max-w-xl px-4"
+                                        style={{
+                                            zIndex: style.zIndex,
+                                            transformStyle: 'preserve-3d',
+                                            pointerEvents: style.isActive ? 'auto' : 'none',
+                                        }}
                                     >
-                                        <Star size={18} className="text-skylink-gold fill-skylink-gold" />
+                                        <TiltTestimonialCard isActive={style.isActive}>
+                                            <div className={`glass-dark rounded-2xl shadow-xl p-6 md:p-8 border transition-all duration-500 glow-hover ${style.isActive
+                                                ? 'border-skylink-gold/30 shadow-[0_0_35px_rgba(194,155,64,0.12)]'
+                                                : 'border-white/5'
+                                                }`}>
+                                                
+                                                {style.isActive && (
+                                                    <StarBurst activeIndex={activeIndex} />
+                                                )}
+
+                                                {/* Quote icon */}
+                                                <div className="absolute -top-5 left-8 w-10 h-10 bg-skylink-gold rounded-full flex items-center justify-center shadow-lg z-20">
+                                                    <Quote size={16} className="text-white" />
+                                                </div>
+
+                                                {/* Stars */}
+                                                <div className="flex gap-1 mb-4 relative">
+                                                    {[...Array(t.rating)].map((_, i) => (
+                                                        <Star key={i} size={15} className="text-skylink-gold fill-skylink-gold" />
+                                                    ))}
+                                                </div>
+
+                                                {/* Quote text */}
+                                                <blockquote className="text-base md:text-lg font-serif text-slate-200 leading-relaxed mb-6 italic">
+                                                    "{t.quote}"
+                                                </blockquote>
+
+                                                {/* Author info */}
+                                                <div className="flex items-center gap-3 border-t border-white/10 pt-4">
+                                                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-white font-bold text-xs shadow-lg flex-shrink-0`}>
+                                                        {t.initials}
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-sm text-white">{t.author}</h4>
+                                                        <p className="text-xs text-slate-400">
+                                                            {t.role}, {t.company}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Active progress */}
+                                                {style.isActive && isAutoPlaying && (
+                                                    <div className="absolute top-4 right-4 w-5 h-5">
+                                                        <svg viewBox="0 0 24 24" className="w-full h-full -rotate-90">
+                                                            <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="2" />
+                                                            <motion.circle
+                                                                cx="12" cy="12" r="10"
+                                                                fill="none"
+                                                                stroke="#c29b40"
+                                                                strokeWidth="2"
+                                                                strokeLinecap="round"
+                                                                strokeDasharray={62.83}
+                                                                initial={{ strokeDashoffset: 62.83 }}
+                                                                animate={{ strokeDashoffset: 0 }}
+                                                                transition={{ duration: 5, ease: 'linear' }}
+                                                                key={`progress-${activeIndex}`}
+                                                            />
+                                                        </svg>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </TiltTestimonialCard>
                                     </motion.div>
-                                ))}
-                            </div>
-
-                            {/* Quote text */}
-                            <blockquote className="text-xl md:text-2xl font-serif text-slate-200 leading-relaxed mb-8 italic">
-                                "{testimonials[activeIndex].quote}"
-                            </blockquote>
-
-                            {/* Author info */}
-                            <div className="flex items-center gap-4 border-t border-white/10 pt-6">
-                                {/* Avatar */}
-                                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-skylink-blue to-tech-cyan flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                                    {testimonials[activeIndex].initials}
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-white text-lg">
-                                        {testimonials[activeIndex].author}
-                                    </h4>
-                                    <p className="text-slate-400">
-                                        {testimonials[activeIndex].role}, {testimonials[activeIndex].company}
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    {/* Navigation Arrows */}
-                    <button
-                        onClick={() => navigate('prev')}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full glass shadow-lg border border-white/20 flex items-center justify-center text-slate-300 hover:text-white hover:border-skylink-blue transition-colors hidden md:flex"
-                        aria-label="Previous testimonial"
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
-                    <button
-                        onClick={() => navigate('next')}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-12 h-12 rounded-full glass shadow-lg border border-white/20 flex items-center justify-center text-slate-300 hover:text-white hover:border-skylink-blue transition-colors hidden md:flex"
-                        aria-label="Next testimonial"
-                    >
-                        <ChevronRight size={24} />
-                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
 
-                {/* Dots navigation */}
-                <div className="flex justify-center gap-3 mt-8">
-                    {testimonials.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => {
-                                setActiveIndex(i);
-                                setIsAutoPlaying(false);
-                                setTimeout(() => setIsAutoPlaying(true), 10000);
-                            }}
-                            className={`relative h-3 transition-all duration-300 ${i === activeIndex ? 'w-8' : 'w-3'
-                                }`}
-                            aria-label={`Go to testimonial ${i + 1}`}
-                        >
-                            <span
-                                className={`absolute inset-0 rounded-full transition-colors duration-300 ${i === activeIndex
-                                    ? 'bg-skylink-gold'
-                                    : 'bg-slate-300 hover:bg-slate-400'
+                {/* Navigation Controls */}
+                <div className="flex items-center justify-center gap-6 mt-8">
+                    <button
+                        onClick={() => navigate('prev')}
+                        className="w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-skylink-blue transition-colors"
+                        aria-label="Previous testimonial"
+                    >
+                        <ChevronLeft size={20} />
+                    </button>
+
+                    {/* Navigation Dots */}
+                    <div className="flex gap-2">
+                        {testimonials.map((_, i) => (
+                            <button
+                                key={i}
+                                onClick={() => {
+                                    setActiveIndex(i);
+                                    setIsAutoPlaying(false);
+                                    setTimeout(() => setIsAutoPlaying(true), 10000);
+                                }}
+                                className={`relative h-2 rounded-full transition-all duration-300 ${i === activeIndex ? 'w-8 bg-skylink-gold' : 'w-2 bg-white/20 hover:bg-white/40'
                                     }`}
+                                aria-label={`Go to testimonial ${i + 1}`}
                             />
-                            {i === activeIndex && (
-                                <motion.span
-                                    layoutId="activeDot"
-                                    className="absolute inset-0 rounded-full ring-2 ring-skylink-gold/30"
-                                />
-                            )}
-                        </button>
-                    ))}
+                        ))}
+                    </div>
+
+                    <button
+                        onClick={() => navigate('next')}
+                        className="w-10 h-10 rounded-full glass border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-skylink-blue transition-colors"
+                        aria-label="Next testimonial"
+                    >
+                        <ChevronRight size={20} />
+                    </button>
                 </div>
             </div>
         </section>
@@ -206,4 +494,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-
