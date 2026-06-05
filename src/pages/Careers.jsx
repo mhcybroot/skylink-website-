@@ -6,6 +6,8 @@ import heroBg from '../assets/Photos/DSC05856.jpg';
 import cultureBg from '../assets/Photos/DSC05814.jpg';
 import LottieAnimation from '../components/Common/LottieAnimation';
 import placeholderAnimation from '../assets/animations/placeholder.json';
+import DayInLife from '../components/Careers/DayInLife';
+import BenefitsDeck from '../components/Careers/BenefitsDeck';
 
 const getDeptBorderColorClass = (color) => {
     if (color === 'skylink-navy') return 'border-t-skylink-navy';
@@ -789,9 +791,33 @@ const Careers = () => {
                 </div>
             </section>
 
+            {/* NEW LAYER 2 COMPONENT: DAY IN THE LIFE */}
+            <DayInLife />
+
+            {/* NEW LAYER 2 COMPONENT: BENEFITS DECK */}
+            <BenefitsDeck />
+
             {/* 3. OPEN POSITIONS WITH RADAR MATRIX FILTERING */}
             <section id="openings" ref={openingsRef} className="py-28 bg-transparent relative z-10 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-6">
+                    
+                    {/* NEW LAYER 2 COMPONENT: LIVE APPLICANT TELEMETRY */}
+                    <div className="flex justify-center mb-12">
+                        <motion.div 
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={openingsInView ? { opacity: 1, y: 0 } : {}}
+                            className="bg-slate-900 border border-white/10 rounded-full px-6 py-3 flex items-center gap-4 shadow-lg"
+                        >
+                            <div className="relative flex h-3 w-3">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tech-cyan opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-3 w-3 bg-tech-cyan"></span>
+                            </div>
+                            <span className="font-mono text-xs text-white uppercase tracking-widest">
+                                Live Telemetry: <span className="text-skylink-gold font-bold">142</span> Active Applications
+                            </span>
+                        </motion.div>
+                    </div>
+
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={openingsInView ? { opacity: 1, y: 0 } : {}}

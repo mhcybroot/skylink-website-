@@ -2,6 +2,7 @@ import { useRef, useState, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Facebook, Linkedin, Twitter, Mail, Phone, MapPin, Send } from 'lucide-react';
+import FooterTerrain from '../UI/FooterTerrain';
 
 // ============================================
 // FLOATING PARTICLES COMPONENT
@@ -194,6 +195,7 @@ const Footer = () => {
             <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-skylink-blue via-tech-cyan to-skylink-gold" />
 
             {/* Background decorations & Particles */}
+            <FooterTerrain />
             <FloatingParticles />
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div className="absolute -top-32 -right-32 w-96 h-96 bg-skylink-blue/10 rounded-full blur-3xl" />

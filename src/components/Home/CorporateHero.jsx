@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
+import ScrambleText from '../UI/ScrambleText';
 
 // Import images
 import hero1 from '../../assets/Photos/DSC05841.jpg'; // Meeting
@@ -110,26 +111,6 @@ const CorporateHero = () => {
         window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     };
 
-    // Text animation variants
-    const titleVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.03,
-            }
-        }
-    };
-
-    const letterVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.5, ease: 'easeOut' }
-        }
-    };
-
     return (
         <div
             ref={heroRef}
@@ -199,21 +180,18 @@ const CorporateHero = () => {
                         >
                             {/* Animated Title */}
                             <motion.h1
-                                variants={titleVariants}
                                 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter leading-none font-serif"
                             >
-                                {slides[currentIndex].title.split('').map((char, index) => (
-                                    <motion.span
-                                        key={index}
-                                        variants={letterVariants}
-                                        className="inline-block"
-                                        style={{
-                                            marginRight: char === ' ' ? '0.25em' : 0,
-                                        }}
-                                    >
-                                        {char === ' ' ? '\u00A0' : char}
-                                    </motion.span>
-                                ))}
+                                <ScrambleText text="INSTITUTIONAL" delay={300} duration={1200} /><br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-skylink-blue via-skylink-gold to-white relative inline-block">
+                                    <ScrambleText text="RELIABILITY" delay={800} duration={1500} />
+                                    <motion.div 
+                                        initial={{ scaleX: 0 }}
+                                        animate={{ scaleX: 1 }}
+                                        transition={{ duration: 1, delay: 1.5, ease: "easeOut" }}
+                                        className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-skylink-blue to-skylink-gold origin-left"
+                                    />
+                                </span>
                             </motion.h1>
 
                             {/* Subtitle */}

@@ -11,6 +11,7 @@ import LottieAnimation from '../components/Common/LottieAnimation';
 
 import InteractiveFAQ from '../components/UI/InteractiveFAQ';
 import placeholderAnimation from '../assets/animations/placeholder.json';
+import RoomTransition3D from '../components/Property/RoomTransition3D';
 
 const propertyFaqs = [
     { question: "What states do you currently service?", answer: "We operate a comprehensive national network covering all 50 states with regional hub dispatch centers to ensure rapid SLAs." },
@@ -1043,9 +1044,9 @@ const PropertyServices = () => {
                             </div>
                         </div>
                         <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {/* Feature 4: Custom Before/After Slide widget in place of standard preservation image */}
+                            {/* Feature 7: 3D Before/After Room Transition */}
                             <div className="col-span-full">
-                                <BeforeAfterSlider beforeImg={preservationBg} afterImg={renoBg} />
+                                <RoomTransition3D beforeImg={preservationBg} afterImg={renoBg} />
                             </div>
 
                             <div className="glass p-8 border border-white/10">

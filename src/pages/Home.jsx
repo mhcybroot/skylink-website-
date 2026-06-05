@@ -8,6 +8,11 @@ import WorkflowSection from '../components/Home/WorkflowSection';
 import Testimonials from '../components/Home/Testimonials';
 import CTASection from '../components/Home/CTASection';
 import ScrollReveal from '../components/UI/ScrollReveal';
+import AnimatedBackground from '../components/UI/AnimatedBackground';
+import ScrollProgress from '../components/UI/ScrollProgress';
+import TechHexGrid from '../components/UI/TechHexGrid';
+import ClientDashboard from '../components/UI/ClientDashboard';
+import VideoParallax from '../components/Home/VideoParallax';
 
 const Home = () => {
     return (
@@ -28,6 +33,15 @@ const Home = () => {
                 <section id="services" className="relative z-20"><ServiceHighlights /></section>
             </ScrollReveal>
             
+            <section id="parallax" className="relative z-10 w-full">
+                <VideoParallax />
+            </section>
+
+            <ScrollReveal type="fadeUp" delay={0.1}>
+                <section id="tech-stack" className="relative z-10 bg-slate-950 border-t border-b border-white/5"><TechHexGrid /></section>
+            </ScrollReveal>
+
+            
             <ScrollReveal type="fadeUp" delay={0.1}>
                 <section id="gallery" className="relative z-10"><ImageMarquee /></section>
             </ScrollReveal>
@@ -36,6 +50,10 @@ const Home = () => {
                 <section id="workflow" className="relative z-20"><WorkflowSection /></section>
             </ScrollReveal>
             
+            <ScrollReveal type="fadeUp">
+                <section id="dashboard" className="relative z-20"><ClientDashboard /></section>
+            </ScrollReveal>
+
             <ScrollReveal type="fadeUp">
                 <section id="testimonials" className="relative z-10"><Testimonials /></section>
             </ScrollReveal>

@@ -10,6 +10,8 @@ import boBg from '../assets/Photos/DSC05814.jpg'; // General Office
 import techBg from '../assets/Photos/DSC05839.jpg'; // Tech/Server
 import LottieAnimation from '../components/Common/LottieAnimation';
 import placeholderAnimation from '../assets/animations/placeholder.json';
+import ServerRack from '../components/UI/ServerRack';
+import CyberThreatMap from '../components/ITES/CyberThreatMap';
 
 const ITESServices = () => {
     const introRef = useRef(null);
@@ -282,6 +284,14 @@ const ITESServices = () => {
                             <h3 className="text-xl font-bold mb-4 text-white">Data Sovereignty</h3>
                             <p className="text-slate-100 text-sm leading-relaxed">Strict data fencing and local residency compliance for clients requiring GDPR or HIPAA adherence.</p>
                         </div>
+                    </div>
+                    
+                    <div className="mt-16 max-w-7xl mx-auto">
+                        <CyberThreatMap />
+                    </div>
+                    
+                    <div className="mt-16 max-w-3xl mx-auto">
+                        <ServerRack />
                     </div>
                 </div>
             </section>

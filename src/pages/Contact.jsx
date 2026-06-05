@@ -6,6 +6,8 @@ import heroBg from '../assets/Photos/DSC05810.jpg';
 import LottieAnimation from '../components/Common/LottieAnimation';
 import placeholderAnimation from '../assets/animations/placeholder.json';
 import InteractiveGlobe from '../components/3D/InteractiveGlobe';
+import DecryptorMinigame from '../components/UI/DecryptorMinigame';
+import ThumbprintSubmit from '../components/UI/ThumbprintSubmit';
 
 const getOfficeBorderTopColorClass = (color) => {
     if (color === 'skylink-blue') return 'border-t-skylink-blue';
@@ -52,6 +54,8 @@ const TerminalForm = ({ formData, setFormData, onSubmit, formStatus }) => {
                     setHistory([]);
                 } else {
                     setHistory(prev => [...prev, `[ERROR] Command not recognized: ${val}`, `Type /help for available commands.`]);
+                    setInputError(true);
+                    setTimeout(() => setInputError(false), 500);
                 }
             } else if (mode === 'name') {
                 setFormData(prev => ({ ...prev, name: val }));
@@ -64,6 +68,8 @@ const TerminalForm = ({ formData, setFormData, onSubmit, formStatus }) => {
                     setMode('subject');
                 } else {
                     setHistory(prev => [...prev, `[ERROR] Invalid email format. Try again:`, `[SYSTEM] Enter Email Address:`]);
+                    setInputError(true);
+                    setTimeout(() => setInputError(false), 500);
                 }
             } else if (mode === 'subject') {
                 setFormData(prev => ({ ...prev, subject: val }));
@@ -72,15 +78,18 @@ const TerminalForm = ({ formData, setFormData, onSubmit, formStatus }) => {
             } else if (mode === 'message') {
                 if (val.trim().length >= 10) {
                     setFormData(prev => ({ ...prev, message: val }));
-                    setHistory(prev => [...prev, `[OK] Message logged.`, `[SYSTEM] Validating telemetry...`]);
-                    onSubmit(val);
-                    setMode('done');
+                    setHistory(prev => [...prev, `[OK] Message logged.`, `[SYSTEM] Manual Biometric Override Required.`]);
+                    setMode('biometric');
                 } else {
                     setHistory(prev => [...prev, `[ERROR] Message too short (${val.length}/10).`, `[SYSTEM] Enter Message:`]);
+                    setInputError(true);
+                    setTimeout(() => setInputError(false), 500);
                 }
             }
         }
     };
+
+    const [inputError, setInputError] = useState(false);
 
     return (
         <div className="w-full h-[400px] bg-slate-950 border border-tech-cyan/30 rounded-xl font-mono text-sm p-6 overflow-y-auto flex flex-col shadow-[0_0_30px_rgba(6,182,212,0.15)] relative">
@@ -92,8 +101,12 @@ const TerminalForm = ({ formData, setFormData, onSubmit, formStatus }) => {
                     </div>
                 ))}
                 
-                {mode !== 'done' && formStatus !== 'loading' && formStatus !== 'success' && (
-                    <div className="flex items-center gap-2 text-white mt-4">
+                {mode !== 'done' && mode !== 'biometric' && mode !== 'decrypt' && formStatus !== 'loading' && formStatus !== 'success' && (
+                    <motion.div 
+                        className="flex items-center gap-2 text-white mt-4"
+                        animate={inputError ? { x: [-10, 10, -10, 10, 0], backgroundColor: ['rgba(239,68,68,0.2)', 'transparent'] } : {}}
+                        transition={{ duration: 0.4 }}
+                    >
                         <span className="text-skylink-gold whitespace-nowrap">guest@skylink:~$</span>
                         <input 
                             type="text" 
@@ -104,8 +117,33 @@ const TerminalForm = ({ formData, setFormData, onSubmit, formStatus }) => {
                             className="flex-1 bg-transparent border-none outline-none focus:ring-0 text-white p-0"
                             spellCheck="false"
                         />
+                    </motion.div>
+                )}
+                
+                {mode === 'biometric' && (
+                    <div className="mt-8 mb-4">
+                        <ThumbprintSubmit 
+                            disabled={false} 
+                            onSubmit={() => {
+                                setHistory(prev => [...prev, `[OK] Biometric signature verified.`, `[SYSTEM] Additional security required.`]);
+                                setMode('decrypt');
+                            }} 
+                        />
                     </div>
                 )}
+
+                {mode === 'decrypt' && (
+                    <div className="mt-4 mb-4">
+                        <DecryptorMinigame 
+                            onUnlock={() => {
+                                setHistory(prev => [...prev, `[SYSTEM] Validating telemetry...`]);
+                                onSubmit(formData.message);
+                                setMode('done');
+                            }}
+                        />
+                    </div>
+                )}
+
                 {formStatus === 'loading' && (
                     <div className="text-tech-cyan animate-pulse mt-4">TRANSMITTING SECURE PAYLOAD...</div>
                 )}

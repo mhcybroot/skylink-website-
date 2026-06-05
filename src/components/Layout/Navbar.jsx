@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Building, Monitor, ArrowRight, Search, Volume2, VolumeX, Terminal, Settings } from 'lucide-react';
+import { Menu, X, ChevronDown, Building, Monitor, ArrowRight, Search, Volume2, VolumeX, Terminal, Settings, Globe, Users, Target } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ============================================
@@ -123,6 +123,32 @@ const LogoParticleContainer = () => {
                     );
                 })}
             </svg>
+        </div>
+    );
+};
+
+const MarketTicker = () => {
+    return (
+        <div className="w-full bg-tech-cyan text-slate-900 overflow-hidden py-1 border-b border-white/10 z-[60] fixed top-0">
+            <motion.div 
+                className="whitespace-nowrap font-mono text-[9px] font-bold tracking-widest uppercase flex gap-12"
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+            >
+                <span>SYS_UPTIME: 99.998%</span>
+                <span>GLOBAL_NODES: ONLINE</span>
+                <span>BANDWIDTH: 1.2 TB/s</span>
+                <span>ACTIVE_AGENTS: 1,402</span>
+                <span>SEC_PROTOCOL: ENABLED</span>
+                <span>PING: 12ms</span>
+                {/* Duplicate for infinite seamless scroll */}
+                <span>SYS_UPTIME: 99.998%</span>
+                <span>GLOBAL_NODES: ONLINE</span>
+                <span>BANDWIDTH: 1.2 TB/s</span>
+                <span>ACTIVE_AGENTS: 1,402</span>
+                <span>SEC_PROTOCOL: ENABLED</span>
+                <span>PING: 12ms</span>
+            </motion.div>
         </div>
     );
 };
@@ -282,12 +308,13 @@ const Navbar = () => {
 
     return (
         <>
+            <MarketTicker />
             {/* FEATURE 1: HOLOGRAPHIC CAPSULE NAVBAR */}
             <motion.nav 
                 className="fixed z-50 flex items-center border border-transparent"
                 style={{ left: '50%' }}
                 animate={{
-                    top: isScrolled ? '16px' : '0px',
+                    top: isScrolled ? '40px' : '24px',
                     width: isScrolled ? 'calc(100% - 2rem)' : '100%',
                     maxWidth: isScrolled ? '1024px' : '100%',
                     x: '-50%',
@@ -434,8 +461,114 @@ const Navbar = () => {
                             </AnimatePresence>
                         </div>
 
-                        <NavLink to="/about">About</NavLink>
-                        <NavLink to="/careers">Careers</NavLink>
+                        {/* Mega Menu Trigger for ABOUT */}
+                        <div className="relative group flex flex-col items-center justify-center h-full py-4"
+                            onMouseEnter={() => setActiveDropdown('about')}
+                            onMouseLeave={() => setActiveDropdown(null)}
+                        >
+                            <button className="flex items-center text-sm font-semibold tracking-wide uppercase transition-colors focus:outline-none group text-white/80 hover:text-skylink-gold">
+                                About
+                                <ChevronDown className={`ml-1 w-4 h-4 transition-transform duration-300 ${activeDropdown === 'about' ? 'rotate-180' : ''}`} />
+                            </button>
+                            <span className={`absolute bottom-0 w-1.5 h-1.5 rounded-full bg-skylink-gold transition-transform duration-300 shadow-[0_0_8px_rgba(194,155,64,0.8)] ${activeDropdown === 'about' ? 'scale-100' : 'scale-0'}`} />
+
+                            <AnimatePresence>
+                                {activeDropdown === 'about' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 15, scaleY: 0.95, transformOrigin: "top" }}
+                                        animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                                        exit={{ opacity: 0, y: 15, scaleY: 0.95 }}
+                                        transition={{ type: 'spring', stiffness: 280, damping: 24 }}
+                                        className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 w-[400px] bg-slate-950/95 backdrop-blur-2xl rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border border-white/10 overflow-hidden"
+                                    >
+                                        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-skylink-blue via-tech-cyan to-skylink-gold" />
+                                        
+                                        <div className="p-4 flex flex-col gap-2">
+                                            <Link
+                                                to="/about"
+                                                className="group/item relative flex items-center p-4 rounded-xl hover:bg-white/5 transition-all duration-300"
+                                                onClick={() => setActiveDropdown(null)}
+                                            >
+                                                <div className="p-2.5 bg-skylink-blue/10 rounded-lg mr-4 group-hover/item:bg-skylink-blue transition-all">
+                                                    <Globe className="w-5 h-5 text-skylink-blue group-hover/item:text-white" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-white text-md group-hover/item:text-skylink-blue transition-colors">Global Footprint</h3>
+                                                    <p className="text-xs text-slate-400 mt-1">Explore our Live Operations Map.</p>
+                                                </div>
+                                            </Link>
+
+                                            <Link
+                                                to="/about"
+                                                className="group/item relative flex items-center p-4 rounded-xl hover:bg-white/5 transition-all duration-300"
+                                                onClick={() => setActiveDropdown(null)}
+                                            >
+                                                <div className="p-2.5 bg-tech-cyan/10 rounded-lg mr-4 group-hover/item:bg-tech-cyan transition-all">
+                                                    <Target className="w-5 h-5 text-tech-cyan group-hover/item:text-slate-900" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-white text-md group-hover/item:text-tech-cyan transition-colors">Our History</h3>
+                                                    <p className="text-xs text-slate-400 mt-1">A decade of continuous innovation.</p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        {/* Mega Menu Trigger for CAREERS */}
+                        <div className="relative group flex flex-col items-center justify-center h-full py-4"
+                            onMouseEnter={() => setActiveDropdown('careers')}
+                            onMouseLeave={() => setActiveDropdown(null)}
+                        >
+                            <button className="flex items-center text-sm font-semibold tracking-wide uppercase transition-colors focus:outline-none group text-white/80 hover:text-skylink-gold">
+                                Careers
+                                <ChevronDown className={`ml-1 w-4 h-4 transition-transform duration-300 ${activeDropdown === 'careers' ? 'rotate-180' : ''}`} />
+                            </button>
+                            <span className={`absolute bottom-0 w-1.5 h-1.5 rounded-full bg-skylink-gold transition-transform duration-300 shadow-[0_0_8px_rgba(194,155,64,0.8)] ${activeDropdown === 'careers' ? 'scale-100' : 'scale-0'}`} />
+
+                            <AnimatePresence>
+                                {activeDropdown === 'careers' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 15, scaleY: 0.95, transformOrigin: "top" }}
+                                        animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                                        exit={{ opacity: 0, y: 15, scaleY: 0.95 }}
+                                        transition={{ type: 'spring', stiffness: 280, damping: 24 }}
+                                        className="absolute left-1/2 transform -translate-x-1/2 top-full mt-2 w-[400px] bg-slate-950/95 backdrop-blur-2xl rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border border-white/10 overflow-hidden"
+                                    >
+                                        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-skylink-blue via-tech-cyan to-skylink-gold" />
+                                        
+                                        <div className="p-4">
+                                            <div className="mb-4 p-4 rounded-xl bg-gradient-to-br from-skylink-gold/10 to-transparent border border-skylink-gold/20 flex flex-col items-center justify-center text-center">
+                                                <div className="relative w-full h-12 flex items-center justify-center mb-2 overflow-hidden rounded-lg bg-slate-900">
+                                                    <motion.div 
+                                                        className="absolute inset-0 bg-skylink-gold/20"
+                                                        animate={{ x: ['-100%', '100%'] }}
+                                                        transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+                                                    />
+                                                    <span className="font-mono text-xs font-bold text-skylink-gold relative z-10 tracking-widest">ACTIVELY RECRUITING: 42 ROLES</span>
+                                                </div>
+                                            </div>
+
+                                            <Link
+                                                to="/careers"
+                                                className="group/item relative flex items-center p-4 rounded-xl hover:bg-white/5 transition-all duration-300"
+                                                onClick={() => setActiveDropdown(null)}
+                                            >
+                                                <div className="p-2.5 bg-skylink-gold/10 rounded-lg mr-4 group-hover/item:bg-skylink-gold transition-all">
+                                                    <Users className="w-5 h-5 text-skylink-gold group-hover/item:text-slate-900" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-white text-md group-hover/item:text-skylink-gold transition-colors">Join The Roster</h3>
+                                                    <p className="text-xs text-slate-400 mt-1">See open positions and our unique culture.</p>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
                         <a
                             href="http://76.13.221.43:8083"

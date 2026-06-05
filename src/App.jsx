@@ -17,6 +17,9 @@ import Canvas3DContext from './components/UI/Canvas3DContext';
 import CustomCursor from './components/UI/CustomCursor';
 import SystemHUD from './components/UI/SystemHUD';
 import AchievementSystem, { useAchievements } from './components/UI/AchievementSystem';
+import AssistantDrone from './components/UI/AssistantDrone';
+import CommandMenu from './components/UI/CommandMenu';
+import EasterEgg from './components/UI/EasterEgg';
 
 // Page transition variants - Cinematic 3D Depth
 const pageVariants = {
@@ -235,6 +238,9 @@ function App() {
       const target = e.target.closest('a, button, [role="button"], input[type="submit"]');
       if (target) {
         playUISound('click');
+        if (window.navigator && window.navigator.vibrate) {
+          window.navigator.vibrate(15); // Simulated haptic feedback
+        }
         speakText(target.innerText || target.getAttribute('aria-label') || 'Action');
       }
     };
@@ -284,6 +290,7 @@ function App() {
         <CustomCursor />
         <Canvas3DContext />
         <Navbar />
+        <CommandMenu />
         <main className="flex-grow relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
@@ -316,8 +323,14 @@ function App() {
         {/* Global Achievement System */}
         <AchievementSystem />
 
+        {/* Holographic Drone Assistant */}
+        <AssistantDrone />
+
         {/* Interactive Telemetry HUD */}
         <SystemHUD />
+
+        {/* Konami Code Terminal */}
+        <EasterEgg />
       </div>
     </>
   );

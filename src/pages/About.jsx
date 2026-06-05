@@ -11,7 +11,9 @@ import mdImg from '../assets/managing-director.webp';
 import LottieAnimation from '../components/Common/LottieAnimation';
 import placeholderAnimation from '../assets/animations/placeholder.json';
 import InteractiveOrgChart from '../components/UI/InteractiveOrgChart';
-import CaseStudyCarousel from '../components/UI/CaseStudyCarousel';
+import HoverCards from '../components/UI/HoverCards';
+import RadarTimeline from '../components/UI/RadarTimeline';
+import InteractiveGlobe from '../components/3D/InteractiveGlobe';
 
 const getTextColorClass = (color) => {
     if (color === 'skylink-gold') return 'text-skylink-gold';
@@ -729,7 +731,7 @@ const About = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="w-full flex justify-center"
                     >
-                        <ValuesConstellation values={values} />
+                        <HoverCards />
                     </motion.div>
                 </div>
             </section>
@@ -789,47 +791,27 @@ const About = () => {
                     {/* Timeline soundtrack panel (Feature 12) */}
                     <TimelineSoundtrack scrollYProgress={scrollYProgress} />
 
-                    <div className="relative perspective-1200 transform-style-3d py-16">
-                        {/* Timeline line */}
-                        <div className="absolute left-6 md:left-10 top-0 bottom-0 w-0.5 bg-white/5" />
-                        <motion.div
-                            style={{ scaleY: pathLength, originY: 0 }}
-                            className="absolute left-6 md:left-10 top-0 bottom-0 w-0.5 bg-gradient-to-b from-skylink-blue via-tech-cyan to-skylink-gold"
-                        />
-
-                        <div className="space-y-24 transform-style-3d">
-                            {timeline.map((item, idx) => (
-                                <TimelineItem 
-                                    key={idx} 
-                                    item={item} 
-                                    index={idx} 
-                                    scrollYProgress={scrollYProgress} 
-                                />
-                            ))}
-                        </div>
+                    <div className="py-16">
+                        <RadarTimeline />
                     </div>
                 </div>
             </section>
-
-            {/* FEATURE 13: PROJECT CASE STUDY CAROUSEL */}
-            <section className="py-24 bg-transparent relative z-10 border-t border-white/5">
-                <div className="max-w-7xl mx-auto px-6">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center mb-10"
-                    >
-                        <div className="inline-flex items-center gap-2 text-skylink-blue font-bold tracking-widest text-sm uppercase mb-4">
-                            <div className="w-8 h-px bg-skylink-blue" />
-                            Proven Track Record
-                            <div className="w-8 h-px bg-skylink-blue" />
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-white font-serif mb-4">Case Studies</h2>
-                    </motion.div>
-                    
-                    <CaseStudyCarousel />
+            
+            {/* 5. GLOBAL FOOTPRINT */}
+            <section className="py-28 bg-transparent relative z-10 border-t border-white/10">
+                <div className="max-w-7xl mx-auto px-6 text-center mb-16">
+                    <div className="inline-flex items-center gap-2 text-skylink-blue font-bold tracking-widest text-sm uppercase mb-4">
+                        <div className="w-8 h-px bg-skylink-blue" />
+                        Global Network
+                        <div className="w-8 h-px bg-skylink-blue" />
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-serif">Live Operations Map</h2>
+                    <p className="mt-6 text-slate-300 max-w-2xl mx-auto">
+                        A real-time look at our interconnected BPO delivery centers and asset management field nodes.
+                    </p>
+                </div>
+                <div className="w-full h-[600px] relative">
+                    <InteractiveGlobe />
                 </div>
             </section>
 

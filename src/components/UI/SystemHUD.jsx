@@ -9,6 +9,7 @@ export default function SystemHUD() {
     const [voiceEnabled, setVoiceEnabled] = useState(localStorage.getItem('skylink_voice_enabled') === 'true');
     const [isCalibrating, setIsCalibrating] = useState(false);
     const [particlesCount, setParticlesCount] = useState(120);
+    const [isOverclocked, setIsOverclocked] = useState(false);
 
     // Feature 15: Ambient Spatial Soundscape
     const [ambientSoundEnabled, setAmbientSoundEnabled] = useState(false);
@@ -39,13 +40,38 @@ export default function SystemHUD() {
     // 2. Adjust particle counts dynamically based on scroll inertia or random drift
     useEffect(() => {
         const interval = setInterval(() => {
-            setParticlesCount(prev => {
-                const drift = Math.floor(Math.random() * 7) - 3;
-                return Math.max(90, Math.min(150, prev + drift));
-            });
+            if (isOverclocked) {
+                setParticlesCount(500); // Massive boost
+            } else {
+                setParticlesCount(prev => {
+                    const drift = Math.floor(Math.random() * 7) - 3;
+                    return Math.max(90, Math.min(150, prev + drift));
+                });
+            }
         }, 3000);
         return () => clearInterval(interval);
-    }, []);
+    }, [isOverclocked]);
+
+    // Overclock visual effect injection
+    useEffect(() => {
+        if (isOverclocked) {
+            document.body.classList.add('overclocked');
+            // Overclock sound
+            if (voiceEnabled && window.speechSynthesis) {
+                const utterance = new SpeechSynthesisUtterance("WARNING: SYSTEM OVERCLOCK ENGAGED. LIMITERS REMOVED.");
+                utterance.pitch = 0.5;
+                utterance.rate = 1.3;
+                window.speechSynthesis.speak(utterance);
+            }
+        } else {
+            document.body.classList.remove('overclocked');
+            if (voiceEnabled && window.speechSynthesis && isOverclocked !== false) {
+                const utterance = new SpeechSynthesisUtterance("OVERCLOCK DISABLED. SYSTEM STABILIZED.");
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+    }, [isOverclocked]);
 
     // Scroll listener for Ambient Sound Modulator
     useEffect(() => {
@@ -208,6 +234,29 @@ export default function SystemHUD() {
                 )}
             </AnimatePresence>
 
+            {/* Overclock Red Overlay */}
+            <AnimatePresence>
+                {isOverclocked && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 1 }}
+                        className="fixed inset-0 z-[9990] pointer-events-none mix-blend-screen"
+                        style={{
+                            background: 'radial-gradient(circle, transparent 50%, rgba(239, 68, 68, 0.15) 100%)',
+                            boxShadow: 'inset 0 0 100px rgba(239, 68, 68, 0.3)'
+                        }}
+                    >
+                        <motion.div 
+                            className="absolute inset-0 bg-red-500/10 pointer-events-none"
+                            animate={{ opacity: [0.5, 1, 0.5] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Collapsible Trigger HUD Button */}
             <div className="fixed left-6 bottom-6 z-50">
                 <motion.button
@@ -358,14 +407,26 @@ export default function SystemHUD() {
                         </div>
 
                         {/* Calibration Trigger */}
-                        <div className="border-t border-white/5 pt-4">
+                        <div className="border-t border-white/5 pt-4 flex gap-2">
                             <button
                                 role="button"
                                 onClick={runCalibration}
-                                className="w-full py-2 bg-tech-cyan hover:bg-tech-cyan-light text-slate-900 font-mono font-bold uppercase tracking-widest text-[10px] rounded-lg shadow-lg hover:shadow-glow transition-all flex items-center justify-center gap-1.5"
+                                className="flex-1 py-2 bg-tech-cyan hover:bg-tech-cyan-light text-slate-900 font-mono font-bold uppercase tracking-widest text-[10px] rounded-lg shadow-lg hover:shadow-glow transition-all flex items-center justify-center gap-1.5"
                             >
                                 <Play size={10} fill="currentColor" />
-                                Run System Calibration
+                                Calibrate
+                            </button>
+                            <button
+                                role="button"
+                                onClick={() => setIsOverclocked(!isOverclocked)}
+                                className={`flex-1 py-2 font-mono font-bold uppercase tracking-widest text-[10px] rounded-lg shadow-lg transition-all flex items-center justify-center gap-1.5 ${
+                                    isOverclocked 
+                                    ? 'bg-red-500 hover:bg-red-400 text-white shadow-[0_0_20px_#ef4444]' 
+                                    : 'bg-white/10 hover:bg-white/20 text-white border border-white/20'
+                                }`}
+                            >
+                                <Sparkles size={10} />
+                                {isOverclocked ? 'Normalize' : 'Overclock'}
                             </button>
                         </div>
                     </motion.div>

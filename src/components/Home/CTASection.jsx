@@ -4,6 +4,8 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import renoBg from '../../assets/Photos/DSC05809.jpg';
 import techBg from '../../assets/Photos/DSC05839.jpg';
+import MagneticButton from '../UI/MagneticButton';
+import SpotlightText from '../UI/SpotlightText';
 
 // ============================================
 // ANIMATED COUNTER FOR TRUST BADGES
@@ -215,7 +217,7 @@ const CTASection = () => {
                     className="inline-flex items-center gap-2 px-6 py-2 rounded-full glass border border-skylink-gold/30 mb-8 shadow-[0_0_20px_rgba(194,155,64,0.15)] glow-hover cursor-default"
                 >
                     <Sparkles size={16} className="text-skylink-gold animate-pulse" />
-                    <span className="text-sm font-medium text-slate-200 tracking-wide">Ready to Transform Your Operations?</span>
+                    <SpotlightText className="text-sm font-medium tracking-wide">Ready to Transform Your Operations?</SpotlightText>
                 </motion.div>
 
                 {/* Headline */}
@@ -249,23 +251,27 @@ const CTASection = () => {
                     transition={{ duration: 0.8, delay: 0.3 }}
                     className="flex flex-col sm:flex-row justify-center gap-6 perspective-1000 relative z-10"
                 >
-                    <Link
-                        to="/contact"
-                        className="group relative inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-skylink-gold to-yellow-500 text-skylink-navy font-bold text-lg uppercase tracking-wider rounded-xl shadow-[0_10px_30px_rgba(194,155,64,0.3)] hover:shadow-[0_20px_40px_rgba(194,155,64,0.5)] transition-all duration-300 hover:-translate-y-2 glow-hover"
-                    >
-                        <span className="flex items-center">
-                            Schedule Consultation
-                            <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                        </span>
-                        <div className="absolute inset-0 rounded-xl border border-white/40 mix-blend-overlay" />
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            to="/contact"
+                            className="group relative inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-skylink-gold to-yellow-500 text-skylink-navy font-bold text-lg uppercase tracking-wider rounded-xl shadow-[0_10px_30px_rgba(194,155,64,0.3)] hover:shadow-[0_20px_40px_rgba(194,155,64,0.5)] transition-all duration-300 glow-hover w-full h-full block"
+                        >
+                            <span className="flex items-center">
+                                Schedule Consultation
+                                <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-2 transition-transform" />
+                            </span>
+                            <div className="absolute inset-0 rounded-xl border border-white/40 mix-blend-overlay pointer-events-none" />
+                        </Link>
+                    </MagneticButton>
 
-                    <Link
-                        to="/about"
-                        className="group inline-flex items-center justify-center px-10 py-5 glass border border-white/10 text-white font-bold text-lg uppercase tracking-wider rounded-xl hover:border-tech-cyan/50 hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 shadow-lg glow-hover"
-                    >
-                        View Corporate Profile
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            to="/about"
+                            className="group inline-flex items-center justify-center px-10 py-5 glass border border-white/10 text-white font-bold text-lg uppercase tracking-wider rounded-xl hover:border-tech-cyan/50 hover:bg-white/5 transition-all duration-300 shadow-lg glow-hover w-full h-full block"
+                        >
+                            View Corporate Profile
+                        </Link>
+                    </MagneticButton>
                 </motion.div>
 
                 {/* Animated Trust indicators */}
