@@ -12,10 +12,10 @@ const ImageMarquee = () => {
     const displayImages = images.slice(0, 15);
 
     return (
-        <section className="py-16 bg-gradient-to-b from-slate-900 via-skylink-navy to-slate-900 overflow-hidden relative">
+        <section className="py-16 bg-transparent overflow-hidden relative z-10">
             {/* Gradient overlays for smooth edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-skylink-navy/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-skylink-navy/80 to-transparent z-10 pointer-events-none" />
 
             {/* Section header */}
             <div className="text-center mb-10">
@@ -57,7 +57,7 @@ const ImageMarquee = () => {
                             <div className="absolute -inset-1 bg-gradient-to-r from-skylink-blue via-tech-cyan to-skylink-gold rounded-2xl opacity-0 group-hover:opacity-50 blur-lg transition-opacity duration-500" />
 
                             {/* Image container */}
-                            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-slate-700/50 group-hover:border-tech-cyan/50 transition-colors duration-300">
+                            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/20 group-hover:border-tech-cyan/50 transition-colors duration-300">
                                 {/* Overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-skylink-navy/80 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500 z-10" />
 

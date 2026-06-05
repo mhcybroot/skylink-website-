@@ -10,11 +10,11 @@ const CTASection = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative bg-skylink-navy py-28 overflow-hidden"
+            className="relative bg-transparent py-28 overflow-hidden z-10"
         >
             {/* Animated gradient background */}
             <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-skylink-navy via-skylink-blue/20 to-skylink-navy" />
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-skylink-blue/10 to-transparent" />
 
                 {/* Floating orbs */}
                 <motion.div

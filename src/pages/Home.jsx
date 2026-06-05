@@ -10,7 +10,7 @@ import CTASection from '../components/Home/CTASection';
 
 const Home = () => {
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen relative z-10">
             <SEO title="Home" description="Skylink Innovations Ltd. - Strategic Asset Management & Global BPO Solutions." />
             <CorporateHero />
             <StatsSection />

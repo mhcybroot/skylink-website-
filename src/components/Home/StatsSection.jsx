@@ -53,8 +53,8 @@ const StatItem = ({ value, label, icon: Icon, isLast, index }) => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.15 }}
             className={`relative flex flex-col items-center justify-center p-12 group cursor-default
-                ${!isLast ? 'border-b md:border-b-0 md:border-r border-slate-700' : ''}
-                hover:bg-gradient-to-b hover:from-slate-800 hover:to-skylink-navy transition-all duration-500`}
+                ${!isLast ? 'border-b md:border-b-0 md:border-r border-white/10' : ''}
+                hover:bg-white/5 transition-all duration-500`}
         >
             {/* Hover glow effect */}
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -103,7 +103,7 @@ const StatsSection = () => {
     ];
 
     return (
-        <section ref={sectionRef} className="bg-skylink-navy border-t border-slate-700 relative overflow-hidden">
+        <section ref={sectionRef} className="bg-transparent border-t border-white/10 relative overflow-hidden z-10">
             {/* Background decoration */}
             <div className="absolute inset-0 opacity-30">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-skylink-blue/10 rounded-full blur-3xl" />

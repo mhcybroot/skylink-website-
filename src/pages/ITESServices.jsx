@@ -26,7 +26,7 @@ const ITESServices = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen pt-20 font-sans">
+        <div className="min-h-screen pt-20 font-sans relative z-10 bg-transparent">
             <SEO title="ITES & Global BPO" description="Scalable BPO, Omni-channel Support, and Digital Transformation solutions for global enterprises." />
             {/* 1. COMPACT INDUSTRIAL HERO */}
             <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold overflow-hidden">
@@ -78,24 +78,24 @@ const ITESServices = () => {
             </section>
 
             {/* 2. THE 24/7 ADVANTAGE (INTRO) */}
-            <section ref={introRef} className="py-24 bg-white">
+            <section ref={introRef} className="py-24 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={introInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-4xl font-bold text-skylink-navy mb-6 font-serif">THE 24/7 ADVANTAGE</h2>
+                        <h2 className="text-4xl font-bold text-white mb-6 font-serif">THE 24/7 ADVANTAGE</h2>
                         <motion.div
                             initial={{ width: 0 }}
                             animate={introInView ? { width: 80 } : {}}
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="h-1 bg-tech-cyan mb-8"
                         />
-                        <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+                        <p className="text-lg text-slate-300 mb-6 leading-relaxed">
                             In today's "always-on" economy, downtime is not an option. Skylink Innovations provides a seamless extension of your workforce, operating across multiple time zones to ensure continuous business velocity.
                         </p>
-                        <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                        <p className="text-lg text-slate-300 mb-8 leading-relaxed">
                             We combine human empathy with AI-driven efficiency to reduce operational costs while significantly elevating customer satisfaction scores (CSAT).
                         </p>
                         <motion.ul
@@ -113,7 +113,7 @@ const ITESServices = () => {
                                 <motion.li
                                     key={idx}
                                     variants={itemVariants}
-                                    className="flex items-center text-skylink-navy font-bold text-sm uppercase tracking-wide"
+                                    className="flex items-center text-slate-200 font-bold text-sm uppercase tracking-wide"
                                 >
                                     <CheckCircle size={18} className="text-tech-cyan mr-3" />
                                     {item}
@@ -143,17 +143,17 @@ const ITESServices = () => {
             </section>
 
             {/* 3. DEEP DIVE: FRONT OFFICE WING */}
-            <section className="py-24 bg-slate-50 border-y border-slate-200">
+            <section className="py-24 bg-transparent border-y border-white/10 relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-24">
-                                <span className="text-8xl font-bold text-slate-200 leading-none -ml-4">01</span>
-                                <h2 className="text-3xl font-bold text-skylink-navy -mt-10 relative z-10 mb-6 font-serif">FRONT OFFICE EXCELLENCE</h2>
-                                <p className="text-slate-500 mb-8 leading-relaxed">
+                                <span className="text-8xl font-bold text-white/10 leading-none -ml-4">01</span>
+                                <h2 className="text-3xl font-bold text-white -mt-10 relative z-10 mb-6 font-serif">FRONT OFFICE EXCELLENCE</h2>
+                                <p className="text-slate-300 mb-8 leading-relaxed">
                                     Your brand's voice, amplified. Our agents are rigorously trained in your culture and product to deliver seamless, empathetic customer interactions.
                                 </p>
-                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-blue uppercase tracking-widest hover:text-skylink-navy transition-colors">
+                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-blue uppercase tracking-widest hover:text-white transition-colors">
                                     View Case Studies <ArrowRight className="ml-2 w-4 h-4" />
                                 </Link>
                             </div>
@@ -161,40 +161,40 @@ const ITESServices = () => {
                         <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                             <img src={cxBg} alt="Front Office" className="w-full h-64 object-cover col-span-full border-b-4 border-skylink-blue" />
 
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <Headphones size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Inbound Support</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Inbound Support</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• Tier 1 & 2 Tech Support</li>
                                     <li>• Order Management</li>
                                     <li>• Warranty Processing</li>
                                     <li>• Retention Services</li>
                                 </ul>
                             </div>
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <MessageSquare size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Omnichannel</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Omnichannel</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• Live Chat & Email</li>
                                     <li>• Social Media Moderation</li>
                                     <li>• SMS/WhatsApp Support</li>
                                     <li>• In-App Concierge</li>
                                 </ul>
                             </div>
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <Users size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Sales & Lead Gen</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Sales & Lead Gen</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• Appt. Setting</li>
                                     <li>• Outbound Campaigns</li>
                                     <li>• Market Research</li>
                                     <li>• Customer Surveys</li>
                                 </ul>
                             </div>
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <Globe size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Multilingual</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Multilingual</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• English (Native/Neutral)</li>
                                     <li>• Spanish (LatAm/ES)</li>
                                     <li>• French (CA/EU)</li>
@@ -207,42 +207,42 @@ const ITESServices = () => {
             </section>
 
             {/* 4. DEEP DIVE: BACK OFFICE WING */}
-            <section className="py-24 bg-white border-b border-slate-200">
+            <section className="py-24 bg-transparent border-b border-white/10 relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-8 order-2 lg:order-1 grid grid-cols-1 md:grid-cols-2 gap-8">
                             <img src={boBg} alt="Back Office" className="w-full h-64 object-cover col-span-full border-b-4 border-skylink-gold" />
 
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <Database size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Data Operations</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">High-volume data entry, cleansing, and annotation for AI training sets with &gt;99% accuracy guarantees.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">Data Operations</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">High-volume data entry, cleansing, and annotation for AI training sets with &gt;99% accuracy guarantees.</p>
                             </div>
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <TrendingUp size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Finance & Accounting</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">Accounts Payable/Receivable, Invoice Processing, and Payroll Administration managed by certified specialists.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">Finance & Accounting</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">Accounts Payable/Receivable, Invoice Processing, and Payroll Administration managed by certified specialists.</p>
                             </div>
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <FileText size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Content Moderation</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">Protecting your community 24/7 with human-in-the-loop review of UGC (User Generated Content) and Policy Enforcement.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">Content Moderation</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">Protecting your community 24/7 with human-in-the-loop review of UGC (User Generated Content) and Policy Enforcement.</p>
                             </div>
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <Shield size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Compliance & Risk</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">KYC/AML verification, Claim Adjudication, and Fraud Detection services for regulated industries.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">Compliance & Risk</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">KYC/AML verification, Claim Adjudication, and Fraud Detection services for regulated industries.</p>
                             </div>
                         </div>
 
                         <div className="lg:col-span-4 order-1 lg:order-2">
                             <div className="sticky top-24 text-right">
-                                <span className="text-8xl font-bold text-slate-100 leading-none -mr-4">02</span>
-                                <h2 className="text-3xl font-bold text-skylink-navy -mt-10 relative z-10 mb-6 font-serif">BACK OFFICE & DATA</h2>
-                                <p className="text-slate-500 mb-8 leading-relaxed">
+                                <span className="text-8xl font-bold text-white/10 leading-none -mr-4">02</span>
+                                <h2 className="text-3xl font-bold text-white -mt-10 relative z-10 mb-6 font-serif">BACK OFFICE & DATA</h2>
+                                <p className="text-slate-300 mb-8 leading-relaxed">
                                     The engine room of your enterprise. We streamline repetitive, high-volume tasks, freeing your internal teams to focus on strategic growth and innovation.
                                 </p>
-                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-gold uppercase tracking-widest hover:text-skylink-navy transition-colors">
+                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-gold uppercase tracking-widest hover:text-white transition-colors">
                                     Schedule ROI Audit <ArrowRight className="ml-2 w-4 h-4" />
                                 </Link>
                             </div>
@@ -252,7 +252,7 @@ const ITESServices = () => {
             </section>
 
             {/* 5. DIGITAL TRANSFORMATION SUITE (DARK MODE) */}
-            <section className="py-24 bg-skylink-navy text-white relative overflow-hidden">
+            <section className="py-24 bg-transparent text-white relative overflow-hidden z-10 border-y border-white/10">
                 <div
                     className="absolute inset-0 bg-cover bg-center opacity-20"
                     style={{ backgroundImage: `url(${techBg})` }}
@@ -287,73 +287,73 @@ const ITESServices = () => {
             </section>
 
             {/* 6. GLOBAL DELIVERY MAP */}
-            <section className="py-32 bg-slate-50 text-center border-t border-slate-200">
+            <section className="py-32 bg-transparent text-center border-t border-white/10 relative z-10">
                 <div className="max-w-4xl mx-auto px-6">
-                    <Globe size={48} className="mx-auto text-skylink-navy mb-6" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-skylink-navy mb-6 font-serif">TRUE GLOBAL DELIVERY</h2>
-                    <p className="text-xl text-slate-600 mb-10 leading-relaxed font-light">
+                    <Globe size={48} className="mx-auto text-white mb-6" />
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-serif">TRUE GLOBAL DELIVERY</h2>
+                    <p className="text-xl text-slate-300 mb-10 leading-relaxed font-light">
                         From our headquarters in New York to delivery centers in the Philippines, India, and Latin America, we provide a unified standard of excellence.
                     </p>
 
                     {/* Global Hubs Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 text-left">
                         {/* New York */}
-                        <div className="relative p-8 border border-slate-200 bg-white shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-slate-100">
+                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
                                 <div className="h-full bg-skylink-gold w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
                             </div>
                             <div className="w-12 h-1 bg-skylink-gold mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif group-hover:text-skylink-gold transition-colors">New York</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-skylink-gold transition-colors">New York</h3>
                             <span className="text-xs font-bold text-skylink-gold uppercase tracking-widest mb-4 block">Global HQ</span>
-                            <p className="text-sm text-slate-500 mb-4 group-hover:text-slate-600 transition-colors">Strategic Management, Client Relations, & Legal Compliance.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-slate-100 pt-4 mt-6">
+                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">Strategic Management, Client Relations, & Legal Compliance.</p>
+                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
                                 <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
                                 EST (UTC-5) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-skylink-gold font-bold">ACTIVE</span>
                             </div>
                         </div>
 
                         {/* London */}
-                        <div className="relative p-8 border border-slate-200 bg-white shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-slate-100">
+                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
                                 <div className="h-full bg-slate-400 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
                             </div>
                             <div className="w-12 h-1 bg-slate-300 mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif group-hover:text-slate-500 transition-colors">London</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-slate-400 transition-colors">London</h3>
                             <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 block">EMEA Hub</span>
-                            <p className="text-sm text-slate-500 mb-4 group-hover:text-slate-600 transition-colors">European Markets, GDPR Compliance, & FinTech Services.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-slate-100 pt-4 mt-6">
+                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">European Markets, GDPR Compliance, & FinTech Services.</p>
+                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
                                 <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                GMT (UTC+0) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-slate-500 font-bold">ACTIVE</span>
+                                GMT (UTC+0) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 font-bold">ACTIVE</span>
                             </div>
                         </div>
 
                         {/* Bangalore */}
-                        <div className="relative p-8 border border-slate-200 bg-white shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-slate-100">
+                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
                                 <div className="h-full bg-skylink-blue w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
                             </div>
                             <div className="w-12 h-1 bg-skylink-blue mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif group-hover:text-skylink-blue transition-colors">Bangalore</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-skylink-blue transition-colors">Bangalore</h3>
                             <span className="text-xs font-bold text-skylink-blue uppercase tracking-widest mb-4 block">Tech Center</span>
-                            <p className="text-sm text-slate-500 mb-4 group-hover:text-slate-600 transition-colors">Software Development, AI Labs, & IT Infrastructure.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-slate-100 pt-4 mt-6">
+                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">Software Development, AI Labs, & IT Infrastructure.</p>
+                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
                                 <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
                                 IST (UTC+5:30) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-skylink-blue font-bold">ACTIVE</span>
                             </div>
                         </div>
 
                         {/* Manila */}
-                        <div className="relative p-8 border border-slate-200 bg-white shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-slate-100">
-                                <div className="h-full bg-skylink-navy w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
+                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
+                                <div className="h-full bg-tech-cyan w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
                             </div>
-                            <div className="w-12 h-1 bg-skylink-navy mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-skylink-navy mb-2 font-serif group-hover:text-skylink-navy transition-colors">Manila</h3>
-                            <span className="text-xs font-bold text-skylink-navy uppercase tracking-widest mb-4 block">CX Capital</span>
-                            <p className="text-sm text-slate-500 mb-4 group-hover:text-slate-600 transition-colors">Voice Operations, Customer Support, & Content Moderation.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-slate-100 pt-4 mt-6">
+                            <div className="w-12 h-1 bg-tech-cyan mb-6 group-hover:w-20 transition-all duration-300"></div>
+                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-tech-cyan transition-colors">Manila</h3>
+                            <span className="text-xs font-bold text-tech-cyan uppercase tracking-widest mb-4 block">CX Capital</span>
+                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">Voice Operations, Customer Support, & Content Moderation.</p>
+                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
                                 <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                PHT (UTC+8) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-skylink-navy font-bold">ACTIVE</span>
+                                PHT (UTC+8) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-tech-cyan font-bold">ACTIVE</span>
                             </div>
                         </div>
                     </div>

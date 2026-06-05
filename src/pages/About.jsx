@@ -52,7 +52,7 @@ const About = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen pt-20 font-sans">
+        <div className="min-h-screen pt-20 font-sans relative z-10 bg-transparent">
             <SEO title="About Us" description="Built on Trust. Skylink Innovations is the strategic backbone for the nation's leading asset managers." />
 
             {/* 1. HERO */}
@@ -104,7 +104,7 @@ const About = () => {
             </section>
 
             {/* 2. THE SKYLINK CODE */}
-            <section ref={valuesRef} className="py-28 bg-white">
+            <section ref={valuesRef} className="py-28 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -117,8 +117,8 @@ const About = () => {
                             Our Values
                             <div className="w-8 h-px bg-skylink-gold" />
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-skylink-navy mb-4 font-serif">The Skylink Code</h2>
-                        <p className="mt-6 text-slate-500 max-w-2xl mx-auto">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-serif">The Skylink Code</h2>
+                        <p className="mt-6 text-slate-300 max-w-2xl mx-auto">
                             Our reputation is our currency. Every action we take is guided by a rigid framework of ethics and excellence.
                         </p>
                     </motion.div>
@@ -134,7 +134,7 @@ const About = () => {
                                 key={idx}
                                 variants={itemVariants}
                                 whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                                className="text-center group p-8 rounded-2xl bg-slate-50 hover:bg-white hover:shadow-2xl transition-all duration-500 border border-transparent hover:border-slate-100"
+                                className="text-center group p-8 rounded-2xl glass hover:bg-white/10 hover:shadow-2xl transition-all duration-500 border border-white/10 hover:border-white/20"
                             >
                                 <motion.div
                                     whileHover={{ scale: 1.1, rotate: 5 }}
@@ -142,8 +142,8 @@ const About = () => {
                                 >
                                     <value.icon size={36} className="text-skylink-gold" />
                                 </motion.div>
-                                <h3 className="text-2xl font-bold text-skylink-navy mb-4 font-serif">{value.title}</h3>
-                                <p className="text-slate-600 leading-relaxed">
+                                <h3 className="text-2xl font-bold text-white mb-4 font-serif">{value.title}</h3>
+                                <p className="text-slate-300 leading-relaxed">
                                     {value.desc}
                                 </p>
                             </motion.div>
@@ -153,7 +153,7 @@ const About = () => {
             </section>
 
             {/* 3. LEADERSHIP */}
-            <section ref={leadershipRef} className="py-28 bg-slate-50">
+            <section ref={leadershipRef} className="py-28 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -165,8 +165,8 @@ const About = () => {
                             <div className="w-8 h-px bg-skylink-blue" />
                             Executive Team
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-skylink-navy mb-4 font-serif">Leadership</h2>
-                        <p className="text-lg text-slate-600 max-w-3xl">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-serif">Leadership</h2>
+                        <p className="text-lg text-slate-300 max-w-3xl">
                             Decades of combined experience in Real Estate, Finance, and Global Operations.
                         </p>
                     </motion.div>
@@ -182,7 +182,7 @@ const About = () => {
                                 key={idx}
                                 variants={itemVariants}
                                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                                className={`bg-white rounded-2xl shadow-lg overflow-hidden group border-b-4 border-${leader.color}`}
+                                className={`glass rounded-2xl shadow-lg overflow-hidden group border-b-4 border-white/10 border-b-${leader.color}`}
                             >
                                 <div className="h-80 overflow-hidden relative">
                                     <img
@@ -196,8 +196,8 @@ const About = () => {
                                         <p className="text-skylink-gold font-bold tracking-widest text-xs uppercase">{leader.title}</p>
                                     </div>
                                 </div>
-                                <div className="p-8">
-                                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                                <div className="p-8 border-t border-white/10">
+                                    <p className="text-slate-300 text-sm leading-relaxed mb-6">
                                         {leader.desc}
                                     </p>
                                     <div className={`w-12 h-1 bg-slate-200 group-hover:bg-${leader.color} group-hover:w-20 transition-all duration-300`} />
@@ -209,7 +209,7 @@ const About = () => {
             </section>
 
             {/* 4. TIMELINE */}
-            <section ref={timelineRef} className="py-28 bg-white">
+            <section ref={timelineRef} className="py-28 bg-transparent relative z-10">
                 <div className="max-w-4xl mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -222,7 +222,7 @@ const About = () => {
                             Our History
                             <div className="w-8 h-px bg-skylink-blue" />
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-skylink-navy font-serif">A Decade of Innovation</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white font-serif">A Decade of Innovation</h2>
                     </motion.div>
 
                     <div className="relative">
@@ -248,8 +248,8 @@ const About = () => {
                                         className={`absolute left-4 md:left-8 top-0 w-5 h-5 rounded-full border-4 border-white shadow-lg ${item.active ? 'bg-skylink-gold' : 'bg-slate-300'} ${item.year === 'TODAY' ? 'animate-pulse w-6 h-6 -left-0.5 md:left-7' : ''}`}
                                     />
                                     <span className={`text-sm font-bold tracking-widest mb-2 block ${item.active ? 'text-skylink-gold' : 'text-slate-400'}`}>{item.year}</span>
-                                    <h3 className="text-xl font-bold text-skylink-navy mb-2">{item.title}</h3>
-                                    <p className="text-slate-600">{item.desc}</p>
+                                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                                    <p className="text-slate-300">{item.desc}</p>
                                 </motion.div>
                             ))}
                         </div>
@@ -258,7 +258,7 @@ const About = () => {
             </section>
 
             {/* 5. CSR */}
-            <section ref={csrRef} className="relative py-28 bg-skylink-navy overflow-hidden">
+            <section ref={csrRef} className="relative py-28 bg-transparent overflow-hidden z-10">
                 <div
                     className="absolute inset-0 bg-cover bg-center opacity-10"
                     style={{ backgroundImage: `url(${csrBg})` }}

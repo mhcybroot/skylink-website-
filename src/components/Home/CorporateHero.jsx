@@ -7,8 +7,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import hero1 from '../../assets/Photos/DSC05841.jpg'; // Meeting
 import hero2 from '../../assets/Photos/DSC05810.jpg'; // Construction
 import hero3 from '../../assets/Photos/DSC05839.jpg'; // Tech
-import LottieAnimation from '../Common/LottieAnimation';
-import placeholderAnimation from '../../assets/animations/placeholder.json';
+import Hero3DScene from './Hero3DScene';
 
 const slides = [
     {
@@ -230,12 +229,9 @@ const CorporateHero = () => {
                     </AnimatePresence>
                 </div>
 
-                {/* Right Side Animation (Hidden on mobile) */}
-                <div className="hidden lg:block opacity-60 mix-blend-screen pointer-events-none">
-                    <LottieAnimation
-                        animationData={placeholderAnimation}
-                        className="w-full max-w-lg mx-auto"
-                    />
+                {/* Right Side Animation */}
+                <div className="hidden lg:block absolute right-0 top-0 w-1/2 h-full pointer-events-none">
+                    <Hero3DScene mousePosition={mousePosition} />
                 </div>
             </motion.div>
 

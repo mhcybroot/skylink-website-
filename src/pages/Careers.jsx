@@ -65,7 +65,7 @@ const Careers = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen pt-20 font-sans">
+        <div className="min-h-screen pt-20 font-sans relative z-10 bg-transparent">
             <SEO title="Careers" description="Build Your Legacy. Join a team that is redefining the standards of global asset management and digital operations." />
 
             {/* 1. HERO */}
@@ -130,7 +130,7 @@ const Careers = () => {
             </section>
 
             {/* 2. WHY SKYLINK? (CULTURE) */}
-            <section ref={cultureRef} className="py-28 bg-white">
+            <section ref={cultureRef} className="py-28 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
@@ -146,10 +146,10 @@ const Careers = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={cultureInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ delay: 0.4, duration: 0.5 }}
-                            className="absolute -bottom-6 -right-6 md:bottom-8 md:right-8 bg-white p-8 rounded-xl shadow-2xl border-t-4 border-skylink-blue"
+                            className="absolute -bottom-6 -right-6 md:bottom-8 md:right-8 glass-dark p-8 rounded-xl shadow-2xl border-t-4 border-skylink-blue"
                         >
-                            <div className="text-4xl font-bold text-skylink-navy mb-2">4.8/5</div>
-                            <div className="text-sm font-bold text-slate-500 tracking-widest uppercase">Employee Satisfaction</div>
+                            <div className="text-4xl font-bold text-white mb-2">4.8/5</div>
+                            <div className="text-sm font-bold text-slate-300 tracking-widest uppercase">Employee Satisfaction</div>
                         </motion.div>
                     </motion.div>
 
@@ -162,8 +162,8 @@ const Careers = () => {
                             <div className="w-8 h-px bg-skylink-blue" />
                             Culture
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-skylink-navy mb-6 font-serif">Why Skylink?</h2>
-                        <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">Why Skylink?</h2>
+                        <p className="text-lg text-slate-300 mb-8 leading-relaxed">
                             We operate at the intersection of stability and speed. As a Skylink team member, you'll be challenged to solve complex logistical problems while being supported by world-class infrastructure.
                         </p>
 
@@ -178,11 +178,11 @@ const Careers = () => {
                                     key={idx}
                                     variants={itemVariants}
                                     whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                                    className="group p-6 bg-slate-50 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 border border-transparent hover:border-slate-100"
+                                    className="group p-6 glass rounded-xl hover:bg-white/10 hover:shadow-lg transition-all duration-300 border border-white/10 hover:border-white/20"
                                 >
                                     <item.icon size={28} className="text-skylink-blue mb-4 group-hover:scale-110 transition-transform" />
-                                    <h3 className="text-lg font-bold text-skylink-navy mb-2">{item.title}</h3>
-                                    <p className="text-sm text-slate-500">{item.desc}</p>
+                                    <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
+                                    <p className="text-sm text-slate-300">{item.desc}</p>
                                 </motion.div>
                             ))}
                         </motion.div>
@@ -191,7 +191,7 @@ const Careers = () => {
             </section>
 
             {/* 3. OPEN POSITIONS */}
-            <section id="openings" ref={openingsRef} className="py-28 bg-slate-50">
+            <section id="openings" ref={openingsRef} className="py-28 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -204,7 +204,7 @@ const Careers = () => {
                             Opportunities
                             <div className="w-8 h-px bg-skylink-blue" />
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-skylink-navy font-serif">Open Positions</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white font-serif">Open Positions</h2>
                     </motion.div>
 
                     <motion.div
@@ -218,13 +218,13 @@ const Careers = () => {
                                 key={deptIdx}
                                 variants={itemVariants}
                                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                                className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-${dept.color}`}
+                                className={`glass p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/10 border-t-4 border-t-${dept.color}`}
                             >
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className={`p-3 bg-${dept.color}/10 rounded-xl`}>
                                         <dept.icon size={24} className={`text-${dept.color}`} />
                                     </div>
-                                    <h3 className="text-xl font-bold text-skylink-navy">{dept.department}</h3>
+                                    <h3 className="text-xl font-bold text-white">{dept.department}</h3>
                                 </div>
 
                                 <ul className="space-y-4">
@@ -232,10 +232,10 @@ const Careers = () => {
                                         <motion.li
                                             key={roleIdx}
                                             whileHover={{ x: 5 }}
-                                            className="group cursor-pointer p-4 rounded-lg hover:bg-slate-50 transition-colors"
+                                            className="group cursor-pointer p-4 rounded-lg hover:bg-white/5 transition-colors"
                                         >
                                             <div className="flex justify-between items-center mb-1">
-                                                <h4 className="font-bold text-slate-700 group-hover:text-skylink-blue transition-colors">{role.title}</h4>
+                                                <h4 className="font-bold text-slate-200 group-hover:text-skylink-blue transition-colors">{role.title}</h4>
                                                 <ChevronRight size={16} className="text-slate-300 group-hover:text-skylink-blue group-hover:translate-x-1 transition-all" />
                                             </div>
                                             <p className="text-xs text-slate-500">{role.location} • {role.type}</p>
@@ -251,7 +251,7 @@ const Careers = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={openingsInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ delay: 0.5, duration: 0.5 }}
-                        className="mt-16 bg-gradient-to-r from-skylink-navy to-skylink-blue p-12 text-center rounded-2xl relative overflow-hidden"
+                        className="mt-16 glass-dark border border-white/10 p-12 text-center rounded-2xl relative overflow-hidden"
                     >
                         {/* Background decoration */}
                         <div className="absolute inset-0 opacity-10">

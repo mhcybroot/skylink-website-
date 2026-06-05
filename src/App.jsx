@@ -13,6 +13,7 @@ import LoadingScreen from './components/UI/LoadingScreen';
 import FloatingCTA from './components/UI/FloatingCTA';
 import ScrollProgress from './components/UI/ScrollProgress';
 import BackToTop from './components/UI/BackToTop';
+import Canvas3DContext from './components/UI/Canvas3DContext';
 
 // Page transition variants
 const pageVariants = {
@@ -62,9 +63,10 @@ function App() {
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
 
-      <div className="min-h-screen flex flex-col font-sans text-slate-900">
+      <div className="min-h-screen flex flex-col font-sans text-slate-200 relative">
+        <Canvas3DContext />
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}

@@ -25,7 +25,7 @@ const PropertyServices = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen pt-20 font-sans">
+        <div className="min-h-screen pt-20 font-sans relative z-10 bg-transparent">
             <SEO title="Property Preservation" description="Nationwide property preservation, maintenance, and renovation services for asset managers." />
             {/* 1. COMPACT INDUSTRIAL HERO */}
             <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold overflow-hidden">
@@ -76,24 +76,24 @@ const PropertyServices = () => {
             </section>
 
             {/* 2. THE SKYLINK STANDARD (INTRO) */}
-            <section ref={introRef} className="py-24 bg-white">
+            <section ref={introRef} className="py-24 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={introInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-4xl font-bold text-skylink-navy mb-6 font-serif">THE SKYLINK STANDARD</h2>
+                        <h2 className="text-4xl font-bold text-white mb-6 font-serif">THE SKYLINK STANDARD</h2>
                         <motion.div
                             initial={{ width: 0 }}
                             animate={introInView ? { width: 80 } : {}}
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="h-1 bg-skylink-gold mb-8"
                         />
-                        <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+                        <p className="text-lg text-slate-300 mb-6 leading-relaxed">
                             In a fragmented industry, stability is the ultimate asset. Skylink Innovations delivers a unified, enterprise-grade solution for asset managers, tackling the complex logistics of property preservation with military precision.
                         </p>
-                        <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                        <p className="text-lg text-slate-300 mb-8 leading-relaxed">
                             We don't just maintain properties; we mitigate risk, accelerate turnaround times, and maximize ROI through data-driven field operations.
                         </p>
                         <motion.ul
@@ -111,7 +111,7 @@ const PropertyServices = () => {
                                 <motion.li
                                     key={idx}
                                     variants={itemVariants}
-                                    className="flex items-center text-skylink-navy font-bold text-sm uppercase tracking-wide"
+                                    className="flex items-center text-slate-200 font-bold text-sm uppercase tracking-wide"
                                 >
                                     <CheckCircle size={18} className="text-skylink-gold mr-3" />
                                     {item}
@@ -141,17 +141,17 @@ const PropertyServices = () => {
             </section>
 
             {/* 3. DEEP DIVE: PRESERVATION WING */}
-            <section className="py-24 bg-slate-50 border-y border-slate-200">
+            <section className="py-24 bg-transparent border-y border-white/10 relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-4">
                             <div className="sticky top-24">
-                                <span className="text-8xl font-bold text-slate-200 leading-none -ml-4">01</span>
-                                <h2 className="text-3xl font-bold text-skylink-navy -mt-10 relative z-10 mb-6 font-serif">FIELD OPERATIONS & PRESERVATION</h2>
-                                <p className="text-slate-500 mb-8 leading-relaxed">
+                                <span className="text-8xl font-bold text-white/10 leading-none -ml-4">01</span>
+                                <h2 className="text-3xl font-bold text-white -mt-10 relative z-10 mb-6 font-serif">FIELD OPERATIONS & PRESERVATION</h2>
+                                <p className="text-slate-300 mb-8 leading-relaxed">
                                     Our "Boots on the Ground" teams allow you to manage thousands of assets as easily as one. Immediate securement and stabilization prevents ongoing deterioration.
                                 </p>
-                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-blue uppercase tracking-widest hover:text-skylink-navy transition-colors">
+                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-blue uppercase tracking-widest hover:text-white transition-colors">
                                     Request Rate Sheet <ArrowRight className="ml-2 w-4 h-4" />
                                 </Link>
                             </div>
@@ -159,40 +159,40 @@ const PropertyServices = () => {
                         <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                             <img src={preservationBg} alt="Preservation" className="w-full h-64 object-cover col-span-full border-b-4 border-skylink-blue" />
 
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <ShieldCheck size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Securement</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Securement</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• Lock Changes & Re-keying</li>
                                     <li>• Board-ups (HUD Specs)</li>
                                     <li>• Eviction Assistance</li>
                                     <li>• Window/Door Repair</li>
                                 </ul>
                             </div>
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <Trash2 size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Conveyance Prep</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Conveyance Prep</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• Interior Trash-out</li>
                                     <li>• Hazard Removal</li>
                                     <li>• Maid Services</li>
                                     <li>• Personal Property Storage</li>
                                 </ul>
                             </div>
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <Home size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Landscape Maint.</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Landscape Maint.</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• Grass Cuts & Edging</li>
                                     <li>• Tree Trimming/Removal</li>
                                     <li>• Snow Removal</li>
                                     <li>• Pool Securing</li>
                                 </ul>
                             </div>
-                            <div className="bg-white p-8 border border-slate-200">
+                            <div className="glass p-8 border border-white/10">
                                 <ClipboardCheck size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Winterization</h3>
-                                <ul className="space-y-2 text-sm text-slate-600">
+                                <h3 className="text-xl font-bold text-white mb-3">Winterization</h3>
+                                <ul className="space-y-2 text-sm text-slate-300">
                                     <li>• System Draining</li>
                                     <li>• Pressure Testing</li>
                                     <li>• Anti-freeze Application</li>
@@ -205,42 +205,42 @@ const PropertyServices = () => {
             </section>
 
             {/* 4. DEEP DIVE: CONSTRUCTION WING */}
-            <section className="py-24 bg-white border-b border-slate-200">
+            <section className="py-24 bg-transparent border-b border-white/10 relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-8 order-2 lg:order-1 grid grid-cols-1 md:grid-cols-2 gap-8">
                             <img src={renoBg} alt="Construction" className="w-full h-64 object-cover col-span-full border-b-4 border-skylink-gold" />
 
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <Hammer size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Full Rehabs</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">Complete turnkey renovations for REO assets. We manage permits, materials, and labor to maximize resale value.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">Full Rehabs</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">Complete turnkey renovations for REO assets. We manage permits, materials, and labor to maximize resale value.</p>
                             </div>
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <HardHat size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">CapEx Projects</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">Large-scale capital expenditure projects including roofing, foundation repair, and HVAC system replacements.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">CapEx Projects</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">Large-scale capital expenditure projects including roofing, foundation repair, and HVAC system replacements.</p>
                             </div>
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <PenTool size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Emergency Repairs</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">24/7 dispatched response for vandalism, fire damage, storm damage, and plumbing failures.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">Emergency Repairs</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">24/7 dispatched response for vandalism, fire damage, storm damage, and plumbing failures.</p>
                             </div>
-                            <div className="bg-slate-50 p-8 border-l border-slate-200 hover:border-l-4 hover:border-skylink-gold transition-all">
+                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
                                 <FileCheck size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-skylink-navy mb-3">Code Compliance</h3>
-                                <p className="text-sm text-slate-600 leading-relaxed">Resolving city code violations and mechanic's liens to ensure clear title transfer.</p>
+                                <h3 className="text-xl font-bold text-white mb-3">Code Compliance</h3>
+                                <p className="text-sm text-slate-300 leading-relaxed">Resolving city code violations and mechanic's liens to ensure clear title transfer.</p>
                             </div>
                         </div>
 
                         <div className="lg:col-span-4 order-1 lg:order-2">
                             <div className="sticky top-24 text-right">
-                                <span className="text-8xl font-bold text-slate-100 leading-none -mr-4">02</span>
-                                <h2 className="text-3xl font-bold text-skylink-navy -mt-10 relative z-10 mb-6 font-serif">RENOVATION & CONSTRUCTION</h2>
-                                <p className="text-slate-500 mb-8 leading-relaxed">
+                                <span className="text-8xl font-bold text-white/10 leading-none -mr-4">02</span>
+                                <h2 className="text-3xl font-bold text-white -mt-10 relative z-10 mb-6 font-serif">RENOVATION & CONSTRUCTION</h2>
+                                <p className="text-slate-300 mb-8 leading-relaxed">
                                     From simple "Trash-out & Paint" refreshes to complex structural repairs. Our licensed general contractors bring distressed assets back to market condition.
                                 </p>
-                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-gold uppercase tracking-widest hover:text-skylink-navy transition-colors">
+                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-gold uppercase tracking-widest hover:text-white transition-colors">
                                     View Project Gallery <ArrowRight className="ml-2 w-4 h-4" />
                                 </Link>
                             </div>
@@ -250,7 +250,7 @@ const PropertyServices = () => {
             </section>
 
             {/* 5. TECHNOLOGY SUITE (DARK MODE) */}
-            <section className="py-24 bg-skylink-navy text-white relative overflow-hidden">
+            <section className="py-24 bg-transparent text-white relative overflow-hidden z-10 border-y border-white/10">
                 <div
                     className="absolute inset-0 bg-cover bg-center opacity-20"
                     style={{ backgroundImage: `url(${techBg})` }}
@@ -287,18 +287,18 @@ const PropertyServices = () => {
             </section>
 
             {/* 6. VENDOR NETWORK INVITE */}
-            <section className="py-32 bg-slate-50 text-center border-t border-slate-200">
+            <section className="py-32 bg-transparent text-center border-t border-white/10 relative z-10">
                 <div className="max-w-3xl mx-auto px-6">
-                    <Users size={48} className="mx-auto text-skylink-navy mb-6" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-skylink-navy mb-6 font-serif">JOIN OUR NETWORK</h2>
-                    <p className="text-xl text-slate-600 mb-10 leading-relaxed font-light">
+                    <Users size={48} className="mx-auto text-white mb-6" />
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-serif">JOIN OUR NETWORK</h2>
+                    <p className="text-xl text-slate-300 mb-10 leading-relaxed font-light">
                         Are you a licensed contractor with a commitment to excellence? We are actively expanding our vendor panel in high-volume REO markets.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <Link to="/contact" className="px-8 py-4 bg-skylink-navy text-white font-bold uppercase tracking-widest hover:bg-skylink-blue transition-colors">
                             Contractor Application
                         </Link>
-                        <Link to="/contact" className="px-8 py-4 border border-skylink-navy text-skylink-navy font-bold uppercase tracking-widest hover:bg-slate-200 transition-colors">
+                        <Link to="/contact" className="px-8 py-4 border border-white/20 text-white font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">
                             Download Vendor Packet
                         </Link>
                     </div>

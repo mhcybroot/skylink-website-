@@ -62,7 +62,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="bg-white min-h-screen pt-20 font-sans">
+        <div className="min-h-screen pt-20 font-sans relative z-10 bg-transparent">
             <SEO title="Contact Us" description="Let's Build Something Great Together. Whether you need scalable property services or cutting-edge ITES solutions, our team is ready." />
 
             {/* 1. HERO */}
@@ -114,7 +114,7 @@ const Contact = () => {
             </section>
 
             {/* 2. CONTACT FORM & INFO */}
-            <section ref={formRef} className="py-24 bg-white">
+            <section ref={formRef} className="py-24 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-16">
                     {/* Form Section */}
                     <motion.div
@@ -127,7 +127,7 @@ const Contact = () => {
                             <div className="w-8 h-px bg-skylink-blue" />
                             Contact Form
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-skylink-navy mb-8 font-serif">Send Us a Message</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 font-serif">Send Us a Message</h2>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -145,7 +145,7 @@ const Contact = () => {
                                             required
                                             onFocus={() => setFocusedField(label)}
                                             onBlur={() => setFocusedField(null)}
-                                            className={`w-full px-4 py-4 border-2 rounded-xl bg-slate-50 focus:bg-white focus:outline-none transition-all duration-300 ${focusedField === label ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-slate-200'}`}
+                                            className={`w-full px-4 py-4 border-2 rounded-xl bg-skylink-navy/40 focus:bg-white/10 text-white focus:outline-none transition-all duration-300 ${focusedField === label ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-white/10'}`}
                                         />
                                         <motion.div
                                             initial={{ scaleX: 0 }}
@@ -165,7 +165,7 @@ const Contact = () => {
                                 <select
                                     onFocus={() => setFocusedField('subject')}
                                     onBlur={() => setFocusedField(null)}
-                                    className={`w-full px-4 py-4 border-2 rounded-xl bg-slate-50 focus:bg-white focus:outline-none transition-all duration-300 ${focusedField === 'subject' ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-slate-200'}`}
+                                    className={`w-full px-4 py-4 border-2 rounded-xl bg-skylink-navy/40 focus:bg-white/10 text-white focus:outline-none transition-all duration-300 [&>option]:bg-skylink-navy ${focusedField === 'subject' ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-white/10'}`}
                                 >
                                     <option>Select a Subject</option>
                                     <option>Property Preservation Services</option>
@@ -188,7 +188,7 @@ const Contact = () => {
                                     required
                                     onFocus={() => setFocusedField('message')}
                                     onBlur={() => setFocusedField(null)}
-                                    className={`w-full px-4 py-4 border-2 rounded-xl bg-slate-50 focus:bg-white focus:outline-none resize-none transition-all duration-300 ${focusedField === 'message' ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-slate-200'}`}
+                                    className={`w-full px-4 py-4 border-2 rounded-xl bg-skylink-navy/40 focus:bg-white/10 text-white focus:outline-none resize-none transition-all duration-300 ${focusedField === 'message' ? 'border-skylink-blue shadow-lg shadow-skylink-blue/10' : 'border-white/10'}`}
                                 />
                             </motion.div>
 
@@ -220,8 +220,8 @@ const Contact = () => {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="lg:col-span-2"
                     >
-                        <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100 sticky top-32">
-                            <h3 className="text-xl font-bold text-skylink-navy mb-6">Quick Contact</h3>
+                        <div className="glass p-8 rounded-2xl border border-white/10 sticky top-32">
+                            <h3 className="text-xl font-bold text-white mb-6">Quick Contact</h3>
 
                             <div className="space-y-6">
                                 {[
@@ -242,14 +242,14 @@ const Contact = () => {
                                         </div>
                                         <div>
                                             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{item.label}</p>
-                                            <p className="font-semibold text-skylink-navy group-hover:text-skylink-blue transition-colors">{item.value}</p>
+                                            <p className="font-semibold text-white group-hover:text-skylink-blue transition-colors">{item.value}</p>
                                         </div>
                                     </motion.div>
                                 ))}
                             </div>
 
-                            <div className="mt-8 pt-8 border-t border-slate-200">
-                                <p className="text-sm text-slate-500">
+                            <div className="mt-8 pt-8 border-t border-white/10">
+                                <p className="text-sm text-slate-400">
                                     Response Time: We aim to respond to all inquiries within 24 business hours.
                                 </p>
                             </div>
@@ -259,7 +259,7 @@ const Contact = () => {
             </section>
 
             {/* 3. GLOBAL OFFICES */}
-            <section ref={officesRef} className="py-24 bg-slate-50">
+            <section ref={officesRef} className="py-24 bg-transparent relative z-10">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -272,7 +272,7 @@ const Contact = () => {
                             Our Locations
                             <div className="w-8 h-px bg-skylink-gold" />
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-skylink-navy font-serif">Global Offices</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-white font-serif">Global Offices</h2>
                     </motion.div>
 
                     <motion.div
@@ -286,14 +286,14 @@ const Contact = () => {
                                 key={idx}
                                 variants={itemVariants}
                                 whileHover={{ y: -10, transition: { duration: 0.3 } }}
-                                className={`bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border-t-4 border-${office.color} group`}
+                                className={`glass p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/10 border-t-4 border-t-${office.color} group`}
                             >
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className={`p-3 bg-${office.color}/10 rounded-xl group-hover:bg-${office.color}/20 transition-colors`}>
                                         <Building size={24} className={`text-${office.color}`} />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-skylink-navy">{office.city}</h3>
+                                        <h3 className="text-xl font-bold text-white">{office.city}</h3>
                                         <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">{office.type}</p>
                                     </div>
                                 </div>
@@ -304,18 +304,18 @@ const Contact = () => {
                                         className="flex items-start gap-3 cursor-pointer"
                                     >
                                         <MapPin size={18} className="text-slate-400 mt-0.5 flex-shrink-0" />
-                                        <p className="text-slate-600 text-sm">{office.address}</p>
+                                        <p className="text-slate-300 text-sm">{office.address}</p>
                                     </motion.div>
                                     <motion.div
                                         whileHover={{ x: 5 }}
                                         className="flex items-center gap-3 cursor-pointer"
                                     >
                                         <Phone size={18} className="text-slate-400 flex-shrink-0" />
-                                        <p className="text-slate-600 text-sm font-medium group-hover:text-skylink-blue transition-colors">{office.phone}</p>
+                                        <p className="text-slate-300 text-sm font-medium group-hover:text-skylink-blue transition-colors">{office.phone}</p>
                                     </motion.div>
                                 </div>
 
-                                <div className={`mt-6 pt-6 border-t border-slate-100 w-12 h-1 bg-slate-200 group-hover:bg-${office.color} group-hover:w-full transition-all duration-500`} />
+                                <div className={`mt-6 pt-6 border-t border-white/10 w-12 h-1 bg-white/10 group-hover:bg-${office.color} group-hover:w-full transition-all duration-500`} />
                             </motion.div>
                         ))}
                     </motion.div>
@@ -323,7 +323,7 @@ const Contact = () => {
             </section>
 
             {/* 4. MAP CTA */}
-            <section className="py-20 bg-gradient-to-r from-skylink-navy to-skylink-blue relative overflow-hidden">
+            <section className="py-20 glass-dark relative overflow-hidden z-10 border-y border-white/10">
                 {/* Background decoration */}
                 <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
