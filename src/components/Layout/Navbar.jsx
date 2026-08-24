@@ -127,7 +127,7 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
-                        className="md:hidden bg-black/95 border-b border-white/10 px-6 py-6 backdrop-blur-2xl"
+                        className="md:hidden bg-black/95 border-b border-white/10 px-6 py-6 backdrop-blur-2xl max-h-[85vh] overflow-y-auto shadow-2xl"
                     >
                         <div className="flex flex-col gap-4">
                             {navLinks.map((link, idx) => (

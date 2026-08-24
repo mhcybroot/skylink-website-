@@ -139,7 +139,7 @@ const AuraFeatures = () => {
                                 key={service.id}
                                 onMouseEnter={() => setHoveredService(service.id)}
                                 onMouseLeave={() => setHoveredService(null)}
-                                className={`aura-glass-card p-8 md:p-10 flex flex-col justify-between group relative overflow-hidden bg-zinc-950/60 transition-all duration-300 ${
+                                className={`aura-glass-card p-6 sm:p-8 md:p-10 flex flex-col justify-between group relative overflow-hidden bg-zinc-950/60 transition-all duration-300 ${
                                     service.colSpan || ''
                                 } ${
                                     service.featured 

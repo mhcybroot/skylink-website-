@@ -246,12 +246,12 @@ ${candidateNote}`
                 {/* Application Modal */}
                 <AnimatePresence>
                     {selectedJob && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-xl">
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-xl">
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                className="aura-glass-card p-8 md:p-10 max-w-lg w-full bg-zinc-950 border border-white/15 relative shadow-2xl"
+                                className="aura-glass-card p-6 sm:p-8 md:p-10 max-w-lg w-full bg-zinc-950 border border-white/15 relative shadow-2xl max-h-[90vh] overflow-y-auto"
                             >
                                 <button
                                     onClick={() => setSelectedJob(null)}

@@ -140,7 +140,7 @@ ${formData.message}`
                     {/* Left: Contact Info & Value Cards */}
                     <div className="lg:col-span-5 flex flex-col gap-6">
                         {/* Direct Contacts Card */}
-                        <div className="aura-glass-card p-8 bg-zinc-950/70 border border-white/10">
+                        <div className="aura-glass-card p-6 sm:p-8 bg-zinc-950/70 border border-white/10">
                             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-[#00E5BE]" />
                                 Direct Communication Channels
@@ -220,7 +220,7 @@ ${formData.message}`
 
                     {/* Right: Interactive Consultation Form */}
                     <div className="lg:col-span-7">
-                        <div className="aura-glass-card p-8 md:p-12 bg-zinc-950/80 border border-white/10 relative overflow-hidden shadow-2xl">
+                        <div className="aura-glass-card p-6 sm:p-8 md:p-12 bg-zinc-950/80 border border-white/10 relative overflow-hidden shadow-2xl">
                             {formStatus === 'success' ? (
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}

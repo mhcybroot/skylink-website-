@@ -132,16 +132,16 @@ const ITESServices = () => {
                 </div>
 
                 {/* Metrics Bar */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-8 rounded-2xl bg-zinc-950/70 border border-white/10 mb-28 shadow-2xl">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-5 sm:p-8 rounded-2xl bg-zinc-950/70 border border-white/10 mb-28 shadow-2xl">
                     {itesStats.map((stat, i) => (
                         <div key={i} className="text-center">
-                            <div className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5BE] font-mono mb-1">
+                            <div className="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5BE] font-mono mb-1">
                                 {stat.value}
                             </div>
-                            <div className="text-sm font-semibold text-white mb-0.5">
+                            <div className="text-xs sm:text-sm font-semibold text-white mb-0.5">
                                 {stat.label}
                             </div>
-                            <div className="text-xs text-slate-400">
+                            <div className="text-[11px] text-slate-400">
                                 {stat.detail}
                             </div>
                         </div>

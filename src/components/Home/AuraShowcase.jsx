@@ -46,12 +46,12 @@ const AuraShowcase = () => {
                     {/* Top Bar of Cockpit */}
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
                         {/* Tab Switchers */}
-                        <div className="flex items-center gap-2 p-1 rounded-full bg-white/5 border border-white/10">
+                        <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl sm:rounded-full bg-white/5 border border-white/10 w-full sm:w-auto">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
-                                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                                    className={`px-3 sm:px-4 py-1.5 rounded-lg sm:rounded-full text-xs font-semibold transition-all ${
                                         activeTab === tab.id
                                             ? 'bg-[#00E5BE] text-black shadow-aura-sm'
                                             : 'text-slate-400 hover:text-white'
