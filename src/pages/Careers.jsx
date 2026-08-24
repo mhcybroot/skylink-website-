@@ -91,9 +91,26 @@ const Careers = () => {
     const handleApply = (e) => {
         e.preventDefault();
         setApplicationStatus('submitting');
+
+        const subject = encodeURIComponent(`Job Application: ${selectedJob.title} - ${candidateName}`);
+        const body = encodeURIComponent(
+`Role Applied For: ${selectedJob.title}
+Department: ${selectedJob.department}
+Candidate Name: ${candidateName}
+Email: ${candidateEmail}
+
+Candidate Portfolio / Note:
+${candidateNote}`
+        );
+
+        const mailtoUrl = `mailto:info@skylink-innovations.com?cc=contact@skylink-ltd.com&subject=${subject}&body=${body}`;
+
+        // Open mailto client
+        window.location.href = mailtoUrl;
+
         setTimeout(() => {
             setApplicationStatus('success');
-        }, 1200);
+        }, 1000);
     };
 
     return (

@@ -82,9 +82,25 @@ const Contact = () => {
         e.preventDefault();
         setFormStatus('submitting');
         
+        const subject = encodeURIComponent(`Technical Consultation Request - ${formData.service} (${formData.name})`);
+        const body = encodeURIComponent(
+`Full Name: ${formData.name}
+Business Email: ${formData.email}
+Company / Organization: ${formData.company || 'N/A'}
+Service of Interest: ${formData.service}
+
+Project Details / Requirements:
+${formData.message}`
+        );
+
+        const mailtoUrl = `mailto:info@skylink-innovations.com?cc=contact@skylink-ltd.com&subject=${subject}&body=${body}`;
+
+        // Trigger mailto client
+        window.location.href = mailtoUrl;
+
         setTimeout(() => {
             setFormStatus('success');
-        }, 1200);
+        }, 1000);
     };
 
     return (
