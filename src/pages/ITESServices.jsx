@@ -1,380 +1,336 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Headphones, Database, Shield, Zap, Globe, Users, TrendingUp, MessageSquare, FileText, CheckCircle, ArrowRight, Server, Cpu, Lock } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+    Headphones, 
+    Database, 
+    ShieldCheck, 
+    Zap, 
+    Globe, 
+    Users, 
+    TrendingUp, 
+    MessageSquare, 
+    FileText, 
+    CheckCircle2, 
+    ArrowRight, 
+    Server, 
+    Cpu, 
+    Sparkles, 
+    Clock, 
+    ChevronDown,
+    Building2,
+    Shield
+} from 'lucide-react';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
-import heroBg from '../assets/Photos/DSC05826.jpg'; // Office Team
-import introBg from '../assets/Photos/DSC05841.jpg'; // Meeting
-import cxBg from '../assets/Photos/DSC05848.jpg'; // Workstation
-import boBg from '../assets/Photos/DSC05814.jpg'; // General Office
-import techBg from '../assets/Photos/DSC05839.jpg'; // Tech/Server
-import LottieAnimation from '../components/Common/LottieAnimation';
-import placeholderAnimation from '../assets/animations/placeholder.json';
-import ServerRack from '../components/UI/ServerRack';
-import CyberThreatMap from '../components/ITES/CyberThreatMap';
+import introBg from '../assets/Photos/DSC05841.jpg';
+import cxBg from '../assets/Photos/DSC05848.jpg';
+
+const itesStats = [
+    { value: '24/7/365', label: 'Follow-the-Sun Operations', detail: 'Round-the-clock multilingual coverage' },
+    { value: '99.98%', label: 'Order & Data Accuracy', detail: 'Multi-tiered human + AI verification' },
+    { value: '< 45s', label: 'Average Response Time', detail: 'Real-time live queue dispatch' },
+    { value: '40%+', label: 'OpEx Cost Reduction', detail: 'Scalable institutional resource pods' }
+];
+
+const itesPillars = [
+    {
+        id: 'cx',
+        title: 'Omni-Channel Customer Experience (CX)',
+        category: 'Tier-1 to Tier-3 Support',
+        icon: Headphones,
+        description: 'Delivering exceptional customer journeys across voice, live chat, email, SMS, and in-app ticketing with empathy and high first-contact resolution (FCR).',
+        highlights: ['24/7 Inbound & Outbound Voice', 'Live Chat & Instant Messaging', 'VIP Tier-3 Technical Helpdesk', 'CSAT & NPS Optimization']
+    },
+    {
+        id: 'data',
+        title: 'High-Volume Data Processing & QA',
+        category: 'Information Management',
+        icon: Database,
+        description: 'Accurate, high-velocity data extraction, optical verification, catalog enrichment, and database scrubbing with double-blind QA checks.',
+        highlights: ['Geotagged Metadata Validation', 'Mortgage & Legal Document Indexing', 'E-Commerce Catalog Moderation', 'AI Model Training & Annotation']
+    },
+    {
+        id: 'backoffice',
+        title: 'Back-Office Operations & Workflow Support',
+        category: 'Business Operations',
+        icon: FileText,
+        description: 'End-to-end back-office execution for underwriting, insurance claims, transaction reconciliation, order validation, and compliance tracking.',
+        highlights: ['Claims Processing & Reconciliation', 'Billing & Invoice Auditing', 'Order Entry & Fulfillment', 'Regulatory Reporting']
+    },
+    {
+        id: 'techsupport',
+        title: 'Managed IT Helpdesk & NOC Pods',
+        category: 'Technical Operations',
+        icon: Server,
+        description: 'Dedicated Tier-1/2/3 technical support pods monitoring infrastructure alerts, triaging incident tickets, and managing cloud identity access.',
+        highlights: ['24/7 NOC Alert Triage', 'SaaS Application Provisioning', 'Identity & Access Management', 'Patch & Escalation Management']
+    }
+];
+
+const faqs = [
+    {
+        question: 'How quickly can Skylink ramp up a dedicated ITES / BPO squad?',
+        answer: 'Depending on complexity and technical requirements, our standard onboarding timeline ranges from 7 to 14 business days, including protocol training, security provisioning, and SLA alignment.'
+    },
+    {
+        question: 'What data security frameworks do your operating pods follow?',
+        answer: 'All teams operate within secure, clean-room environments adhering to ISO 27001, SOC 2 Type II, and GDPR compliance, featuring restricted USB access, biometric check-in, and encrypted VPN tunnels.'
+    },
+    {
+        question: 'Can you integrate with our existing CRM and ticketing software?',
+        answer: 'Yes. Our squads are fluent with industry standard tools including Zendesk, Salesforce Service Cloud, Jira Service Management, Freshdesk, HubSpot, and custom client portals.'
+    },
+    {
+        question: 'How do you structure billing for BPO and ITES engagements?',
+        answer: 'We offer flexible engagement models tailored to your volume, including dedicated monthly FTE pods, shared hybrid pools, and performance-based SLA arrangements.'
+    }
+];
 
 const ITESServices = () => {
-    const introRef = useRef(null);
-    const introInView = useInView(introRef, { once: true, margin: '-100px' });
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, x: -20 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
-    };
+    const [openFaq, setOpenFaq] = useState(null);
 
     return (
-        <div className="min-h-screen pt-20 font-sans relative z-10 bg-transparent">
-            <SEO title="ITES & Global BPO" description="Scalable BPO, Omni-channel Support, and Digital Transformation solutions for global enterprises." />
-            {/* 1. COMPACT INDUSTRIAL HERO */}
-            <section className="relative h-[500px] flex items-center bg-skylink-navy border-b-4 border-skylink-gold overflow-hidden">
-                <motion.div
-                    initial={{ scale: 1.1, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 0.3 }}
-                    transition={{ duration: 1.5 }}
-                    className="absolute inset-0 bg-cover bg-center grayscale-[50%]"
-                    style={{ backgroundImage: `url(${heroBg})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-skylink-navy via-skylink-navy/90 to-transparent" />
+        <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
+            <SEO
+                title="Global ITES & BPO Solutions | Skylink Innovations Ltd."
+                description="Scalable 24/7 IT-Enabled Services, Omni-Channel Customer Experience, Data Processing, and Back-Office Operations powered by Skylink Innovations Ltd."
+            />
 
-                {/* Lottie Background Overlay */}
-                <div className="absolute inset-0 pointer-events-none opacity-30 mix-blend-overlay">
-                    <LottieAnimation
-                        animationData={placeholderAnimation}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
+            {/* Ambient Spotlight Glows */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-b from-[#00E5BE]/20 via-[#00E5BE]/5 to-transparent rounded-full blur-[140px] pointer-events-none -z-0" />
+            <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-[#00F5C4]/10 rounded-full blur-[130px] pointer-events-none -z-0" />
 
-                <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="inline-flex items-center gap-2 py-2 px-4 bg-tech-cyan/20 backdrop-blur-sm border border-tech-cyan/50 text-tech-cyan text-xs font-bold tracking-[0.2em] mb-6 uppercase rounded-full"
-                    >
-                        <span className="w-2 h-2 rounded-full bg-tech-cyan animate-pulse" />
-                        Vertical 02
-                    </motion.span>
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight font-serif leading-none"
-                    >
-                        GLOBAL<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-tech-cyan to-blue-400">WORKFLOW</span>
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-xl text-slate-300 font-light max-w-2xl leading-relaxed border-l-2 border-tech-cyan pl-6"
-                    >
-                        Scalable BPO, Omni-channel Support, and Digital Transformation solutions for the modern enterprise.
-                    </motion.p>
-                </div>
-            </section>
+            {/* Subtle Grid Backdrop */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-0" />
 
-            {/* 2. THE 24/7 ADVANTAGE (INTRO) */}
-            <section ref={introRef} className="py-24 bg-transparent relative z-10">
-                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={introInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <h2 className="text-4xl font-bold text-white mb-6 font-serif">THE 24/7 ADVANTAGE</h2>
-                        <motion.div
-                            initial={{ width: 0 }}
-                            animate={introInView ? { width: 80 } : {}}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                            className="h-1 bg-tech-cyan mb-8"
-                        />
-                        <p className="text-lg text-slate-300 mb-6 leading-relaxed">
-                            In today's "always-on" economy, downtime is not an option. Skylink Innovations provides a seamless extension of your workforce, operating across multiple time zones to ensure continuous business velocity.
-                        </p>
-                        <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-                            We combine human empathy with AI-driven efficiency to reduce operational costs while significantly elevating customer satisfaction scores (CSAT).
-                        </p>
-                        <motion.ul
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate={introInView ? "visible" : "hidden"}
-                            className="space-y-4"
-                        >
-                            {[
-                                "Follow-the-Sun Delivery Model",
-                                "ISO 27001 Information Security",
-                                "Multilingual Support Teams",
-                                "AI-Augmented Quality Assurance"
-                            ].map((item, idx) => (
-                                <motion.li
-                                    key={idx}
-                                    variants={itemVariants}
-                                    className="flex items-center text-slate-200 font-bold text-sm uppercase tracking-wide"
-                                >
-                                    <CheckCircle size={18} className="text-tech-cyan mr-3" />
-                                    {item}
-                                </motion.li>
-                            ))}
-                        </motion.ul>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={introInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="relative h-[500px] border border-slate-200 p-2 group"
-                    >
-                        <div className="absolute inset-2 border border-slate-100" />
-                        <img src={introBg} alt="Advantage" className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700" />
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={introInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.5, delay: 0.5 }}
-                            className="absolute bottom-10 -left-6 bg-skylink-navy p-8 text-white shadow-2xl max-w-xs"
-                        >
-                            <div className="text-4xl font-bold text-tech-cyan mb-2">99.9%</div>
-                            <div className="text-sm font-bold tracking-widest uppercase">Uptime Guarantee</div>
-                        </motion.div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* 3. DEEP DIVE: FRONT OFFICE WING */}
-            <section className="py-24 bg-transparent border-y border-white/10 relative z-10">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-4">
-                            <div className="sticky top-24">
-                                <span className="text-8xl font-bold text-white/10 leading-none -ml-4">01</span>
-                                <h2 className="text-3xl font-bold text-white -mt-10 relative z-10 mb-6 font-serif">FRONT OFFICE EXCELLENCE</h2>
-                                <p className="text-slate-300 mb-8 leading-relaxed">
-                                    Your brand's voice, amplified. Our agents are rigorously trained in your culture and product to deliver seamless, empathetic customer interactions.
-                                </p>
-                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-blue uppercase tracking-widest hover:text-white transition-colors">
-                                    View Case Studies <ArrowRight className="ml-2 w-4 h-4" />
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <img src={cxBg} alt="Front Office" className="w-full h-64 object-cover col-span-full border-b-4 border-skylink-blue" />
-
-                            <div className="glass p-8 border border-white/10">
-                                <Headphones size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Inbound Support</h3>
-                                <ul className="space-y-2 text-sm text-slate-300">
-                                    <li>• Tier 1 & 2 Tech Support</li>
-                                    <li>• Order Management</li>
-                                    <li>• Warranty Processing</li>
-                                    <li>• Retention Services</li>
-                                </ul>
-                            </div>
-                            <div className="glass p-8 border border-white/10">
-                                <MessageSquare size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Omnichannel</h3>
-                                <ul className="space-y-2 text-sm text-slate-300">
-                                    <li>• Live Chat & Email</li>
-                                    <li>• Social Media Moderation</li>
-                                    <li>• SMS/WhatsApp Support</li>
-                                    <li>• In-App Concierge</li>
-                                </ul>
-                            </div>
-                            <div className="glass p-8 border border-white/10">
-                                <Users size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Sales & Lead Gen</h3>
-                                <ul className="space-y-2 text-sm text-slate-300">
-                                    <li>• Appt. Setting</li>
-                                    <li>• Outbound Campaigns</li>
-                                    <li>• Market Research</li>
-                                    <li>• Customer Surveys</li>
-                                </ul>
-                            </div>
-                            <div className="glass p-8 border border-white/10">
-                                <Globe size={32} className="text-skylink-blue mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Multilingual</h3>
-                                <ul className="space-y-2 text-sm text-slate-300">
-                                    <li>• English (Native/Neutral)</li>
-                                    <li>• Spanish (LatAm/ES)</li>
-                                    <li>• French (CA/EU)</li>
-                                    <li>• German / Portuguese</li>
-                                </ul>
-                            </div>
-                        </div>
+            <div className="max-w-7xl mx-auto relative z-10">
+                {/* Hero Header */}
+                <div className="text-center max-w-4xl mx-auto mb-20">
+                    <div className="aura-badge mb-4">
+                        <Sparkles size={14} className="text-[#00E5BE]" />
+                        <span>Global IT-Enabled Services</span>
                     </div>
-                </div>
-            </section>
-
-            {/* 4. DEEP DIVE: BACK OFFICE WING */}
-            <section className="py-24 bg-transparent border-b border-white/10 relative z-10">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                        <div className="lg:col-span-8 order-2 lg:order-1 grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <img src={boBg} alt="Back Office" className="w-full h-64 object-cover col-span-full border-b-4 border-skylink-gold" />
-
-                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
-                                <Database size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Data Operations</h3>
-                                <p className="text-sm text-slate-300 leading-relaxed">High-volume data entry, cleansing, and annotation for AI training sets with &gt;99% accuracy guarantees.</p>
-                            </div>
-                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
-                                <TrendingUp size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Finance & Accounting</h3>
-                                <p className="text-sm text-slate-300 leading-relaxed">Accounts Payable/Receivable, Invoice Processing, and Payroll Administration managed by certified specialists.</p>
-                            </div>
-                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
-                                <FileText size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Content Moderation</h3>
-                                <p className="text-sm text-slate-300 leading-relaxed">Protecting your community 24/7 with human-in-the-loop review of UGC (User Generated Content) and Policy Enforcement.</p>
-                            </div>
-                            <div className="glass p-8 border-l border-white/10 hover:border-l-4 hover:border-skylink-gold transition-all">
-                                <Shield size={32} className="text-skylink-gold mb-4" />
-                                <h3 className="text-xl font-bold text-white mb-3">Compliance & Risk</h3>
-                                <p className="text-sm text-slate-300 leading-relaxed">KYC/AML verification, Claim Adjudication, and Fraud Detection services for regulated industries.</p>
-                            </div>
-                        </div>
-
-                        <div className="lg:col-span-4 order-1 lg:order-2">
-                            <div className="sticky top-24 text-right">
-                                <span className="text-8xl font-bold text-white/10 leading-none -mr-4">02</span>
-                                <h2 className="text-3xl font-bold text-white -mt-10 relative z-10 mb-6 font-serif">BACK OFFICE & DATA</h2>
-                                <p className="text-slate-300 mb-8 leading-relaxed">
-                                    The engine room of your enterprise. We streamline repetitive, high-volume tasks, freeing your internal teams to focus on strategic growth and innovation.
-                                </p>
-                                <Link to="/contact" className="inline-flex items-center text-sm font-bold text-skylink-gold uppercase tracking-widest hover:text-white transition-colors">
-                                    Schedule ROI Audit <ArrowRight className="ml-2 w-4 h-4" />
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 5. DIGITAL TRANSFORMATION SUITE (DARK MODE) */}
-            <section className="py-24 bg-transparent text-white relative overflow-hidden z-10 border-y border-white/10">
-                <div
-                    className="absolute inset-0 bg-cover bg-center opacity-20"
-                    style={{ backgroundImage: `url(${techBg})` }}
-                ></div>
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="text-center mb-16">
-                        <span className="text-skylink-gold font-bold tracking-[0.2em] text-xs uppercase mb-3 block">Future Ready</span>
-                        <h2 className="text-4xl font-bold mb-6 font-serif text-white">DIGITAL TRANSFORMATION</h2>
-                        <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
-                            It's not just about labor arbitrage anymore. It's about technology arbitrage. We deploy automation and AI to supercharge our human workforce.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm">
-                            <Cpu size={40} className="text-skylink-gold mb-6" />
-                            <h3 className="text-xl font-bold mb-4 text-white">RPA Implementation</h3>
-                            <p className="text-slate-100 text-sm leading-relaxed">Robotic Process Automation bots handle rule-based tasks with 100% accuracy and zero fatigue.</p>
-                        </div>
-                        <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm">
-                            <Zap size={40} className="text-skylink-gold mb-6" />
-                            <h3 className="text-xl font-bold mb-4 text-white">AI Assistants</h3>
-                            <p className="text-slate-100 text-sm leading-relaxed">Deploying GenAI agents to triage support tickets and draft responses, reducing handle time by 40%.</p>
-                        </div>
-                        <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-sm">
-                            <Lock size={40} className="text-skylink-gold mb-6" />
-                            <h3 className="text-xl font-bold mb-4 text-white">Data Sovereignty</h3>
-                            <p className="text-slate-100 text-sm leading-relaxed">Strict data fencing and local residency compliance for clients requiring GDPR or HIPAA adherence.</p>
-                        </div>
-                    </div>
-                    
-                    <div className="mt-16 max-w-7xl mx-auto">
-                        <CyberThreatMap />
-                    </div>
-                    
-                    <div className="mt-16 max-w-3xl mx-auto">
-                        <ServerRack />
-                    </div>
-                </div>
-            </section>
-
-            {/* 6. GLOBAL DELIVERY MAP */}
-            <section className="py-32 bg-transparent text-center border-t border-white/10 relative z-10">
-                <div className="max-w-4xl mx-auto px-6">
-                    <Globe size={48} className="mx-auto text-white mb-6" />
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 font-serif">TRUE GLOBAL DELIVERY</h2>
-                    <p className="text-xl text-slate-300 mb-10 leading-relaxed font-light">
-                        From our headquarters in New York to delivery centers in the Philippines, India, and Latin America, we provide a unified standard of excellence.
+                    <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
+                        Scalable 24/7 ITES &{' '}
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5BE] via-[#2DD4BF] to-[#5eead4]">
+                            Global BPO Operations
+                        </span>
+                    </h1>
+                    <p className="text-slate-300 text-base sm:text-xl leading-relaxed max-w-3xl mx-auto mb-10">
+                        Extend your operational capacity with dedicated, certified engineering and customer support pods operating around the clock with guaranteed SLAs.
                     </p>
 
-                    {/* Global Hubs Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 text-left">
-                        {/* New York */}
-                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
-                                <div className="h-full bg-skylink-gold w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
-                            </div>
-                            <div className="w-12 h-1 bg-skylink-gold mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-skylink-gold transition-colors">New York</h3>
-                            <span className="text-xs font-bold text-skylink-gold uppercase tracking-widest mb-4 block">Global HQ</span>
-                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">Strategic Management, Client Relations, & Legal Compliance.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
-                                <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                EST (UTC-5) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-skylink-gold font-bold">ACTIVE</span>
-                            </div>
-                        </div>
-
-                        {/* London */}
-                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
-                                <div className="h-full bg-slate-400 w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
-                            </div>
-                            <div className="w-12 h-1 bg-slate-300 mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-slate-400 transition-colors">London</h3>
-                            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 block">EMEA Hub</span>
-                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">European Markets, GDPR Compliance, & FinTech Services.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
-                                <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                GMT (UTC+0) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-slate-400 font-bold">ACTIVE</span>
-                            </div>
-                        </div>
-
-                        {/* Bangalore */}
-                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
-                                <div className="h-full bg-skylink-blue w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
-                            </div>
-                            <div className="w-12 h-1 bg-skylink-blue mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-skylink-blue transition-colors">Bangalore</h3>
-                            <span className="text-xs font-bold text-skylink-blue uppercase tracking-widest mb-4 block">Tech Center</span>
-                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">Software Development, AI Labs, & IT Infrastructure.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
-                                <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                IST (UTC+5:30) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-skylink-blue font-bold">ACTIVE</span>
-                            </div>
-                        </div>
-
-                        {/* Manila */}
-                        <div className="relative p-8 border border-white/10 glass shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group overflow-hidden cursor-default">
-                            <div className="absolute top-0 left-0 w-full h-1 bg-white/10">
-                                <div className="h-full bg-tech-cyan w-0 group-hover:w-full transition-all duration-700 ease-out"></div>
-                            </div>
-                            <div className="w-12 h-1 bg-tech-cyan mb-6 group-hover:w-20 transition-all duration-300"></div>
-                            <h3 className="text-2xl font-bold text-white mb-2 font-serif group-hover:text-tech-cyan transition-colors">Manila</h3>
-                            <span className="text-xs font-bold text-tech-cyan uppercase tracking-widest mb-4 block">CX Capital</span>
-                            <p className="text-sm text-slate-300 mb-4 group-hover:text-white transition-colors">Voice Operations, Customer Support, & Content Moderation.</p>
-                            <div className="flex items-center text-xs text-slate-400 font-mono border-t border-white/10 pt-4 mt-6">
-                                <div className="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                PHT (UTC+8) <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-tech-cyan font-bold">ACTIVE</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <Link to="/contact" className="px-8 py-4 bg-skylink-navy text-white font-bold uppercase tracking-widest hover:bg-skylink-blue transition-colors">
-                            Discuss Your Requirements
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <Link to="/contact" className="btn-aura-primary w-full sm:w-auto">
+                            <span>Request Dedicated Squad Proposal</span>
+                            <ArrowRight size={16} />
                         </Link>
+                        <a href="#services-grid" className="btn-aura-secondary w-full sm:w-auto">
+                            Explore ITES Capabilities
+                        </a>
                     </div>
                 </div>
-            </section>
+
+                {/* Metrics Bar */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 p-8 rounded-2xl bg-zinc-950/70 border border-white/10 mb-28 shadow-2xl">
+                    {itesStats.map((stat, i) => (
+                        <div key={i} className="text-center">
+                            <div className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5BE] font-mono mb-1">
+                                {stat.value}
+                            </div>
+                            <div className="text-sm font-semibold text-white mb-0.5">
+                                {stat.label}
+                            </div>
+                            <div className="text-xs text-slate-400">
+                                {stat.detail}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* 24/7 Advantage Showcase */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-28">
+                    <div className="lg:col-span-6">
+                        <div className="aura-badge mb-4">
+                            <Globe size={14} className="text-[#00E5BE]" />
+                            <span>Global Delivery Network</span>
+                        </div>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">
+                            Seamless operational continuity across every time zone.
+                        </h2>
+                        <p className="text-slate-300 text-base leading-relaxed mb-6">
+                            In today's fast-moving market, business velocity cannot pause overnight. Skylink Innovations Ltd provides an uninterrupted extension of your organization, handling client interactions, data pipelines, and IT escalations seamlessly.
+                        </p>
+                        <ul className="space-y-3.5 text-sm text-slate-300">
+                            <li className="flex items-center gap-3">
+                                <CheckCircle2 size={18} className="text-[#00E5BE] shrink-0" />
+                                <span><strong>Follow-the-Sun Delivery:</strong> Continuous 24/7/365 coverage without handover lag</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <CheckCircle2 size={18} className="text-[#00E5BE] shrink-0" />
+                                <span><strong>SOC 2 & ISO 27001 Certified:</strong> Clean-room facilities and encrypted data handling</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <CheckCircle2 size={18} className="text-[#00E5BE] shrink-0" />
+                                <span><strong>AI-Augmented QA:</strong> Dual automated and supervisor auditing on every interaction</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div className="lg:col-span-6">
+                        <div className="aura-glass-card p-4 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 relative">
+                            <img
+                                src={introBg}
+                                alt="Skylink ITES Operations Center"
+                                className="w-full h-80 sm:h-96 object-cover rounded-xl brightness-90"
+                            />
+                            <div className="absolute bottom-8 left-8 right-8 p-4 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                                <div>
+                                    <div className="text-xs font-mono uppercase text-[#00E5BE]">Active Delivery Centers</div>
+                                    <div className="text-sm font-semibold text-white">North America & Global Hubs</div>
+                                </div>
+                                <span className="px-3 py-1 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] text-xs font-mono font-bold">
+                                    LIVE 24/7
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Core Capabilities Grid */}
+                <div id="services-grid" className="mb-28">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <div className="aura-badge mb-3">
+                            <Cpu size={14} className="text-[#00E5BE]" />
+                            <span>Service Catalog</span>
+                        </div>
+                        <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-6">
+                            Tailored IT-Enabled Solutions
+                        </h2>
+                        <p className="text-slate-400 text-base sm:text-lg">
+                            Engineered to accelerate performance, optimize cost structures, and elevate quality metrics.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {itesPillars.map((service) => {
+                            const Icon = service.icon;
+                            return (
+                                <div
+                                    key={service.id}
+                                    className="aura-glass-card p-8 md:p-10 bg-zinc-950/70 border border-white/10 hover:border-[#00E5BE]/40 transition-all flex flex-col justify-between group"
+                                >
+                                    <div>
+                                        <div className="flex items-center justify-between mb-6">
+                                            <div className="w-12 h-12 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] shadow-aura-sm group-hover:bg-[#00E5BE]/20 transition-colors">
+                                                <Icon size={22} />
+                                            </div>
+                                            <span className="text-[11px] font-mono uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400">
+                                                {service.category}
+                                            </span>
+                                        </div>
+
+                                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-[#00E5BE] transition-colors">
+                                            {service.title}
+                                        </h3>
+                                        <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                                            {service.description}
+                                        </p>
+                                    </div>
+
+                                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-6 border-t border-white/5 text-xs text-slate-300">
+                                        {service.highlights.map((h, idx) => (
+                                            <li key={idx} className="flex items-center gap-2">
+                                                <CheckCircle2 size={13} className="text-[#00E5BE] shrink-0" />
+                                                <span>{h}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* FAQ Accordion */}
+                <div className="max-w-4xl mx-auto mb-28">
+                    <div className="text-center mb-12">
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                            Frequently Asked Questions
+                        </h3>
+                        <p className="text-slate-400 text-sm">
+                            Everything you need to know about partnering with our global ITES delivery pods.
+                        </p>
+                    </div>
+
+                    <div className="space-y-4">
+                        {faqs.map((faq, index) => {
+                            const isOpen = openFaq === index;
+                            return (
+                                <div
+                                    key={index}
+                                    className="aura-glass-card overflow-hidden bg-zinc-950/60 border border-white/10"
+                                >
+                                    <button
+                                        onClick={() => setOpenFaq(isOpen ? null : index)}
+                                        className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                                    >
+                                        <span className="font-semibold text-sm sm:text-base text-white">
+                                            {faq.question}
+                                        </span>
+                                        <ChevronDown
+                                            size={18}
+                                            className={`text-[#00E5BE] transition-transform duration-300 shrink-0 ${
+                                                isOpen ? 'rotate-180' : ''
+                                            }`}
+                                        />
+                                    </button>
+                                    <AnimatePresence>
+                                        {isOpen && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.25 }}
+                                                className="px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-white/5 pt-4"
+                                            >
+                                                {faq.answer}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* Bottom Call to Action */}
+                <div className="aura-glass-card p-10 md:p-16 text-center relative overflow-hidden bg-zinc-950 border border-white/10">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#00E5BE]/10 rounded-full blur-[140px] pointer-events-none -z-0" />
+                    
+                    <div className="relative z-10 max-w-2xl mx-auto">
+                        <div className="aura-badge mb-4 mx-auto">
+                            <ShieldCheck size={14} className="text-[#00E5BE]" />
+                            <span>Empower Your Operations</span>
+                        </div>
+                        <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-6">
+                            Ready to scale your business operations?
+                        </h2>
+                        <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
+                            Partner with Skylink Innovations Ltd for 24/7 high-accuracy IT-enabled services, customer experience excellence, and data workflows.
+                        </p>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <Link to="/contact" className="btn-aura-primary w-full sm:w-auto">
+                                <span>Schedule a Technical Consultation</span>
+                                <ArrowRight size={16} />
+                            </Link>
+                            <Link to="/contact" className="btn-aura-secondary w-full sm:w-auto">
+                                <span>Get Custom Pricing</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

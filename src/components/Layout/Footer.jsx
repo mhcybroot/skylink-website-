@@ -5,6 +5,8 @@ import logoImg from '../../assets/logo.png';
 
 const footerLinks = {
     solutions: [
+        { label: 'US Property Preservation', to: '/property' },
+        { label: 'Global ITES & BPO', to: '/ites' },
         { label: 'Custom Software & Apps', to: '/#services' },
         { label: 'Cloud Infrastructure & Migration', to: '/#services' },
         { label: 'Managed IT Services & Support', to: '/#services' },
@@ -13,7 +15,7 @@ const footerLinks = {
         { label: 'IT Consulting & Strategy', to: '/#services' }
     ],
     company: [
-        { label: 'About Us', to: '/#about' },
+        { label: 'About Us', to: '/about' },
         { label: 'Why Choose Skylink', to: '/#why-choose-us' },
         { label: 'Execution Methodology', to: '/#how-it-works' },
         { label: 'Careers & Culture', to: '/careers' },
