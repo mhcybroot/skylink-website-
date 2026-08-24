@@ -7,12 +7,12 @@ const footerLinks = {
     solutions: [
         { label: 'US Property Preservation', to: '/property' },
         { label: 'Global ITES & BPO', to: '/ites' },
-        { label: 'Custom Software & Apps', to: '/#services' },
-        { label: 'Cloud Infrastructure & Migration', to: '/#services' },
-        { label: 'Managed IT Services & Support', to: '/#services' },
-        { label: 'Cybersecurity & Compliance', to: '/#services' },
-        { label: 'Data Analytics & BI', to: '/#services' },
-        { label: 'IT Consulting & Strategy', to: '/#services' }
+        { label: 'Custom Software & Apps', to: '/services/software-development' },
+        { label: 'Cloud Infrastructure & Migration', to: '/services/cloud-infrastructure' },
+        { label: 'Managed IT Services & Support', to: '/services/managed-it' },
+        { label: 'Cybersecurity & Compliance', to: '/services/cybersecurity' },
+        { label: 'Data Analytics & BI', to: '/services/data-analytics' },
+        { label: 'IT Consulting & Strategy', to: '/services/it-consulting' }
     ],
     company: [
         { label: 'About Us', to: '/about' },

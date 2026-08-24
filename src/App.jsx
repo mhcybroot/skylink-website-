@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
@@ -9,6 +9,7 @@ import ITESServices from './pages/ITESServices';
 import About from './pages/About';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
+import ServiceDetail from './pages/ServiceDetail';
 import LoadingScreen from './components/UI/LoadingScreen';
 import ScrollProgress from './components/UI/ScrollProgress';
 import BackToTop from './components/UI/BackToTop';
@@ -76,6 +77,8 @@ function App() {
             >
               <Routes location={location}>
                 <Route path="/" element={<Home />} />
+                <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
+                <Route path="/services" element={<Navigate to="/#services" replace />} />
                 <Route path="/property" element={<PropertyServices />} />
                 <Route path="/ites" element={<ITESServices />} />
                 <Route path="/about" element={<About />} />

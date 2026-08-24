@@ -42,7 +42,7 @@ const coreServices = [
         badge: 'Bespoke Engineering',
         colSpan: 'md:col-span-1 lg:col-span-1',
         highlights: ['Full-stack Web & Mobile Apps', 'API & Microservices Architecture', 'Enterprise System Modernization'],
-        link: '/contact'
+        link: '/services/software-development'
     },
     {
         id: 'cloud',
@@ -53,7 +53,7 @@ const coreServices = [
         badge: 'AWS / Azure / GCP',
         colSpan: 'md:col-span-1 lg:col-span-1',
         highlights: ['Cloud Migration & Deployment', 'Zero-Downtime Transition', 'Cost & Resource Optimization'],
-        link: '/contact'
+        link: '/services/cloud-infrastructure'
     },
     {
         id: 'managed-it',
@@ -64,7 +64,7 @@ const coreServices = [
         badge: 'Zero Downtime',
         colSpan: 'md:col-span-1 lg:col-span-1',
         highlights: ['24/7 Proactive Monitoring', 'Enterprise Helpdesk & Support', 'Network & Server Administration'],
-        link: '/contact'
+        link: '/services/managed-it'
     },
     {
         id: 'cybersecurity',
@@ -75,7 +75,7 @@ const coreServices = [
         badge: 'Bank-Grade Defense',
         colSpan: 'md:col-span-1 lg:col-span-1',
         highlights: ['Threat Monitoring & Mitigation', 'Vulnerability & Pen Testing', 'Regulatory Compliance & Encryption'],
-        link: '/contact'
+        link: '/services/cybersecurity'
     },
     {
         id: 'analytics',
@@ -86,7 +86,7 @@ const coreServices = [
         badge: 'Actionable BI',
         colSpan: 'md:col-span-1 lg:col-span-1',
         highlights: ['Executive BI Dashboards', 'Predictive Modeling & Pipelines', 'Real-time Telemetry & KPIs'],
-        link: '/contact'
+        link: '/services/data-analytics'
     },
     {
         id: 'consulting',
@@ -97,7 +97,7 @@ const coreServices = [
         badge: 'Digital Roadmap',
         colSpan: 'md:col-span-2 lg:col-span-2',
         highlights: ['Infrastructure Audits & ROI', 'Architecture Planning', 'Legacy Optimization'],
-        link: '/contact'
+        link: '/services/it-consulting'
     }
 ];
 
