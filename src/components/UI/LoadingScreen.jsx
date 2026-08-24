@@ -1,267 +1,133 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 import logo from '../../assets/logo.png';
 
-// FEATURE 3: 3D ICOSAHEDRON — morphing hex lattice
-const MorphingShape = ({ progress }) => {
-    const groupRef = useRef();
-    const particlesRef = useRef();
+const taglines = [
+    'Initializing Secure Infrastructure...',
+    'Connecting Cloud Architecture...',
+    'Loading Next-Generation IT Services...',
+    'Finalizing Digital Workflows...'
+];
 
-    const hexNodes = useMemo(() => [
-        [0, 0, 0], // Center core node
-        [1.3, 0, 0],
-        [0.65, 1.12, 0],
-        [-0.65, 1.12, 0],
-        [-1.3, 0, 0],
-        [-0.65, -1.12, 0],
-        [0.65, -1.12, 0]
-    ], []);
-
-    const scatterPositions = useMemo(() => {
-        const positions = [];
-        for (let i = 0; i < 200; i++) {
-            positions.push(
-                (Math.random() - 0.5) * 20,
-                (Math.random() - 0.5) * 20,
-                (Math.random() - 0.5) * 20,
-            );
-        }
-        return new Float32Array(positions);
-    }, []);
-
-    const particleSizes = useMemo(() => {
-        const sizes = [];
-        for (let i = 0; i < 200; i++) {
-            sizes.push(Math.random() * 0.08 + 0.02);
-        }
-        return new Float32Array(sizes);
-    }, []);
-
-    useFrame(({ clock }) => {
-        const t = clock.getElapsedTime();
-
-        if (groupRef.current) {
-            // Spin entire hex lattice grid
-            groupRef.current.rotation.x = t * 0.4;
-            groupRef.current.rotation.y = t * 0.5;
-
-            // Compiling effect: contract satellites radius as progress reaches 100%
-            const currentRadius = 1.5 - progress * 0.85;
-
-            const pulse = 1 + Math.sin(t * 3.5) * 0.03;
-            groupRef.current.scale.setScalar(pulse);
-
-            // Re-position satellite nodes
-            groupRef.current.children.forEach((child, index) => {
-                if (index > 0 && index <= 6) {
-                    const angle = ((index - 1) * Math.PI) / 3;
-                    child.position.x = Math.cos(angle) * currentRadius;
-                    child.position.y = Math.sin(angle) * currentRadius;
-                }
-            });
-        }
-
-        if (particlesRef.current) {
-            const positions = particlesRef.current.geometry.attributes.position.array;
-            for (let i = 0; i < positions.length; i += 3) {
-                const idx = i / 3;
-                const angle = t * (0.25 + idx * 0.005) + idx;
-                const radius = 2 + Math.sin(t * 0.6 + idx) * 0.45;
-                positions[i] = Math.cos(angle) * radius * Math.sin(idx);
-                positions[i + 1] = Math.sin(angle) * radius * Math.cos(idx * 0.75);
-                positions[i + 2] = Math.sin(angle + idx) * radius * 0.5;
-            }
-            particlesRef.current.geometry.attributes.position.needsUpdate = true;
-        }
-    });
-
-    const glowColor = new THREE.Color('#06b6d4');
-    const goldColor = new THREE.Color('#c29b40');
-
-    return (
-        <group>
-            {/* Morphing Hex Lattice Group */}
-            <group ref={groupRef}>
-                {hexNodes.map((pos, idx) => (
-                    <group key={idx} position={pos}>
-                        {/* Solid Spherical Joints */}
-                        <mesh>
-                            <sphereGeometry args={[idx === 0 ? 0.28 : 0.16, 16, 16]} />
-                            <meshStandardMaterial
-                                color={idx === 0 ? goldColor : glowColor}
-                                emissive={idx === 0 ? goldColor : glowColor}
-                                emissiveIntensity={0.6}
-                                roughness={0.1}
-                                metalness={0.9}
-                            />
-                        </mesh>
-                        {/* Wireframe Box Envelopes */}
-                        <mesh>
-                            <boxGeometry args={[idx === 0 ? 0.42 : 0.26, idx === 0 ? 0.42 : 0.26, idx === 0 ? 0.42 : 0.26]} />
-                            <meshBasicMaterial
-                                color={idx === 0 ? glowColor : goldColor}
-                                wireframe
-                                transparent
-                                opacity={0.6 + progress * 0.3}
-                            />
-                        </mesh>
-                    </group>
-                ))}
-            </group>
-
-            {/* Orbiting particles */}
-            <points ref={particlesRef}>
-                <bufferGeometry>
-                    <bufferAttribute
-                        attach="attributes-position"
-                        args={[scatterPositions, 3]}
-                    />
-                    <bufferAttribute
-                        attach="attributes-size"
-                        args={[particleSizes, 1]}
-                    />
-                </bufferGeometry>
-                <pointsMaterial
-                    color="#06b6d4"
-                    size={0.04}
-                    transparent
-                    opacity={0.5}
-                    sizeAttenuation
-                    blending={THREE.AdditiveBlending}
-                    depthWrite={false}
-                />
-            </points>
-        </group>
-    );
-};
-
-// ============================================
-// LOADING SCREEN COMPONENT
-// ============================================
-const LoadingScreen = ({ isLoading = true, minDuration = 1500 }) => {
-    const [showLoader, setShowLoader] = useState(isLoading);
+const LoadingScreen = ({ isLoading, minDuration = 1200 }) => {
     const [progress, setProgress] = useState(0);
     const [taglineIndex, setTaglineIndex] = useState(0);
-    const [isExploding, setIsExploding] = useState(false);
+    const [shouldRender, setShouldRender] = useState(true);
 
-    const taglines = [
-        "Initializing Systems...",
-        "Loading Assets...",
-        "Building Environment...",
-        "Calibrating Interface...",
-        "Almost Ready...",
-    ];
-
+    // Progress counter simulation
     useEffect(() => {
-        if (!isLoading) return;
+        const interval = 16;
+        const totalSteps = minDuration / interval;
+        const increment = 100 / totalSteps;
 
-        const progressInterval = setInterval(() => {
-            setProgress(prev => {
-                if (prev >= 100) {
-                    clearInterval(progressInterval);
+        const timer = setInterval(() => {
+            setProgress((prev) => {
+                const next = prev + increment;
+                if (next >= 100) {
+                    clearInterval(timer);
                     return 100;
                 }
-                const remaining = 100 - prev;
-                const increment = Math.min(remaining * 0.15 + 2, 18);
-                return Math.min(prev + increment, 100);
+                return next;
             });
-        }, 70);
+        }, interval);
 
-        const taglineInterval = setInterval(() => {
-            setTaglineIndex(prev => (prev + 1) % taglines.length);
-        }, 700);
+        return () => clearInterval(timer);
+    }, [minDuration]);
 
-        const timer = setTimeout(() => {
-            setIsExploding(true);
-            setTimeout(() => setShowLoader(false), 500);
-        }, minDuration);
+    // Cycle status messages
+    useEffect(() => {
+        const taglineTimer = setInterval(() => {
+            setTaglineIndex((prev) => (prev + 1) % taglines.length);
+        }, 320);
 
-        return () => {
-            clearInterval(progressInterval);
-            clearInterval(taglineInterval);
-            clearTimeout(timer);
-        };
-    }, [isLoading, minDuration]);
+        return () => clearInterval(taglineTimer);
+    }, []);
 
-    const normalizedProgress = Math.min(progress / 100, 1);
+    // Handle smooth exit
+    useEffect(() => {
+        if (!isLoading && progress >= 100) {
+            const exitTimer = setTimeout(() => {
+                setShouldRender(false);
+            }, 400);
+            return () => clearTimeout(exitTimer);
+        }
+    }, [isLoading, progress]);
+
+    if (!shouldRender) return null;
 
     return (
         <AnimatePresence>
-            {showLoader && (
+            {(isLoading || progress < 100) && (
                 <motion.div
                     initial={{ opacity: 1 }}
-                    exit={{
-                        opacity: 0,
-                        scale: 1.2,
-                        filter: 'blur(20px)',
-                        transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }
+                    exit={{ 
+                        opacity: 0, 
+                        scale: 1.02,
+                        filter: 'blur(8px)',
+                        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } 
                     }}
-                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-skylink-navy"
+                    className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-black overflow-hidden pointer-events-none"
                 >
-                    {/* WebGL 3D Scene */}
-                    <div className="absolute inset-0">
-                        <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-                            <ambientLight intensity={0.4} />
-                            <pointLight position={[5, 5, 5]} intensity={1.5} color="#06b6d4" />
-                            <pointLight position={[-5, -5, 3]} intensity={0.8} color="#c29b40" />
-                            <MorphingShape progress={normalizedProgress} />
-                        </Canvas>
-                    </div>
+                    {/* Ambient Radial Aura Spotlight */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[700px] h-[500px] md:h-[700px] bg-gradient-to-b from-[#00E5BE]/20 via-[#00E5BE]/5 to-transparent rounded-full blur-[140px] pointer-events-none animate-pulse-slow" />
 
-                    {/* UI Overlay */}
-                    <div className="relative z-10 flex flex-col items-center pointer-events-none">
-                        {/* Brand Logo */}
-                        <motion.img
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3, duration: 0.6 }}
-                            src={logo}
-                            alt="Skylink Logo"
-                            className="h-16 w-auto"
-                        />
+                    {/* Subtle Background Grid Pattern */}
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
-                        {/* Progress Bar */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                            className="mt-10 w-72"
-                        >
-                            <div className="h-[2px] bg-white/10 rounded-full overflow-hidden relative">
+                    {/* Central Brand Container */}
+                    <div className="relative z-10 flex flex-col items-center max-w-sm w-full px-6">
+                        {/* Logo Wrapper with Glowing Aura Halo */}
+                        <div className="relative mb-8 flex items-center justify-center">
+                            {/* Rotating Aura Glow Halo */}
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                                className="absolute -inset-4 rounded-full border border-dashed border-[#00E5BE]/30 opacity-60 pointer-events-none"
+                            />
+                            <div className="absolute inset-0 rounded-full bg-[#00E5BE]/20 blur-xl animate-pulse" />
+
+                            <motion.img
+                                initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ duration: 0.5 }}
+                                src={logo}
+                                alt="Skylink Innovations Ltd."
+                                className="h-12 md:h-14 w-auto object-contain brightness-110 drop-shadow-[0_0_25px_rgba(0,229,190,0.35)] relative z-10"
+                            />
+                        </div>
+
+                        {/* Minimalist Progress Track */}
+                        <div className="w-full relative mt-4">
+                            <div className="h-[2px] w-full bg-white/[0.08] rounded-full overflow-hidden relative">
                                 <motion.div
-                                    className="h-full bg-gradient-to-r from-skylink-gold via-tech-cyan to-skylink-gold"
+                                    className="h-full bg-gradient-to-r from-[#00E5BE] via-[#2DD4BF] to-[#5eead4] shadow-[0_0_12px_#00E5BE]"
                                     style={{ width: `${Math.min(progress, 100)}%` }}
-                                    transition={{ duration: 0.1 }}
+                                    transition={{ ease: 'linear' }}
                                 />
-                                <div
-                                    className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-tech-cyan blur-md"
-                                    style={{ left: `${Math.min(progress, 100)}%`, transform: 'translate(-50%, -50%)' }}
-                                />
+                            </div>
+                        </div>
+
+                        {/* Status Tagline & Percentage Counter */}
+                        <div className="w-full flex items-center justify-between mt-4 text-xs font-mono">
+                            <div className="h-4 overflow-hidden flex items-center text-slate-400">
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={taglineIndex}
+                                        initial={{ opacity: 0, y: 4 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -4 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="tracking-wider text-[11px] text-slate-400 truncate max-w-[220px]"
+                                    >
+                                        {taglines[taglineIndex]}
+                                    </motion.span>
+                                </AnimatePresence>
                             </div>
 
-                            {/* Tagline + Percentage */}
-                            <div className="flex items-center justify-between mt-3">
-                                <div className="h-4 overflow-hidden">
-                                    <AnimatePresence mode="wait">
-                                        <motion.p
-                                            key={taglineIndex}
-                                            initial={{ opacity: 0, y: 8 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -8 }}
-                                            transition={{ duration: 0.25 }}
-                                            className="text-[10px] text-slate-500 tracking-[0.15em] uppercase font-mono"
-                                        >
-                                            {taglines[taglineIndex]}
-                                        </motion.p>
-                                    </AnimatePresence>
-                                </div>
-                                <p className="text-[10px] text-tech-cyan/60 font-mono tabular-nums">
-                                    {Math.floor(Math.min(progress, 100))}%
-                                </p>
-                            </div>
-                        </motion.div>
+                            <span className="text-[#00E5BE] font-bold text-xs tabular-nums">
+                                {Math.round(Math.min(progress, 100))}%
+                            </span>
+                        </div>
                     </div>
                 </motion.div>
             )}
