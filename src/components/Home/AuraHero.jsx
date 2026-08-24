@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, Play, X, CheckCircle2, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles, Building2, ChevronRight, MapPin, Globe } from 'lucide-react';
 
 const stats = [
+    {
+        value: '50 States',
+        label: 'USA Field Property Preservation',
+        detail: 'Nationwide coverage for pre-foreclosure, REO & rehab inspections'
+    },
     {
         value: '99.9%',
         label: 'System Uptime & Reliability',
@@ -12,7 +17,7 @@ const stats = [
     {
         value: '10x',
         label: 'Operational Velocity',
-        detail: 'Accelerating digital workflows and automation'
+        detail: 'Accelerating digital workflows and process automation'
     },
     {
         value: '24/7',
@@ -22,8 +27,6 @@ const stats = [
 ];
 
 const AuraHero = () => {
-    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-
     return (
         <section className="relative min-h-[92vh] md:min-h-screen w-full bg-black flex flex-col justify-between items-center pt-32 pb-16 px-6 overflow-hidden">
             {/* Ambient Radial Aura Glows */}
@@ -44,7 +47,7 @@ const AuraHero = () => {
                 >
                     <div className="aura-badge flex items-center gap-2">
                         <Sparkles size={14} className="text-[#00E5BE] animate-pulse" />
-                        <span className="tracking-wide">Premier IT-Enabled Services & Digital Solutions</span>
+                        <span className="tracking-wide">Global IT-Enabled Services & US Property Preservation</span>
                     </div>
                 </motion.div>
 
@@ -68,7 +71,7 @@ const AuraHero = () => {
                     transition={{ duration: 0.7, delay: 0.2 }}
                     className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal"
                 >
-                    We transform complex technological challenges into scalable, efficient, and secure digital workflows. Partner with <strong className="text-white font-semibold">Skylink Innovations Ltd</strong> to accelerate your digital transformation and reach new heights.
+                    We transform complex technological challenges into scalable, efficient, and secure digital workflows. Partner with <strong className="text-white font-semibold">Skylink Innovations Ltd</strong> for cutting-edge ITES and nationwide <strong className="text-white font-semibold">US Property Preservation</strong>.
                 </motion.p>
 
                 {/* CTA Buttons */}
@@ -87,6 +90,14 @@ const AuraHero = () => {
                     </a>
 
                     <Link
+                        to="/property"
+                        className="btn-aura-secondary w-full sm:w-auto flex items-center justify-center gap-2.5"
+                    >
+                        <Building2 size={16} className="text-[#00E5BE]" />
+                        <span>US Property Preservation</span>
+                    </Link>
+
+                    <Link
                         to="/contact"
                         className="btn-aura-secondary w-full sm:w-auto flex items-center justify-center gap-2.5"
                     >
@@ -100,19 +111,20 @@ const AuraHero = () => {
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.45 }}
-                className="relative z-10 w-full max-w-4xl mx-auto pt-16"
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="relative z-10 w-full max-w-6xl mx-auto mt-16 pt-10 border-t border-white/[0.08]"
             >
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
-                    {stats.map((stat, index) => (
-                        <div key={index} className="pt-6 md:pt-0 md:px-6 first:pt-0">
-                            <div className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-1">
-                                <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-300">
-                                    {stat.value}
-                                </span>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    {stats.map((stat, i) => (
+                        <div key={i} className="flex flex-col items-center">
+                            <div className="text-2xl sm:text-4xl font-extrabold text-white font-mono tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#00E5BE]">
+                                {stat.value}
                             </div>
-                            <div className="text-sm font-medium text-slate-400">
+                            <div className="text-xs sm:text-sm font-semibold text-slate-200 mt-1">
                                 {stat.label}
+                            </div>
+                            <div className="text-[11px] text-slate-500 mt-0.5 max-w-[200px] hidden sm:block">
+                                {stat.detail}
                             </div>
                         </div>
                     ))}

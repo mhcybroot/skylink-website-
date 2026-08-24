@@ -7,6 +7,7 @@ import logoImg from '../../assets/logo.png';
 const navLinks = [
     { label: 'About Us', to: '/#about', isAnchor: true },
     { label: 'Core Services', to: '/#services', isAnchor: true },
+    { label: 'US Property Preservation', to: '/property', isAnchor: false },
     { label: 'Why Skylink', to: '/#why-choose-us', isAnchor: true },
     { label: 'Methodology', to: '/#how-it-works', isAnchor: true },
     { label: 'Contact', to: '/contact', isAnchor: false },

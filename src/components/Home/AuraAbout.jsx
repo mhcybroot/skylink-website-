@@ -39,10 +39,10 @@ const AuraAbout = () => {
                             </h3>
                             <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
                                 <p>
-                                    At <strong className="text-white font-semibold">Skylink Innovations Ltd</strong>, we are more than just an IT service provider—we are your strategic technology partner. In a rapidly evolving digital landscape, businesses need robust, agile, and forward-thinking tech solutions to stay competitive. We specialize in delivering comprehensive IT-enabled services designed to streamline your operations, enhance productivity, and drive sustainable growth.
+                                    At <strong className="text-white font-semibold">Skylink Innovations Ltd</strong>, we are more than just an IT service provider—we are your strategic technology and operational partner. In a rapidly evolving landscape, businesses need robust, agile, and forward-thinking tech solutions to stay competitive. We specialize in delivering comprehensive IT-enabled services alongside nationwide <strong className="text-[#00E5BE] font-semibold">US Property Preservation</strong> and asset management designed to streamline your operations, enhance productivity, and drive sustainable growth.
                                 </p>
                                 <p className="text-slate-400">
-                                    Our team of experienced developers, system architects, and IT consultants work closely with you to understand your unique business objectives. Whether you are a dynamic startup looking to build your digital infrastructure from the ground up or an established enterprise aiming to optimize legacy systems, we deliver tailored solutions that produce measurable results.
+                                    Our team of experienced developers, system architects, and field logistics specialists work closely with you to understand your unique business objectives. Whether you require bespoke software engineering, multi-cloud management, or rigorous nationwide US property inspection and preservation services, we deliver tailored solutions that produce measurable results.
                                 </p>
                             </div>
                         </div>
@@ -54,7 +54,7 @@ const AuraAbout = () => {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Shield size={16} className="text-[#00E5BE]" />
-                                <span>Enterprise-Grade Security</span>
+                                <span>All 50 US States Coverage</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Users2 size={16} className="text-[#00E5BE]" />
