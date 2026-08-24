@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logoImg from '../../assets/logo.png';
+import logoSvg from '../../assets/logo.svg';
 
 const navLinks = [
     { label: 'About Us', to: '/#about', isAnchor: true },
@@ -54,11 +54,11 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
                 {/* Official Brand Logo */}
                 <Link to="/" className="flex items-center gap-3 group">
-                    <div className="relative flex items-center">
+                    <div className="relative flex items-center px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-[#00E5BE]/30 hover:bg-white/[0.07] backdrop-blur-md transition-all duration-300 shadow-sm">
                         <img
-                            src={logoImg}
+                            src={logoSvg}
                             alt="Skylink Innovations Ltd."
-                            className="h-10 md:h-12 w-auto object-contain brightness-110 drop-shadow-[0_0_15px_rgba(0,229,190,0.25)] group-hover:scale-105 transition-transform duration-300"
+                            className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                         />
                     </div>
                 </Link>

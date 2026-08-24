@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../../assets/logo.png';
+import logoSvg from '../../assets/logo.svg';
 
 const taglines = [
     'Initializing Secure Infrastructure...',
@@ -86,14 +86,16 @@ const LoadingScreen = ({ isLoading, minDuration = 1200 }) => {
                             />
                             <div className="absolute inset-0 rounded-full bg-[#00E5BE]/20 blur-xl animate-pulse" />
 
-                            <motion.img
-                                initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                transition={{ duration: 0.5 }}
-                                src={logo}
-                                alt="Skylink Innovations Ltd."
-                                className="h-12 md:h-14 w-auto object-contain brightness-110 drop-shadow-[0_0_25px_rgba(0,229,190,0.35)] relative z-10"
-                            />
+                            <div className="relative flex items-center px-4 py-2 rounded-2xl bg-white/[0.06] border border-white/15 backdrop-blur-xl shadow-2xl z-10">
+                                <motion.img
+                                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    transition={{ duration: 0.5 }}
+                                    src={logoSvg}
+                                    alt="Skylink Innovations Ltd."
+                                    className="h-10 md:h-12 w-auto object-contain"
+                                />
+                            </div>
                         </div>
 
                         {/* Minimalist Progress Track */}

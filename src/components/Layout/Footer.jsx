@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, ArrowRight, ShieldCheck, Check, Github, Twitter, Linkedin, Facebook } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoSvg from '../../assets/logo.svg';
 
 const footerLinks = {
     solutions: [
@@ -52,11 +52,13 @@ const Footer = () => {
                     {/* Brand Column */}
                     <div className="lg:col-span-2">
                         <Link to="/" className="inline-block mb-6 group">
-                            <img
-                                src={logoImg}
-                                alt="Skylink Innovations Ltd."
-                                className="h-10 md:h-12 w-auto object-contain brightness-110 drop-shadow-[0_0_15px_rgba(0,229,190,0.25)] group-hover:scale-105 transition-transform duration-300"
-                            />
+                            <div className="inline-flex items-center px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-[#00E5BE]/30 hover:bg-white/[0.07] backdrop-blur-md transition-all duration-300 shadow-sm">
+                                <img
+                                    src={logoSvg}
+                                    alt="Skylink Innovations Ltd."
+                                    className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                                />
+                            </div>
                         </Link>
 
                         <p className="text-slate-400 text-sm leading-relaxed max-w-sm mb-6">
