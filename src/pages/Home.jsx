@@ -1,65 +1,60 @@
-import CorporateHero from '../components/Home/CorporateHero';
 import SEO from '../components/SEO';
-import StatsSection from '../components/Home/StatsSection';
-import IntroductionSection from '../components/Home/IntroductionSection';
-import ServiceHighlights from '../components/Home/ServiceHighlights';
-import ImageMarquee from '../components/Home/ImageMarquee';
-import WorkflowSection from '../components/Home/WorkflowSection';
-import Testimonials from '../components/Home/Testimonials';
-import CTASection from '../components/Home/CTASection';
+import AuraHero from '../components/Home/AuraHero';
+import AuraAbout from '../components/Home/AuraAbout';
+import AuraFeatures from '../components/Home/AuraFeatures';
+import AuraWhyChoose from '../components/Home/AuraWhyChoose';
+import AuraWorkflow from '../components/Home/AuraWorkflow';
+import AuraShowcase from '../components/Home/AuraShowcase';
+import AuraTestimonials from '../components/Home/AuraTestimonials';
+import AuraCTA from '../components/Home/AuraCTA';
 import ScrollReveal from '../components/UI/ScrollReveal';
-import AnimatedBackground from '../components/UI/AnimatedBackground';
-import ScrollProgress from '../components/UI/ScrollProgress';
-import TechHexGrid from '../components/UI/TechHexGrid';
-import ClientDashboard from '../components/UI/ClientDashboard';
-import VideoParallax from '../components/Home/VideoParallax';
 
 const Home = () => {
     return (
-        <div className="flex flex-col min-h-screen relative z-10 bg-transparent">
-            <SEO title="Home" description="Skylink Innovations Ltd. - Strategic Asset Management & Global BPO Solutions." />
-            
-            <section id="hero"><CorporateHero /></section>
-            
-            <ScrollReveal type="fadeUp" delay={0.2}>
-                <section id="stats" className="relative z-20"><StatsSection /></section>
-            </ScrollReveal>
-            
-            <ScrollReveal type="3D" parallax={true}>
-                <section id="about" className="relative z-10"><IntroductionSection /></section>
-            </ScrollReveal>
-            
-            <ScrollReveal type="fadeUp">
-                <section id="services" className="relative z-20"><ServiceHighlights /></section>
-            </ScrollReveal>
-            
-            <section id="parallax" className="relative z-10 w-full">
-                <VideoParallax />
+        <div className="flex flex-col min-h-screen relative z-10 bg-black">
+            <SEO
+                title="Skylink Innovations Ltd. | Next-Generation IT Solutions & ITES"
+                description="We transform complex technological challenges into scalable, efficient, and secure digital workflows. Partner with Skylink Innovations Ltd to accelerate your digital transformation."
+            />
+
+            {/* Aura Hero Section */}
+            <section id="hero">
+                <AuraHero />
             </section>
 
-            <ScrollReveal type="fadeUp" delay={0.1}>
-                <section id="tech-stack" className="relative z-10 bg-slate-950 border-t border-b border-white/5"><TechHexGrid /></section>
+            {/* About Us & Strategic Mission/Vision */}
+            <ScrollReveal type="fadeUp">
+                <AuraAbout />
             </ScrollReveal>
 
-            
-            <ScrollReveal type="fadeUp" delay={0.1}>
-                <section id="gallery" className="relative z-10"><ImageMarquee /></section>
-            </ScrollReveal>
-            
-            <ScrollReveal type="3D">
-                <section id="workflow" className="relative z-20"><WorkflowSection /></section>
-            </ScrollReveal>
-            
+            {/* Core IT-Enabled Services Bento Section */}
             <ScrollReveal type="fadeUp">
-                <section id="dashboard" className="relative z-20"><ClientDashboard /></section>
+                <AuraFeatures />
             </ScrollReveal>
 
+            {/* Why Choose Skylink Innovations */}
             <ScrollReveal type="fadeUp">
-                <section id="testimonials" className="relative z-10"><Testimonials /></section>
+                <AuraWhyChoose />
             </ScrollReveal>
-            
-            <ScrollReveal type="zoomIn">
-                <section id="contact" className="relative z-20"><CTASection /></section>
+
+            {/* Execution Methodology & Workflow */}
+            <ScrollReveal type="fadeUp">
+                <AuraWorkflow />
+            </ScrollReveal>
+
+            {/* Real-time Telemetry Showcase */}
+            <ScrollReveal type="fadeUp">
+                <AuraShowcase />
+            </ScrollReveal>
+
+            {/* Social Proof & Testimonials */}
+            <ScrollReveal type="fadeUp">
+                <AuraTestimonials />
+            </ScrollReveal>
+
+            {/* High-Impact Bottom CTA */}
+            <ScrollReveal type="fadeUp">
+                <AuraCTA />
             </ScrollReveal>
         </div>
     );

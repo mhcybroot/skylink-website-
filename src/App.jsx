@@ -87,14 +87,35 @@ const RouteTransitionOverlay = () => {
 };
 
 // FEATURE 15: AUDIO-SYNTHESIZED UI ACOUSTICS
+let sharedAudioCtx = null;
+let userHasInteracted = false;
+
+if (typeof window !== 'undefined') {
+  const markInteracted = () => {
+    userHasInteracted = true;
+    if (sharedAudioCtx && sharedAudioCtx.state === 'suspended') {
+      sharedAudioCtx.resume();
+    }
+  };
+  window.addEventListener('click', markInteracted, { once: true, passive: true });
+  window.addEventListener('keydown', markInteracted, { once: true, passive: true });
+  window.addEventListener('touchstart', markInteracted, { once: true, passive: true });
+}
+
 const playUISound = (type) => {
   const soundEnabled = localStorage.getItem('skylink_sound_enabled') !== 'false';
-  if (!soundEnabled) return;
+  if (!soundEnabled || !userHasInteracted) return;
 
   try {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
-    const ctx = new AudioContextClass();
+    if (!sharedAudioCtx) {
+      sharedAudioCtx = new AudioContextClass();
+    }
+    if (sharedAudioCtx.state === 'suspended') {
+      sharedAudioCtx.resume();
+    }
+    const ctx = sharedAudioCtx;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 
@@ -145,7 +166,7 @@ const playUISound = (type) => {
       osc.stop(now + 0.3);
     }
   } catch (e) {
-    console.warn("UI audio synthesis not supported on this client", e);
+    // Graceful fallback if client restricts AudioContext
   }
 };
 

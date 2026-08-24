@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import logo from '../../assets/logo-.webp';
+import logo from '../../assets/logo.png';
 
 // FEATURE 3: 3D ICOSAHEDRON — morphing hex lattice
 const MorphingShape = ({ progress }) => {

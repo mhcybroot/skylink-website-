@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, AlertTriangle, CheckCircle, Activity } from 'lucide-react';
+import { Shield, AlertTriangle, CheckCircle, Activity, Globe } from 'lucide-react';
 
 const generateThreat = () => {
     const types = ['DDoS Attempt', 'SQL Injection', 'Malware Payload', 'Brute Force SSH', 'Data Exfiltration', 'Phishing Node'];
