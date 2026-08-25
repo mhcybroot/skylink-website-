@@ -25,37 +25,37 @@ const openPositions = [
         id: 'client-coordinator',
         title: 'US Property Preservation Client Coordinator',
         department: 'Property Preservation & REO Operations',
-        location: 'Dhaka Hub / Hybrid / Remote',
-        type: 'Full-time',
-        experience: '1-3 Years',
-        description: 'Liaise directly with US national mortgage servicers, banks, and asset managers. Manage work orders, conveyances, estimate approvals, and ensure strict compliance with HUD, Fannie Mae, Freddie Mac, and VA guidelines.'
+        location: 'Dhaka Office (On-site)',
+        type: 'Full-time • Night Shift (US Hours)',
+        experience: '1-3 Years Experience',
+        description: 'Liaise directly with US national mortgage servicers, banks, and asset managers during US business hours. Manage work orders, conveyances, estimate approvals, and ensure strict compliance with HUD, Fannie Mae, Freddie Mac, and VA guidelines.'
     },
     {
         id: 'vendor-coordinator',
         title: 'US Property Preservation Vendor Coordinator',
         department: 'Vendor & Field Dispatch',
-        location: 'Dhaka Hub / Night Shift / Hybrid',
-        type: 'Full-time',
-        experience: '1-3 Years',
-        description: 'Recruit, onboard, assign, and manage field contractors and property inspectors across all 50 US states. Track on-time field execution, negotiate pricing matrices, and ensure rapid turnarounds.'
+        location: 'Dhaka Office (On-site)',
+        type: 'Full-time • Night Shift (US Hours)',
+        experience: '1-3 Years Experience',
+        description: 'Recruit, onboard, assign, and manage field contractors and property inspectors across all 50 US states during active US field hours. Track on-time execution, negotiate pricing matrices, and ensure rapid turnarounds.'
     },
     {
         id: 'preservation-processor',
         title: 'US Property Preservation Processor',
         department: 'Order Processing & QA',
-        location: 'Dhaka Hub / Full-time',
-        type: 'Full-time',
-        experience: 'Fresh - 2 Years',
-        description: 'Review and process field inspection reports, photo evidence, PCRs, and contractor bids. Submit bids and completion packages into client portals (PPR, MCS, Safeguard, Xome, Aspen Grove, etc.) with zero error rates.'
+        location: 'Dhaka Office (On-site)',
+        type: 'Full-time • Night Shift (US Hours)',
+        experience: 'Fresh - 2 Years Experience',
+        description: 'Review and process field inspection reports, photo evidence, PCRs, and contractor bids. Submit bids and completion packages into client portals (PPR, MCS, Safeguard, Xome, Aspen Grove, etc.) with zero error rates during US business hours.'
     },
     {
         id: 'bizdev-intern',
         title: 'Business Development Internship',
         department: 'Growth & Strategic Partnerships',
-        location: 'Dhaka Hub / Hybrid',
-        type: 'Internship (Lead to Full-time)',
+        location: 'Dhaka Office (On-site)',
+        type: 'Full-time • Night Shift (US Hours)',
         experience: 'Freshers / Final Year Students',
-        description: 'Conduct international market research, identify prospective enterprise IT & US property management clients, support B2B outreach and proposal generation, and assist leadership with strategic growth initiatives.'
+        description: 'Conduct international B2B market research, identify prospective enterprise IT & US property management clients, support direct cold outreach and proposal generation, and assist leadership with strategic growth initiatives during US market hours.'
     }
 ];
 
