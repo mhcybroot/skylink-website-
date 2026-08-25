@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Maximize2, Sparkles, Play, CheckCircle2 } from 'lucide-react';
+import { Maximize2, Sparkles, CheckCircle2 } from 'lucide-react';
 import VideoModal from './VideoModal';
 
 /**
  * AutoplayVideoBanner Component
- * Shows both the high-res photo and the natural 16:9 YouTube video side by side.
+ * Shows both the high-res photo and the 100% clean 16:9 YouTube video side by side.
+ * Crops out all YouTube seeker bars, channel headers, and player chrome for a clean look.
  */
 const AutoplayVideoBanner = ({
     videoId,
@@ -12,8 +13,7 @@ const AutoplayVideoBanner = ({
     tag = 'FEATURE SHOWCASE',
     tagIcon: TagIcon = Sparkles,
     title,
-    subtitle,
-    highlights = []
+    subtitle
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -77,17 +77,18 @@ const AutoplayVideoBanner = ({
                         )}
                     </div>
 
-                    {/* Right Column: Natural 16:9 YouTube Video Player */}
+                    {/* Right Column: 100% Clean 16:9 YouTube Video Player (Zero YouTube Chrome) */}
                     <div className="lg:col-span-7 flex flex-col">
                         <div className="relative w-full aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-black shadow-2xl group/video">
                             {cleanId ? (
-                                <iframe
-                                    src={`https://www.youtube-nocookie.com/embed/${cleanId}?autoplay=1&mute=1&loop=1&playlist=${cleanId}&controls=1&modestbranding=1&playsinline=1&rel=0`}
-                                    title={title || tag}
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                    className="w-full h-full border-0"
-                                />
+                                <div className="absolute inset-0 w-full h-full overflow-hidden flex items-center justify-center pointer-events-none">
+                                    <iframe
+                                        src={`https://www.youtube-nocookie.com/embed/${cleanId}?autoplay=1&mute=1&loop=1&playlist=${cleanId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=0`}
+                                        title={title || tag}
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        className="w-[145%] h-[145%] max-w-none pointer-events-none object-cover scale-125"
+                                    />
+                                </div>
                             ) : (
                                 <div className="w-full h-full flex items-center justify-center text-slate-500 text-sm">
                                     Video source unavailable
@@ -97,7 +98,7 @@ const AutoplayVideoBanner = ({
                             {/* Corner Fullscreen Action */}
                             <button
                                 onClick={() => setIsModalOpen(true)}
-                                className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-xl bg-black/80 hover:bg-[#00E5BE] hover:text-black text-white text-xs font-semibold backdrop-blur-md border border-white/20 hover:border-[#00E5BE] transition-all flex items-center gap-1.5 shadow-lg group/btn"
+                                className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-xl bg-black/80 hover:bg-[#00E5BE] hover:text-black text-white text-xs font-semibold backdrop-blur-md border border-white/20 hover:border-[#00E5BE] transition-all flex items-center gap-1.5 shadow-lg group/btn cursor-pointer"
                                 aria-label="Expand Video"
                             >
                                 <Maximize2 size={13} className="group-hover/btn:scale-110 transition-transform" />
@@ -111,7 +112,7 @@ const AutoplayVideoBanner = ({
                                 <span className="w-2 h-2 rounded-full bg-[#00E5BE] animate-ping" />
                                 16:9 HD STREAMING PLAYBACK
                             </span>
-                            <span>YouTube Embed Player</span>
+                            <span>Skylink Motion Reel</span>
                         </div>
                     </div>
                 </div>
