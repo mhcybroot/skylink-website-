@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet-async';
 const SEO = ({
     title = 'Skylink Innovations Ltd. | Global ITES & US Property Preservation',
     description = 'Next-generation IT-Enabled Services, Bespoke Software Engineering, Cloud Architecture, and Nationwide US Property Preservation.',
-    keywords = 'Skylink Innovations, US Property Preservation, ITES, BPO, Software Engineering, Cloud Solutions, REO Asset Management, Dhaka Tech',
+    keywords = 'Skylink, Skylink Innovations, Skylink Ltd, Skylink Innovations Ltd, Skylink IT, Skylink ITES, Skylink Property Preservation, Skylink Bangladesh, US Property Preservation, ITES, BPO, Software Engineering, Cloud Solutions, Dhaka Tech',
     canonical = 'https://skylinkltd.ai',
     ogType = 'website',
     ogImage = 'https://skylinkltd.ai/logo.png',
@@ -19,7 +19,16 @@ const SEO = ({
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Skylink Innovations Ltd.',
-        alternateName: 'Skylink Ltd.',
+        alternateName: [
+            'Skylink',
+            'Skylink Ltd',
+            'Skylink Innovations',
+            'Skylink Ltd.',
+            'Skylink IT',
+            'Skylink ITES',
+            'Skylink Property Preservation',
+            'Skylink Bangladesh'
+        ],
         url: 'https://skylinkltd.ai',
         logo: 'https://skylinkltd.ai/logo.png',
         description: 'Global IT-Enabled Services and Nationwide US Property Preservation provider delivering 24/7 mission-critical operations.',

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://skylinkltd.ai/</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Nationwide US Property Preservation -->
+    <url>
+        <loc>https://skylinkltd.ai/property</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <!-- Global ITES & 24/7 BPO Operations -->
+    <url>
+        <loc>https://skylinkltd.ai/ites</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <!-- About Skylink Innovations Ltd. -->
+    <url>
+        <loc>https://skylinkltd.ai/about</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Careers (Active Job Openings) -->
+    <url>
+        <loc>https://skylinkltd.ai/careers</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <!-- Contact & Consultation -->
+    <url>
+        <loc>https://skylinkltd.ai/contact</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Service Detail: Software Development -->
+    <url>
+        <loc>https://skylinkltd.ai/services/software-development</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Service Detail: Cloud Solutions -->
+    <url>
+        <loc>https://skylinkltd.ai/services/cloud-solutions</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Service Detail: Cybersecurity & Compliance -->
+    <url>
+        <loc>https://skylinkltd.ai/services/cybersecurity</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Service Detail: Managed IT -->
+    <url>
+        <loc>https://skylinkltd.ai/services/managed-it</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Service Detail: Data Analytics & BI -->
+    <url>
+        <loc>https://skylinkltd.ai/services/data-analytics</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Service Detail: IT Consulting & Strategy -->
+    <url>
+        <loc>https://skylinkltd.ai/services/it-consulting</loc>
+        <lastmod>2026-08-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+</urlset>

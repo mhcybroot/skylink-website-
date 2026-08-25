@@ -1,0 +1,48 @@
+# ==============================================================================
+# Robots.txt for Skylink Innovations Ltd. (https://skylinkltd.ai)
+# Grants full access to search engines and AI crawlers for indexation
+# ==============================================================================
+
+User-agent: *
+Allow: /
+
+# Directives for major search engine bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Directives for modern AI search engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Link to authoritative sitemap
+Sitemap: https://skylinkltd.ai/sitemap.xml
