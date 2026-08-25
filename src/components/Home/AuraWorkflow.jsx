@@ -119,8 +119,8 @@ const AuraWorkflow = () => {
             onWheel={handleWheel}
             className="relative py-24 md:py-32 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]"
         >
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
+            {/* Cybernetic Neural Synapse & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="synapse" glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header with Title & Navigation Controls */}

@@ -61,8 +61,8 @@ const AuraTestimonials = () => {
 
     return (
         <section id="testimonials" className="relative py-28 md:py-36 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]">
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="center" meshOpacity="opacity-20" />
+            {/* Cybernetic Fluid Waves & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="waves" glowPosition="center" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}

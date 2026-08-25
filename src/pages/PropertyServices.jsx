@@ -194,8 +194,8 @@ const PropertyServices = () => {
                 description="Comprehensive property preservation, inspection, and REO rehab management across all 50 US states with real-time geotagged photographic audits and strict SLA adherence."
             />
 
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
+            {/* Cybernetic Data Highway & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="highway" glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Hero Header */}

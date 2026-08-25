@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Sparkles, Building2, ChevronRight, Play } from 'lucide-react';
 import AnimatedCounter from '../UI/AnimatedCounter';
 import VideoModal from '../UI/VideoModal';
-import heroNetworkImg from '../../assets/hero-network.jpg';
+import heroNetworkImg from '../../assets/cyber-neural-synapse.jpg';
 
 const stats = [
     {

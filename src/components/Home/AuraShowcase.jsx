@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Activity, ShieldCheck, Clock, Server, CheckCircle, TrendingUp, Cpu, Cloud, Radio } from 'lucide-react';
 import AutoplayVideoBanner from '../UI/AutoplayVideoBanner';
+import CyberBackground from '../UI/CyberBackground';
 import nocOperationsImg from '../../assets/noc-operations.jpg';
 
 const tabs = [
@@ -22,8 +23,8 @@ const AuraShowcase = () => {
 
     return (
         <section className="relative py-28 md:py-36 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]">
-            {/* Ambient Radial Spotlight */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#00E5BE]/10 rounded-full blur-[160px] pointer-events-none -z-0" />
+            {/* Cybernetic Global Hologram & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="globe" glowPosition="center" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}

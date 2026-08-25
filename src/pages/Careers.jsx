@@ -121,8 +121,8 @@ ${candidateNote}`
                 description="Join the elite team at Skylink Innovations Ltd. Explore career opportunities in software engineering, cloud architecture, and global IT operations."
             />
 
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
+            {/* Cybernetic Fluid Waves & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="waves" glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Hero Header */}

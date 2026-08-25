@@ -6,8 +6,8 @@ import CyberBackground from '../UI/CyberBackground';
 const AuraAbout = () => {
     return (
         <section id="about" className="relative py-28 md:py-36 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]">
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="top" meshOpacity="opacity-20" />
+            {/* Cybernetic Hex Matrix & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="hex" glowPosition="top" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}

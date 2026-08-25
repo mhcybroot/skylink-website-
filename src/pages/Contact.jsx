@@ -111,8 +111,8 @@ ${formData.message}`
                 description="Get in touch with Skylink Innovations Ltd. Let's discuss your next-generation custom software, cloud migration, or managed IT infrastructure needs."
             />
 
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
+            {/* Cybernetic Hex Matrix & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="hex" glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header Title Section */}

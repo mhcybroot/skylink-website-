@@ -379,6 +379,26 @@ const ServiceDetail = () => {
 
     const Icon = service.icon;
 
+    // Contextual Cyber Variant mapping per service domain
+    const getServiceVariant = (slug) => {
+        switch (slug) {
+            case 'software-development':
+                return 'synapse';
+            case 'cloud-solutions':
+                return 'highway';
+            case 'cybersecurity':
+                return 'circuit';
+            case 'managed-it':
+                return 'globe';
+            case 'data-analytics':
+                return 'highway';
+            case 'it-consulting':
+                return 'waves';
+            default:
+                return 'synapse';
+        }
+    };
+
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
@@ -386,8 +406,8 @@ const ServiceDetail = () => {
                 description={service.subtitle}
             />
 
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
+            {/* Contextual Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant={getServiceVariant(serviceSlug)} glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Breadcrumbs */}

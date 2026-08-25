@@ -101,8 +101,8 @@ const ITESServices = () => {
                 description="Scalable 24/7 IT-Enabled Services, Omni-Channel Customer Experience, Data Processing, and Back-Office Operations powered by Skylink Innovations Ltd."
             />
 
-            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
-            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
+            {/* Cybernetic Global Hologram & Ambient Cyan Spotlight Background */}
+            <CyberBackground variant="globe" glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Hero Header */}
