@@ -18,12 +18,14 @@ import {
     Clock, 
     ChevronDown,
     Building2,
-    Shield
+    Shield,
+    Play
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import AnimatedCounter from '../components/UI/AnimatedCounter';
-import introBg from '../assets/Photos/DSC05841.jpg';
+import VideoModal from '../components/UI/VideoModal';
+import nocOperationsImg from '../assets/noc-operations.jpg';
 import cxBg from '../assets/Photos/DSC05848.jpg';
 
 const itesStats = [
@@ -89,6 +91,7 @@ const faqs = [
 
 const ITESServices = () => {
     const [openFaq, setOpenFaq] = useState(null);
+    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
@@ -179,20 +182,38 @@ const ITESServices = () => {
                     </div>
 
                     <div className="lg:col-span-6">
-                        <div className="aura-glass-card p-4 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 relative">
-                            <img
-                                src={introBg}
-                                alt="Skylink ITES Operations Center"
-                                className="w-full h-80 sm:h-96 object-cover rounded-xl brightness-90"
-                            />
-                            <div className="absolute bottom-8 left-8 right-8 p-4 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
-                                <div>
-                                    <div className="text-xs font-mono uppercase text-[#00E5BE]">Active Delivery Centers</div>
-                                    <div className="text-sm font-semibold text-white">North America & Global Hubs</div>
+                        <div className="aura-glass-card p-3 overflow-hidden rounded-3xl border border-white/15 bg-zinc-950 relative group shadow-2xl">
+                            <div className="relative h-80 sm:h-96 w-full overflow-hidden rounded-2xl">
+                                <img
+                                    src={nocOperationsImg}
+                                    alt="Skylink ITES & 24/7 NOC Command Center"
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-90"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                                
+                                {/* Centered Play Button */}
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                                    <button
+                                        onClick={() => setIsVideoOpen(true)}
+                                        className="w-16 h-16 rounded-full bg-[#00E5BE] text-black flex items-center justify-center shadow-[0_0_30px_rgba(0,229,190,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 group/btn mb-3"
+                                        aria-label="Watch 24/7 NOC Command Walkthrough"
+                                    >
+                                        <Play size={22} className="fill-black ml-1 group-hover/btn:scale-110 transition-transform" />
+                                    </button>
+                                    <span className="text-sm font-bold text-white tracking-wide drop-shadow-md">
+                                        Watch Global NOC Tour
+                                    </span>
                                 </div>
-                                <span className="px-3 py-1 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] text-xs font-mono font-bold">
-                                    LIVE 24/7
-                                </span>
+
+                                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between">
+                                    <div>
+                                        <div className="text-[11px] font-mono uppercase text-[#00E5BE] font-bold">Active Delivery Centers</div>
+                                        <div className="text-xs font-semibold text-white">North America & Global Hubs</div>
+                                    </div>
+                                    <span className="px-2.5 py-0.5 rounded-full bg-[#00E5BE]/20 text-[#00E5BE] text-[11px] font-mono font-bold">
+                                        LIVE 24/7/365
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -332,6 +353,14 @@ const ITESServices = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Video Showcase Modal */}
+            <VideoModal
+                isOpen={isVideoOpen}
+                onClose={() => setIsVideoOpen(false)}
+                videoId="ynUjJ1yVBlA"
+                title="24/7 ITES & Global Network Operations Center (NOC) Tour"
+            />
         </div>
     );
 };
