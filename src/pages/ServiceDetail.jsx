@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import SEO from '../components/SEO';
+import AnimatedCounter from '../components/UI/AnimatedCounter';
 
 const servicesData = {
     'software-development': {
@@ -430,7 +431,7 @@ const ServiceDetail = () => {
                     {service.stats.map((stat, i) => (
                         <div key={i} className="text-center">
                             <div className="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5BE] font-mono mb-1">
-                                {stat.value}
+                                <AnimatedCounter value={stat.value} duration={1.5} />
                             </div>
                             <div className="text-xs sm:text-sm font-semibold text-white mb-0.5">
                                 {stat.label}

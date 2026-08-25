@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Building2, ChevronRight, MapPin, Globe } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight, Sparkles, Building2, ChevronRight } from 'lucide-react';
+import AnimatedCounter from '../UI/AnimatedCounter';
 
 const stats = [
     {
@@ -27,17 +28,40 @@ const stats = [
 ];
 
 const AuraHero = () => {
+    const heroRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: heroRef,
+        offset: ["start start", "end start"]
+    });
+
+    // Vertical Parallax Transform values
+    const auraY = useTransform(scrollYProgress, [0, 1], ["0%", "45%"]);
+    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+    const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
+
     return (
-        <section className="relative min-h-[92vh] md:min-h-screen w-full bg-black flex flex-col justify-between items-center pt-32 pb-16 px-6 overflow-hidden">
-            {/* Ambient Radial Aura Glows */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] md:w-[850px] h-[380px] md:h-[520px] bg-gradient-to-b from-[#00E5BE]/20 via-[#00E5BE]/5 to-transparent rounded-full blur-[120px] pointer-events-none -z-0" />
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] h-[320px] bg-[#00F5C4]/15 rounded-full blur-[90px] pointer-events-none -z-0" />
+        <section 
+            ref={heroRef} 
+            className="relative min-h-[92vh] md:min-h-screen w-full bg-black flex flex-col justify-between items-center pt-32 pb-16 px-6 overflow-hidden"
+        >
+            {/* Parallax Ambient Radial Aura Glows */}
+            <motion.div 
+                style={{ y: auraY }}
+                className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] md:w-[850px] h-[380px] md:h-[520px] bg-gradient-to-b from-[#00E5BE]/20 via-[#00E5BE]/5 to-transparent rounded-full blur-[130px] pointer-events-none -z-0" 
+            />
+            <motion.div 
+                style={{ y: auraY }}
+                className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] h-[320px] bg-[#00F5C4]/15 rounded-full blur-[90px] pointer-events-none -z-0" 
+            />
 
             {/* Subtle Grid Backdrop */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-0" />
 
-            {/* Main Content Area */}
-            <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center my-auto">
+            {/* Main Content Area with Subtle Parallax */}
+            <motion.div 
+                style={{ y: textY, opacity }}
+                className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center my-auto"
+            >
                 {/* Pill Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -105,7 +129,7 @@ const AuraHero = () => {
                         <ChevronRight size={17} />
                     </Link>
                 </motion.div>
-            </div>
+            </motion.div>
 
             {/* Metrics & Social Proof Bar */}
             <motion.div
@@ -118,7 +142,7 @@ const AuraHero = () => {
                     {stats.map((stat, i) => (
                         <div key={i} className="flex flex-col items-center">
                             <div className="text-2xl sm:text-4xl font-extrabold text-white font-mono tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#00E5BE]">
-                                {stat.value}
+                                <AnimatedCounter value={stat.value} duration={1.8} />
                             </div>
                             <div className="text-xs sm:text-sm font-semibold text-slate-200 mt-1">
                                 {stat.label}

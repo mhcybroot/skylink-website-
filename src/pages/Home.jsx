@@ -1,5 +1,6 @@
 import SEO from '../components/SEO';
 import AuraHero from '../components/Home/AuraHero';
+import TechMarquee from '../components/UI/TechMarquee';
 import AuraAbout from '../components/Home/AuraAbout';
 import AuraFeatures from '../components/Home/AuraFeatures';
 import AuraWhyChoose from '../components/Home/AuraWhyChoose';
@@ -21,6 +22,9 @@ const Home = () => {
             <section id="hero">
                 <AuraHero />
             </section>
+
+            {/* Infinite Horizontal Dual Marquee */}
+            <TechMarquee />
 
             {/* About Us & Strategic Mission/Vision */}
             <ScrollReveal type="fadeUp">
