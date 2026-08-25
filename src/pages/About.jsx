@@ -10,13 +10,11 @@ import {
     CheckCircle2, 
     Building2,
     MapPin,
-    Briefcase,
-    Play
+    Briefcase
 } from 'lucide-react';
-import { useState } from 'react';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
-import VideoModal from '../components/UI/VideoModal';
+import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
 
 import chairmanImg from '../assets/chairman.webp';
 import ceoImg from '../assets/ceo.webp';
@@ -65,8 +63,6 @@ const coreValues = [
 ];
 
 const About = () => {
-    const [isVideoOpen, setIsVideoOpen] = useState(false);
-
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
@@ -132,42 +128,16 @@ const About = () => {
                     </div>
                 </div>
 
-                {/* Strategic Governance & Global Advisory Feature Banner */}
-                <div className="mb-28 rounded-3xl overflow-hidden border border-white/15 bg-zinc-950 relative group shadow-2xl">
-                    <div className="relative h-72 sm:h-96 md:h-[420px] w-full overflow-hidden">
-                        <img
-                            src={boardroomImg}
-                            alt="Skylink Innovations Executive Strategic Governance & Advisory"
-                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 brightness-90"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                        
-                        {/* Governance Tag */}
-                        <div className="absolute top-6 left-6 flex items-center gap-2">
-                            <div className="px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-[#00E5BE]/40 text-[#00E5BE] text-xs font-mono font-bold flex items-center gap-2 shadow-lg">
-                                <Briefcase size={13} className="text-[#00E5BE] animate-pulse" />
-                                <span>STRATEGIC ADVISORY & GLOBAL GOVERNANCE</span>
-                            </div>
-                        </div>
-
-                        {/* Centered Play Trigger */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                            <button
-                                onClick={() => setIsVideoOpen(true)}
-                                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#00E5BE] text-black flex items-center justify-center shadow-[0_0_35px_rgba(0,229,190,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 group/btn mb-3"
-                                aria-label="Watch Corporate Vision Reel"
-                            >
-                                <Play size={26} className="fill-black ml-1 group-hover/btn:scale-110 transition-transform" />
-                            </button>
-                            <span className="text-sm sm:text-base font-bold text-white tracking-wide drop-shadow-md">
-                                Watch Corporate Overview & Vision Reel
-                            </span>
-                            <span className="text-xs text-slate-300 font-mono mt-1">
-                                Institutional Transformation & Global Delivery
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                {/* Strategic Governance & Global Advisory Feature Banner (Autoplay) */}
+                <AutoplayVideoBanner
+                    videoId="fWEPPlzMV-U"
+                    posterImg={boardroomImg}
+                    tag="STRATEGIC ADVISORY & GLOBAL GOVERNANCE"
+                    tagIcon={Briefcase}
+                    title="Executive Board & Global Strategic Governance"
+                    subtitle="Institutional Transformation & Multi-Continental Delivery"
+                    heightClass="h-72 sm:h-96 md:h-[440px]"
+                />
 
                 {/* Executive Leadership Team */}
                 <div className="mb-28">
@@ -278,14 +248,6 @@ const About = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Video Showcase Modal */}
-            <VideoModal
-                isOpen={isVideoOpen}
-                onClose={() => setIsVideoOpen(false)}
-                videoId="fWEPPlzMV-U"
-                title="Skylink Innovations — Corporate Overview & Strategic Vision Reel"
-            />
         </div>
     );
 };

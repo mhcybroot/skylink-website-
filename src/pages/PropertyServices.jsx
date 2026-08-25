@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import ScrollReveal from '../components/UI/ScrollReveal';
 import AnimatedCounter from '../components/UI/AnimatedCounter';
-import VideoModal from '../components/UI/VideoModal';
+import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
 import propertyDroneImg from '../assets/property-preservation-drone.jpg';
 
 import beforeImg from '../assets/Photos/DSC05844.jpg';
@@ -185,7 +185,6 @@ const BeforeAfterSlider = () => {
 
 const PropertyServices = () => {
     const [openFaq, setOpenFaq] = useState(null);
-    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
@@ -235,42 +234,16 @@ const PropertyServices = () => {
                     </div>
                 </div>
 
-                {/* Flagship Aerial Operations Feature Banner */}
-                <div className="mb-14 rounded-3xl overflow-hidden border border-white/15 bg-zinc-950 relative group shadow-2xl">
-                    <div className="relative h-72 sm:h-96 md:h-[440px] w-full overflow-hidden">
-                        <img
-                            src={propertyDroneImg}
-                            alt="Nationwide US Property Preservation & Aerial Drone Inspection"
-                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 brightness-95"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                        
-                        {/* Status Tag */}
-                        <div className="absolute top-6 left-6 flex items-center gap-2">
-                            <div className="px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-[#00E5BE]/40 text-[#00E5BE] text-xs font-mono font-bold flex items-center gap-2 shadow-lg">
-                                <MapPin size={13} className="text-[#00E5BE] animate-pulse" />
-                                <span>ALL 50 US STATES COVERED • HUD COMPLIANT</span>
-                            </div>
-                        </div>
-
-                        {/* Centered Play Trigger */}
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                            <button
-                                onClick={() => setIsVideoOpen(true)}
-                                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#00E5BE] text-black flex items-center justify-center shadow-[0_0_35px_rgba(0,229,190,0.6)] hover:scale-110 active:scale-95 transition-all duration-300 group/btn mb-3"
-                                aria-label="Watch US Property Field Reel"
-                            >
-                                <Play size={26} className="fill-black ml-1 group-hover/btn:scale-110 transition-transform" />
-                            </button>
-                            <span className="text-sm sm:text-base font-bold text-white tracking-wide drop-shadow-md">
-                                Watch Field Rehab & Drone Inspection Reel
-                            </span>
-                            <span className="text-xs text-slate-300 font-mono mt-1">
-                                Fannie Mae, Freddie Mac & VA Guidelines
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                {/* Flagship Aerial Operations Feature Banner (Autoplay) */}
+                <AutoplayVideoBanner
+                    videoId="rqeKrdZjOqw"
+                    posterImg={propertyDroneImg}
+                    tag="ALL 50 US STATES COVERED • HUD COMPLIANT"
+                    tagIcon={MapPin}
+                    title="Nationwide Aerial Drone Inspection & Property Preservation"
+                    subtitle="Adhering to HUD, Fannie Mae, Freddie Mac & VA Strict Guidelines"
+                    heightClass="h-72 sm:h-96 md:h-[440px]"
+                />
 
                 {/* Metrics Highlights Bar */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-5 sm:p-8 rounded-2xl bg-zinc-950/70 border border-white/10 mb-28 shadow-2xl">
@@ -488,14 +461,6 @@ const PropertyServices = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Video Showcase Modal */}
-            <VideoModal
-                isOpen={isVideoOpen}
-                onClose={() => setIsVideoOpen(false)}
-                videoId="rqeKrdZjOqw"
-                title="Nationwide US Property Preservation, Drone Inspection & Field Execution Reel"
-            />
         </div>
     );
 };
