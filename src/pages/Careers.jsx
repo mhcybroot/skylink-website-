@@ -104,7 +104,7 @@ Candidate Portfolio / Note:
 ${candidateNote}`
         );
 
-        const mailtoUrl = `mailto:info@skylink-innovations.com?cc=contact@skylink-ltd.com&subject=${subject}&body=${body}`;
+        const mailtoUrl = `mailto:hr@skylinltd.ai?subject=${subject}&body=${body}`;
 
         // Open mailto client
         window.location.href = mailtoUrl;

@@ -94,7 +94,7 @@ Project Details / Requirements:
 ${formData.message}`
         );
 
-        const mailtoUrl = `mailto:info@skylink-innovations.com?cc=contact@skylink-ltd.com&subject=${subject}&body=${body}`;
+        const mailtoUrl = `mailto:hr@skylinltd.ai?subject=${subject}&body=${body}`;
 
         // Trigger mailto client
         window.location.href = mailtoUrl;
@@ -145,7 +145,7 @@ ${formData.message}`
 
                             <div className="space-y-4">
                                 <a
-                                    href="mailto:info@skylink-innovations.com"
+                                    href="mailto:hr@skylinltd.ai"
                                     className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00E5BE]/40 hover:bg-[#00E5BE]/5 transition-all group"
                                 >
                                     <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] shrink-0">
@@ -154,10 +154,10 @@ ${formData.message}`
                                     <div>
                                         <div className="text-xs font-mono uppercase text-slate-400 mb-0.5">Email Inquiries</div>
                                         <div className="text-sm font-semibold text-white group-hover:text-[#00E5BE] transition-colors">
-                                            info@skylink-innovations.com
+                                            hr@skylinltd.ai
                                         </div>
                                         <div className="text-xs text-slate-400 mt-0.5">
-                                            contact@skylink-ltd.com
+                                            contact@skylinltd.ai
                                         </div>
                                     </div>
                                 </a>
