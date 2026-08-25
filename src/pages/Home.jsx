@@ -42,9 +42,7 @@ const Home = () => {
             </ScrollReveal>
 
             {/* Execution Methodology & Workflow */}
-            <ScrollReveal type="fadeUp">
-                <AuraWorkflow />
-            </ScrollReveal>
+            <AuraWorkflow />
 
             {/* Real-time Telemetry Showcase */}
             <ScrollReveal type="fadeUp">

@@ -1,6 +1,20 @@
-import { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Sparkles, ArrowRight, Layers, CheckCircle2, Sliders, Rocket, ShieldCheck, Code, Cpu, ChevronRight, Zap } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+    Sparkles, 
+    ArrowRight, 
+    Layers, 
+    CheckCircle2, 
+    Rocket, 
+    ShieldCheck, 
+    Code, 
+    ChevronRight, 
+    ChevronLeft,
+    Check,
+    Cpu,
+    Lock,
+    Activity
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const steps = [
@@ -9,9 +23,15 @@ const steps = [
         phase: 'PHASE ONE',
         title: 'Strategic Discovery & Architecture Audit',
         tag: 'Strategy & Scoping',
-        description: 'We evaluate your infrastructure, uncover operational bottlenecks, audit legacy debt, and formulate an enterprise-grade digital transformation blueprint tailored to your business goals.',
+        description: 'We analyze your existing infrastructure, uncover operational bottlenecks, audit technical debt, and formulate an enterprise-grade digital roadmap aligned with your business objectives.',
         icon: Layers,
-        deliverables: ['Tech Stack Modernization Audit', 'Target Cloud Architecture Map', 'Cost-Benefit & ROI Projections', 'Milestone-Driven Agile Plan'],
+        deliverables: [
+            'Tech Stack Modernization Audit',
+            'Target Multi-Cloud Architecture Map',
+            'FinOps Cost-Benefit & ROI Analysis',
+            'Milestone-Driven Agile Delivery Plan'
+        ],
+        badge: 'Zero Vendor Lock-In',
         accent: '#00E5BE'
     },
     {
@@ -19,9 +39,15 @@ const steps = [
         phase: 'PHASE TWO',
         title: 'Agile Engineering & Cloud Infrastructure',
         tag: 'Full-Stack Execution',
-        description: 'Our senior engineers construct microservices, modern frontends, and automated Infrastructure as Code (Terraform) pipelines through bi-weekly iterative sprints.',
+        description: 'Our senior engineers construct microservices, modern web frontends, and automated Infrastructure as Code (Terraform) pipelines through bi-weekly iterative sprints.',
         icon: Code,
-        deliverables: ['Containerized Microservices', 'Automated CI/CD Workflows', 'High-Availability Cloud Tier', 'Live Staging Demos & Reviews'],
+        deliverables: [
+            'Containerized Microservices Architecture',
+            'Automated CI/CD Deployment Workflows',
+            'High-Availability Cloud Tier (AWS/Azure/GCP)',
+            'Bi-Weekly Staging Demos & Code Reviews'
+        ],
+        badge: 'Bi-Weekly Sprint Demos',
         accent: '#2DD4BF'
     },
     {
@@ -31,7 +57,13 @@ const steps = [
         tag: 'Bank-Grade QA',
         description: 'Before any code reaches production, our dedicated security and QA squad executes rigorous penetration testing, vulnerability scanning, and regulatory alignment checks.',
         icon: ShieldCheck,
-        deliverables: ['Automated Penetration Tests', 'Zero-Trust IAM Verification', 'SOC 2 & ISO 27001 Readiness', 'Load & Stress Testing Audits'],
+        deliverables: [
+            'Automated Penetration & Vulnerability Tests',
+            'Zero-Trust IAM & Access Control Audits',
+            'SOC 2 Type II & ISO 27001 Readiness',
+            'High-Throughput Load & Stress Testing'
+        ],
+        badge: 'Zero Vulnerability Release',
         accent: '#38BDF8'
     },
     {
@@ -41,255 +73,269 @@ const steps = [
         tag: 'Continuous SRE',
         description: 'We execute zero-downtime DNS cutover and transition systems into our 24/7 Network Operations Center (NOC), delivering real-time telemetry, automated backups, and 99.99% uptime.',
         icon: Rocket,
-        deliverables: ['Zero-Downtime Deployment', '24/7/365 NOC Alerting', 'Automated Daily Backups', 'Quarterly FinOps Reviews'],
+        deliverables: [
+            'Zero-Downtime Live Traffic Migration',
+            '24/7/365 Proactive NOC Alert Monitoring',
+            'Automated Daily Immutable Backups',
+            'Continuous FinOps Cost Optimization'
+        ],
+        badge: '99.99% Availability SLA',
         accent: '#00F5C4'
     }
 ];
 
 const AuraWorkflow = () => {
-    // Desktop pinned horizontal scroll target ref
-    const targetRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: targetRef,
-        offset: ["start start", "end end"]
-    });
+    const [activeStep, setActiveStep] = useState(0);
+    const trackRef = useRef(null);
 
-    const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
-    const xTransform = useTransform(smoothProgress, [0, 1], ["2%", "-72%"]);
-    const progressWidth = useTransform(smoothProgress, [0, 1], ["5%", "100%"]);
+    const nextStep = () => {
+        setActiveStep((prev) => (prev + 1) % steps.length);
+    };
 
-    // Mobile vertical active state
-    const [mobileActiveStep, setMobileActiveStep] = useState(0);
+    const prevStep = () => {
+        setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
+    };
+
+    // Handle horizontal mousewheel scroll over the section
+    const handleWheel = (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+            // Native horizontal trackpad scrolling
+            return;
+        }
+        // If vertical scroll with shift or hovering cards
+        if (e.shiftKey) {
+            if (e.deltaY > 20) nextStep();
+            else if (e.deltaY < -20) prevStep();
+        }
+    };
+
+    const currentStep = steps[activeStep];
+    const Icon = currentStep.icon;
 
     return (
-        <section id="how-it-works" className="relative bg-black text-white overflow-hidden border-t border-white/[0.06]">
+        <section 
+            id="how-it-works" 
+            onWheel={handleWheel}
+            className="relative py-24 md:py-32 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]"
+        >
             {/* Ambient Background Radial Glows */}
-            <div className="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-[#00E5BE]/5 rounded-full blur-[160px] pointer-events-none -z-0" />
-            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#38BDF8]/5 rounded-full blur-[160px] pointer-events-none -z-0" />
+            <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[600px] h-[400px] bg-[#00E5BE]/10 rounded-full blur-[160px] pointer-events-none -z-0" />
+            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[350px] bg-[#38BDF8]/10 rounded-full blur-[150px] pointer-events-none -z-0" />
 
             {/* Subtle Grid Backdrop */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:36px_36px] pointer-events-none" />
 
-            {/* ========================================================================= */}
-            {/* DESKTOP: PINNED HORIZONTAL SCROLLING EXPERIENCE (Visible on lg and above) */}
-            {/* ========================================================================= */}
-            <div ref={targetRef} className="hidden lg:block relative h-[280vh]">
-                <div className="sticky top-0 h-screen flex flex-col justify-between pt-24 pb-12 px-12 overflow-hidden">
-                    {/* Pinned Top Bar: Header & Live Progress Cable */}
-                    <div className="max-w-7xl w-full mx-auto flex items-end justify-between gap-8 mb-4">
-                        <div>
-                            <div className="aura-badge mb-3">
-                                <Sparkles size={14} className="text-[#00E5BE]" />
-                                <span>Execution Methodology</span>
-                            </div>
-                            <h2 className="text-3xl xl:text-4xl font-extrabold text-white">
-                                Disciplined execution in{' '}
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5BE] to-[#38BDF8]">
-                                    four proven phases
-                                </span>
-                            </h2>
+            <div className="max-w-7xl mx-auto relative z-10">
+                {/* Header with Title & Navigation Controls */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                    <div>
+                        <div className="aura-badge mb-3">
+                            <Sparkles size={14} className="text-[#00E5BE]" />
+                            <span>Execution Methodology</span>
                         </div>
-
-                        {/* Interactive Horizontal Progress Cable */}
-                        <div className="w-80 flex flex-col items-end">
-                            <div className="flex items-center gap-2 text-xs font-mono text-slate-400 mb-2">
-                                <span>SCROLL TO ADVANCE</span>
-                                <ArrowRight size={13} className="text-[#00E5BE] animate-pulse" />
-                            </div>
-                            <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden relative">
-                                <motion.div
-                                    style={{ width: progressWidth }}
-                                    className="h-full bg-gradient-to-r from-[#00E5BE] via-[#2DD4BF] to-[#38BDF8] rounded-full shadow-[0_0_12px_#00E5BE]"
-                                />
-                            </div>
-                        </div>
+                        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
+                            Disciplined execution in{' '}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5BE] via-[#2DD4BF] to-[#38BDF8]">
+                                four proven phases
+                            </span>
+                        </h2>
+                        <p className="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+                            From initial discovery to continuous 24/7 site reliability engineering, our disciplined agile lifecycle guarantees predictability, bank-grade security, and zero downtime.
+                        </p>
                     </div>
 
-                    {/* Horizontal Sliding Cards Track */}
-                    <div className="relative w-full overflow-visible py-4">
-                        <motion.div
-                            style={{ x: xTransform }}
-                            className="flex gap-8 w-max pl-4"
-                        >
-                            {steps.map((step, index) => {
-                                const Icon = step.icon;
-                                return (
-                                    <div
-                                        key={index}
-                                        className="w-[480px] xl:w-[540px] aura-glass-card p-10 bg-zinc-950/80 border border-white/10 hover:border-[#00E5BE]/40 transition-all rounded-3xl relative overflow-hidden flex flex-col justify-between shadow-2xl group shrink-0"
-                                    >
-                                        {/* Corner Ambient Glow */}
-                                        <div 
-                                            className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-[80px] pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity"
-                                            style={{ backgroundColor: step.accent }}
-                                        />
-
-                                        <div>
-                                            {/* Phase Tag & Step Number */}
-                                            <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
-                                                <div className="flex items-center gap-3">
-                                                    <div 
-                                                        className="w-10 h-10 rounded-xl flex items-center justify-center font-mono font-bold text-sm border shadow-sm"
-                                                        style={{ 
-                                                            backgroundColor: `${step.accent}15`, 
-                                                            borderColor: `${step.accent}40`,
-                                                            color: step.accent 
-                                                        }}
-                                                    >
-                                                        {step.number}
-                                                    </div>
-                                                    <span className="text-xs font-mono uppercase tracking-widest text-slate-400">
-                                                        {step.phase}
-                                                    </span>
-                                                </div>
-                                                <span 
-                                                    className="text-xs font-mono px-3 py-1 rounded-full border bg-white/5"
-                                                    style={{ borderColor: `${step.accent}40`, color: step.accent }}
-                                                >
-                                                    {step.tag}
-                                                </span>
-                                            </div>
-
-                                            {/* Step Title & Description */}
-                                            <h3 className="text-2xl font-bold text-white mb-4 leading-snug group-hover:text-[#00E5BE] transition-colors">
-                                                {step.title}
-                                            </h3>
-                                            <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                                                {step.description}
-                                            </p>
-
-                                            {/* Key Deliverables Bullet Pills */}
-                                            <div className="space-y-2.5 pt-4 border-t border-white/5">
-                                                <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 mb-2">
-                                                    Key Milestones:
-                                                </div>
-                                                <div className="grid grid-cols-2 gap-2">
-                                                    {step.deliverables.map((d, i) => (
-                                                        <div 
-                                                            key={i} 
-                                                            className="flex items-center gap-2 p-2 rounded-lg bg-white/[0.03] border border-white/5 text-xs text-slate-300"
-                                                        >
-                                                            <CheckCircle2 size={13} className="text-[#00E5BE] shrink-0" />
-                                                            <span className="truncate">{d}</span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* Bottom Action Footer */}
-                                        <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
-                                            <span>Skylink QA Protocol</span>
-                                            <span className="text-[#00E5BE] flex items-center gap-1 font-semibold">
-                                                Active Framework <ChevronRight size={13} />
-                                            </span>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </motion.div>
-                    </div>
-
-                    {/* Footer Nav Bar in Sticky View */}
-                    <div className="max-w-7xl w-full mx-auto flex items-center justify-between text-xs text-slate-400 border-t border-white/5 pt-4">
-                        <div className="flex items-center gap-6 font-mono">
-                            <span>01 / DISCOVERY</span>
-                            <span>02 / SPRINT</span>
-                            <span>03 / AUDIT</span>
-                            <span>04 / LAUNCH</span>
+                    {/* Step Navigation Arrows & Progress */}
+                    <div className="flex items-center gap-4 shrink-0">
+                        <div className="text-xs font-mono text-slate-400">
+                            <span className="text-white font-bold text-base">0{activeStep + 1}</span>
+                            <span className="text-slate-600"> / 04</span>
                         </div>
-                        <Link to="/contact" className="text-[#00E5BE] hover:underline flex items-center gap-1 font-semibold">
-                            <span>Initiate Discovery Consultation</span>
-                            <ArrowRight size={13} />
-                        </Link>
+
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={prevStep}
+                                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 hover:border-[#00E5BE]/40 transition-all active:scale-95"
+                                aria-label="Previous Phase"
+                            >
+                                <ChevronLeft size={18} />
+                            </button>
+                            <button
+                                onClick={nextStep}
+                                className="w-10 h-10 rounded-full bg-[#00E5BE] text-black flex items-center justify-center font-bold hover:brightness-110 shadow-aura-sm transition-all active:scale-95"
+                                aria-label="Next Phase"
+                            >
+                                <ChevronRight size={18} />
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* ======================================================================= */}
-            {/* MOBILE & TABLET: RESPONSIVE VERTICAL TIMELINE WITH GLOWING PROGRESS CABLE */}
-            {/* ======================================================================= */}
-            <div className="lg:hidden py-20 px-6 max-w-3xl mx-auto">
-                <div className="text-center mb-14">
-                    <div className="aura-badge mb-3 mx-auto">
-                        <Sparkles size={14} className="text-[#00E5BE]" />
-                        <span>Execution Methodology</span>
-                    </div>
-                    <h2 className="text-3xl font-extrabold text-white mb-4">
-                        Disciplined execution in{' '}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00E5BE] to-[#2DD4BF]">
-                            four phases
-                        </span>
-                    </h2>
-                    <p className="text-slate-400 text-sm">
-                        Tap any milestone below to inspect our delivery framework.
-                    </p>
-                </div>
-
-                {/* Vertical Cable & Cards */}
-                <div className="relative pl-6 border-l-2 border-white/10 space-y-6">
-                    {steps.map((step, index) => {
-                        const isSelected = mobileActiveStep === index;
-                        return (
-                            <div key={index} className="relative">
-                                {/* Glowing Dot on Timeline Line */}
+                {/* Horizontal Phase Tabs Switcher */}
+                <div className="mb-10 pb-2 overflow-x-auto scrollbar-none">
+                    <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white/[0.03] border border-white/10 w-max min-w-full sm:min-w-0">
+                        {steps.map((step, idx) => {
+                            const isSelected = activeStep === idx;
+                            return (
                                 <button
-                                    onClick={() => setMobileActiveStep(index)}
-                                    className={`absolute -left-[31px] top-4 w-5 h-5 rounded-full border-2 transition-all flex items-center justify-center ${
+                                    key={idx}
+                                    onClick={() => setActiveStep(idx)}
+                                    className={`flex items-center gap-2.5 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 relative whitespace-nowrap ${
                                         isSelected
-                                            ? 'bg-[#00E5BE] border-[#00E5BE] shadow-[0_0_12px_#00E5BE]'
-                                            : 'bg-black border-white/30'
+                                            ? 'bg-white/10 text-white shadow-aura-sm border border-white/15'
+                                            : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
                                     }`}
                                 >
-                                    {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-black" />}
-                                </button>
-
-                                <div
-                                    onClick={() => setMobileActiveStep(index)}
-                                    className={`aura-glass-card p-6 bg-zinc-950/70 border transition-all cursor-pointer ${
-                                        isSelected 
-                                            ? 'border-[#00E5BE]/50 shadow-aura-sm bg-zinc-950' 
-                                            : 'border-white/10'
-                                    }`}
-                                >
-                                    <div className="flex items-center justify-between mb-3">
-                                        <span className="text-xs font-mono font-bold text-[#00E5BE]">
-                                            STEP {step.number} • {step.phase}
-                                        </span>
-                                        <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-white/5 text-slate-300 border border-white/10">
-                                            {step.tag}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-lg font-bold text-white mb-2">
-                                        {step.title}
-                                    </h3>
-                                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                                        {step.description}
-                                    </p>
-
+                                    <span 
+                                        className={`font-mono text-xs px-2 py-0.5 rounded-md border ${
+                                            isSelected 
+                                                ? 'bg-[#00E5BE] text-black border-[#00E5BE] font-bold' 
+                                                : 'bg-white/5 text-slate-400 border-white/10'
+                                        }`}
+                                    >
+                                        {step.number}
+                                    </span>
+                                    <span>{step.phase}</span>
                                     {isSelected && (
                                         <motion.div
-                                            initial={{ opacity: 0, height: 0 }}
-                                            animate={{ opacity: 1, height: 'auto' }}
-                                            className="space-y-2 pt-3 border-t border-white/10"
-                                        >
-                                            <div className="text-[11px] font-mono uppercase text-slate-400">
-                                                Key Deliverables:
-                                            </div>
-                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-                                                {step.deliverables.map((d, i) => (
-                                                    <div key={i} className="flex items-center gap-2 text-xs text-slate-200">
-                                                        <CheckCircle2 size={12} className="text-[#00E5BE] shrink-0" />
-                                                        <span>{d}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </motion.div>
+                                            layoutId="activePhaseGlow"
+                                            className="absolute inset-0 rounded-xl border-2 border-[#00E5BE]/50 pointer-events-none"
+                                            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                                        />
                                     )}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* Horizontal Progress Bar */}
+                <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-10 relative">
+                    <motion.div
+                        animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
+                        transition={{ duration: 0.4, ease: 'easeOut' }}
+                        className="h-full bg-gradient-to-r from-[#00E5BE] via-[#2DD4BF] to-[#38BDF8] rounded-full shadow-[0_0_12px_#00E5BE]"
+                    />
+                </div>
+
+                {/* Active Phase Cinematic Showcase Card */}
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeStep}
+                        initial={{ opacity: 0, x: 25 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -25 }}
+                        transition={{ duration: 0.35, ease: 'easeInOut' }}
+                        className="aura-glass-card p-8 md:p-12 bg-zinc-950/80 border border-white/15 rounded-3xl relative overflow-hidden shadow-2xl"
+                    >
+                        {/* Corner Ambient Glow */}
+                        <div 
+                            className="absolute -top-24 -right-24 w-72 h-72 rounded-full blur-[100px] pointer-events-none opacity-25"
+                            style={{ backgroundColor: currentStep.accent }}
+                        />
+
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                            {/* Left Column: Description & Strategic Scope */}
+                            <div className="lg:col-span-7">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div 
+                                        className="w-12 h-12 rounded-2xl flex items-center justify-center font-mono font-bold text-base border shadow-sm"
+                                        style={{ 
+                                            backgroundColor: `${currentStep.accent}15`, 
+                                            borderColor: `${currentStep.accent}40`,
+                                            color: currentStep.accent 
+                                        }}
+                                    >
+                                        <Icon size={24} />
+                                    </div>
+                                    <div>
+                                        <span className="text-xs font-mono uppercase tracking-widest text-[#00E5BE] font-bold">
+                                            {currentStep.phase} • {currentStep.tag}
+                                        </span>
+                                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
+                                            {currentStep.title}
+                                        </h3>
+                                    </div>
+                                </div>
+
+                                <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 mt-4">
+                                    {currentStep.description}
+                                </p>
+
+                                <div className="flex flex-wrap items-center gap-4">
+                                    <Link 
+                                        to="/contact" 
+                                        className="btn-aura-primary !py-3 !px-6 text-xs sm:text-sm"
+                                    >
+                                        <span>Initiate {currentStep.phase}</span>
+                                        <ArrowRight size={14} />
+                                    </Link>
+                                    <span 
+                                        className="text-xs font-mono px-3.5 py-2 rounded-full border bg-white/5 font-semibold"
+                                        style={{ borderColor: `${currentStep.accent}40`, color: currentStep.accent }}
+                                    >
+                                        {currentStep.badge}
+                                    </span>
                                 </div>
                             </div>
-                        );
-                    })}
+
+                            {/* Right Column: Deliverables Matrix Card */}
+                            <div className="lg:col-span-5">
+                                <div className="p-6 md:p-8 rounded-2xl bg-black/60 border border-white/10 shadow-inner">
+                                    <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+                                        <span className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                                            Key Deliverables & Artifacts
+                                        </span>
+                                        <span className="text-[11px] font-mono text-[#00E5BE]">
+                                            VERIFIED QA
+                                        </span>
+                                    </div>
+
+                                    <div className="space-y-3">
+                                        {currentStep.deliverables.map((item, i) => (
+                                            <div
+                                                key={i}
+                                                className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00E5BE]/30 transition-all"
+                                            >
+                                                <div className="w-5 h-5 rounded-full bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] shrink-0 mt-0.5">
+                                                    <Check size={12} />
+                                                </div>
+                                                <span className="text-xs sm:text-sm text-slate-200 font-medium leading-tight">
+                                                    {item}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                                        <span>Skylink Institutional Framework</span>
+                                        <span className="text-[#00E5BE]">Continuous Protocol</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+
+                {/* Bottom 4-Step Summary Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                    {steps.map((step, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setActiveStep(idx)}
+                            className={`p-4 rounded-2xl text-left border transition-all ${
+                                activeStep === idx
+                                    ? 'bg-[#00E5BE]/10 border-[#00E5BE]/40 shadow-aura-sm'
+                                    : 'bg-white/[0.02] border-white/5 hover:border-white/20'
+                            }`}
+                        >
+                            <div className="text-xs font-mono font-bold text-[#00E5BE] mb-1">
+                                {step.number} / {step.phase}
+                            </div>
+                            <div className="text-xs font-bold text-white truncate">
+                                {step.title}
+                            </div>
+                        </button>
+                    ))}
                 </div>
             </div>
         </section>
