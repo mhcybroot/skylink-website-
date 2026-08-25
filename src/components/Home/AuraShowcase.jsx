@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Activity, ShieldCheck, Clock, Server, CheckCircle, TrendingUp, Cpu, Cloud, Radio } from 'lucide-react';
 import AutoplayVideoBanner from '../UI/AutoplayVideoBanner';
 import CyberBackground from '../UI/CyberBackground';
+import LiveTelemetryCockpit from './LiveTelemetryCockpit';
 import nocOperationsImg from '../../assets/noc-operations.webp';
 
 const tabs = [
@@ -180,6 +181,9 @@ const AuraShowcase = () => {
                             </table>
                         </div>
                     </div>
+
+                    {/* Interactive Live Global NOC & Cloud Latency Cockpit */}
+                    <LiveTelemetryCockpit />
                 </div>
             </div>
         </section>
