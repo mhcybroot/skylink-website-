@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Play, Maximize2, Sparkles } from 'lucide-react';
+import { Maximize2, Sparkles } from 'lucide-react';
 import VideoModal from './VideoModal';
 
 /**
  * AutoplayVideoBanner Component
- * Autoplays YouTube video inline in a muted continuous loop with no bulky center play button.
+ * Autoplays YouTube video inline in a clean, cinematic, muted continuous loop.
+ * Crops out all YouTube player controls, title bars, and logos for a pure background look.
  */
 const AutoplayVideoBanner = ({
     videoId,
@@ -43,23 +44,23 @@ const AutoplayVideoBanner = ({
                     />
                 )}
 
-                {/* Inline Looping Autoplay YouTube Video */}
+                {/* Inline Full-Bleed Autoplay Video (Crops out all YouTube UI overlays) */}
                 {cleanId && (
-                    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden scale-125 md:scale-110">
+                    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden flex items-center justify-center -z-0">
                         <iframe
                             src={`https://www.youtube-nocookie.com/embed/${cleanId}?autoplay=1&mute=1&loop=1&playlist=${cleanId}&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1&fs=0`}
                             title={title || tag}
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            className="w-full h-full object-cover pointer-events-none opacity-85"
+                            className="w-[160%] h-[160%] min-w-[130vw] min-h-[130vh] max-w-none pointer-events-none object-cover opacity-85 scale-125"
                         />
                     </div>
                 )}
 
                 {/* Subtle Cinematic Vignette Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/50 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/50 pointer-events-none z-10" />
 
                 {/* Top Left Live Tag */}
-                <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
+                <div className="absolute top-6 left-6 z-20 flex items-center gap-2">
                     <div className="px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-[#00E5BE]/40 text-[#00E5BE] text-xs font-mono font-bold flex items-center gap-2 shadow-lg">
                         <TagIcon size={13} className="text-[#00E5BE] animate-pulse" />
                         <span>{tag}</span>
@@ -67,7 +68,7 @@ const AutoplayVideoBanner = ({
                 </div>
 
                 {/* Bottom Bar: Title, Subtitle, and Fullscreen Expand Button */}
-                <div className="absolute bottom-6 left-6 right-6 z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+                <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
                     <div>
                         {title && (
                             <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight drop-shadow-md">
