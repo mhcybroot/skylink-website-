@@ -20,8 +20,8 @@ import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
 import chairmanImg from '../assets/chairman.webp';
 import ceoImg from '../assets/ceo.webp';
 import mdImg from '../assets/managing-director.webp';
-import boardroomImg from '../assets/boardroom-governance.jpg';
-import officeBg from '../assets/Photos/DSC05814.jpg';
+import boardroomImg from '../assets/boardroom-governance.webp';
+import officeBg from '../assets/Photos/DSC05814.webp';
 
 const leadership = [
     {

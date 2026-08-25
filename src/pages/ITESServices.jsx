@@ -26,8 +26,8 @@ import { Link } from 'react-router-dom';
 import AnimatedCounter from '../components/UI/AnimatedCounter';
 import VideoModal from '../components/UI/VideoModal';
 import CyberBackground from '../components/UI/CyberBackground';
-import nocOperationsImg from '../assets/noc-operations.jpg';
-import cxBg from '../assets/Photos/DSC05848.jpg';
+import nocOperationsImg from '../assets/noc-operations.webp';
+import cxBg from '../assets/Photos/DSC05848.webp';
 
 const itesStats = [
     { value: '24/7/365', label: 'Follow-the-Sun Operations', detail: 'Round-the-clock multilingual coverage' },

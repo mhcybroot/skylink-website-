@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Activity, ShieldCheck, Clock, Server, CheckCircle, TrendingUp, Cpu, Cloud, Radio } from 'lucide-react';
 import AutoplayVideoBanner from '../UI/AutoplayVideoBanner';
 import CyberBackground from '../UI/CyberBackground';
-import nocOperationsImg from '../../assets/noc-operations.jpg';
+import nocOperationsImg from '../../assets/noc-operations.webp';
 
 const tabs = [
     { id: 'cloud', label: 'Cloud Infrastructure & SRE' },

@@ -27,10 +27,10 @@ import ScrollReveal from '../components/UI/ScrollReveal';
 import AnimatedCounter from '../components/UI/AnimatedCounter';
 import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
 import CyberBackground from '../components/UI/CyberBackground';
-import propertyDroneImg from '../assets/property-preservation-drone.jpg';
+import propertyDroneImg from '../assets/property-preservation-drone.webp';
 
-import beforeImg from '../assets/Photos/DSC05844.jpg';
-import afterImg from '../assets/Photos/DSC05809.jpg';
+import beforeImg from '../assets/Photos/DSC05844.webp';
+import afterImg from '../assets/Photos/DSC05809.webp';
 
 const propertyStats = [
     { value: '50 States', label: 'Nationwide US Coverage', detail: 'Local vendor networks across all 50 states' },
