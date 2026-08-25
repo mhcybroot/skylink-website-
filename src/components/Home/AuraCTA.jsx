@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles, ShieldCheck, Zap, Headphones, MessageSquare } from 'lucide-react';
+import CyberBackground from '../UI/CyberBackground';
 
 const AuraCTA = () => {
     return (
         <section className="relative py-28 md:py-36 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]">
-            {/* Ambient Radial Aura Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] md:w-[900px] h-[400px] bg-gradient-to-b from-[#00E5BE]/20 via-[#00E5BE]/5 to-transparent rounded-full blur-[140px] pointer-events-none -z-0" />
+            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground glowPosition="center" meshOpacity="opacity-30" />
 
             <div className="max-w-5xl mx-auto relative z-10 text-center">
                 {/* Badge */}

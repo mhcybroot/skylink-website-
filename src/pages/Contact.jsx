@@ -17,6 +17,7 @@ import {
     Globe
 } from 'lucide-react';
 import SEO from '../components/SEO';
+import CyberBackground from '../components/UI/CyberBackground';
 
 const serviceOptions = [
     'Nationwide US Property Preservation & REO',
@@ -110,12 +111,8 @@ ${formData.message}`
                 description="Get in touch with Skylink Innovations Ltd. Let's discuss your next-generation custom software, cloud migration, or managed IT infrastructure needs."
             />
 
-            {/* Ambient Radial Spotlight Glows */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-b from-[#00E5BE]/20 via-[#00E5BE]/5 to-transparent rounded-full blur-[140px] pointer-events-none -z-0" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#00F5C4]/10 rounded-full blur-[120px] pointer-events-none -z-0" />
-
-            {/* Subtle Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-0" />
+            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header Title Section */}

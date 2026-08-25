@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 import { Target, Compass, Sparkles, CheckCircle, Shield, Award, Users2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CyberBackground from '../UI/CyberBackground';
 
 const AuraAbout = () => {
     return (
         <section id="about" className="relative py-28 md:py-36 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]">
-            {/* Ambient Radial Spotlight */}
-            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#00E5BE]/5 rounded-full blur-[140px] pointer-events-none -z-0" />
+            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground glowPosition="top" meshOpacity="opacity-20" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}

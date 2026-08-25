@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
+import CyberBackground from '../components/UI/CyberBackground';
 
 const openPositions = [
     {
@@ -120,12 +121,8 @@ ${candidateNote}`
                 description="Join the elite team at Skylink Innovations Ltd. Explore career opportunities in software engineering, cloud architecture, and global IT operations."
             />
 
-            {/* Ambient Spotlight Glows */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-b from-[#00E5BE]/20 via-[#00E5BE]/5 to-transparent rounded-full blur-[140px] pointer-events-none -z-0" />
-            <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-[#00F5C4]/10 rounded-full blur-[130px] pointer-events-none -z-0" />
-
-            {/* Subtle Grid Backdrop */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none -z-0" />
+            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Hero Header */}

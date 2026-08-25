@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Star, Quote, CheckCircle2, ChevronLeft, ChevronRight, Building2, ShieldCheck, Zap } from 'lucide-react';
+import CyberBackground from '../UI/CyberBackground';
 
 const testimonials = [
     {
@@ -60,9 +61,8 @@ const AuraTestimonials = () => {
 
     return (
         <section id="testimonials" className="relative py-28 md:py-36 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]">
-            {/* Ambient Spotlight */}
-            <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[550px] h-[550px] bg-[#00E5BE]/5 rounded-full blur-[150px] pointer-events-none -z-0" />
-            <div className="absolute bottom-1/3 right-1/4 w-[450px] h-[450px] bg-[#38BDF8]/5 rounded-full blur-[140px] pointer-events-none -z-0" />
+            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground glowPosition="center" meshOpacity="opacity-20" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}

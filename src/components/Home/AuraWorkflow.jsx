@@ -16,6 +16,7 @@ import {
     Activity
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CyberBackground from '../UI/CyberBackground';
 
 const steps = [
     {
@@ -118,12 +119,8 @@ const AuraWorkflow = () => {
             onWheel={handleWheel}
             className="relative py-24 md:py-32 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]"
         >
-            {/* Ambient Background Radial Glows */}
-            <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[600px] h-[400px] bg-[#00E5BE]/10 rounded-full blur-[160px] pointer-events-none -z-0" />
-            <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[350px] bg-[#38BDF8]/10 rounded-full blur-[150px] pointer-events-none -z-0" />
-
-            {/* Subtle Grid Backdrop */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:36px_36px] pointer-events-none" />
+            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground glowPosition="both" meshOpacity="opacity-25" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header with Title & Navigation Controls */}

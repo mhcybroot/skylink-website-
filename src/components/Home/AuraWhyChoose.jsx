@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import { Sparkles, Sliders, Award, Lock, Handshake, CheckCircle2 } from 'lucide-react';
+import CyberBackground from '../UI/CyberBackground';
 
 const pillars = [
     {
@@ -35,8 +35,8 @@ const pillars = [
 const AuraWhyChoose = () => {
     return (
         <section id="why-choose-us" className="relative py-28 md:py-36 bg-black text-white px-6 overflow-hidden border-t border-white/[0.06]">
-            {/* Ambient Radial Spotlight */}
-            <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-[#00E5BE]/5 rounded-full blur-[150px] pointer-events-none -z-0" />
+            {/* Cybernetic Mesh & Ambient Cyan Spotlight Background */}
+            <CyberBackground glowPosition="both" meshOpacity="opacity-20" />
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}
