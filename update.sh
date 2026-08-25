@@ -25,7 +25,7 @@ cd "$SCRIPT_DIR"
 # 1. Pull latest code from GitHub
 echo -e "\n${YELLOW}[1/4] Pulling latest changes from GitHub (origin/main)...${NC}"
 git fetch origin main
-git pull origin main
+git reset --hard origin/main
 
 # 2. Install any new dependencies if needed
 echo -e "\n${YELLOW}[2/4] Checking and installing dependencies...${NC}"
