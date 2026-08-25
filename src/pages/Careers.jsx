@@ -22,40 +22,40 @@ import CyberBackground from '../components/UI/CyberBackground';
 
 const openPositions = [
     {
-        id: 'dev-sr-fullstack',
-        title: 'Senior Full-Stack Engineer (React / Node / Cloud)',
-        department: 'Software Engineering',
+        id: 'client-coordinator',
+        title: 'US Property Preservation Client Coordinator',
+        department: 'Property Preservation & REO Operations',
+        location: 'Dhaka Hub / Hybrid / Remote',
+        type: 'Full-time',
+        experience: '1-3 Years',
+        description: 'Liaise directly with US national mortgage servicers, banks, and asset managers. Manage work orders, conveyances, estimate approvals, and ensure strict compliance with HUD, Fannie Mae, Freddie Mac, and VA guidelines.'
+    },
+    {
+        id: 'vendor-coordinator',
+        title: 'US Property Preservation Vendor Coordinator',
+        department: 'Vendor & Field Dispatch',
+        location: 'Dhaka Hub / Night Shift / Hybrid',
+        type: 'Full-time',
+        experience: '1-3 Years',
+        description: 'Recruit, onboard, assign, and manage field contractors and property inspectors across all 50 US states. Track on-time field execution, negotiate pricing matrices, and ensure rapid turnarounds.'
+    },
+    {
+        id: 'preservation-processor',
+        title: 'US Property Preservation Processor',
+        department: 'Order Processing & QA',
+        location: 'Dhaka Hub / Full-time',
+        type: 'Full-time',
+        experience: 'Fresh - 2 Years',
+        description: 'Review and process field inspection reports, photo evidence, PCRs, and contractor bids. Submit bids and completion packages into client portals (PPR, MCS, Safeguard, Xome, Aspen Grove, etc.) with zero error rates.'
+    },
+    {
+        id: 'bizdev-intern',
+        title: 'Business Development Internship',
+        department: 'Growth & Strategic Partnerships',
         location: 'Dhaka Hub / Hybrid',
-        type: 'Full-time',
-        experience: '4+ Years',
-        description: 'Lead the architecture and implementation of scalable web platforms, APIs, and microservices for international enterprise clients.'
-    },
-    {
-        id: 'cloud-devops-lead',
-        title: 'Cloud DevOps & SRE Specialist',
-        department: 'Cloud Infrastructure',
-        location: 'Remote / Hybrid',
-        type: 'Full-time',
-        experience: '3+ Years',
-        description: 'Manage multi-cloud infrastructure across AWS and Azure, automate CI/CD pipelines, and maintain 99.99% system availability.'
-    },
-    {
-        id: 'qa-preservation-lead',
-        title: 'US Property Preservation QA Analyst',
-        department: 'Asset Operations',
-        location: 'Dhaka Hub / Remote',
-        type: 'Full-time',
-        experience: '2+ Years',
-        description: 'Audit geotagged field photos, verify HUD/GSE guideline compliance, and coordinate directly with nationwide US dispatch squads.'
-    },
-    {
-        id: 'cx-team-lead',
-        title: 'Enterprise Technical Support Lead',
-        department: 'ITES / BPO',
-        location: 'Dhaka Hub / Night Shift',
-        type: 'Full-time',
-        experience: '3+ Years',
-        description: 'Supervise Tier-2/3 technical helpdesk teams delivering 24/7 omni-channel customer support for US SaaS clients.'
+        type: 'Internship (Lead to Full-time)',
+        experience: 'Freshers / Final Year Students',
+        description: 'Conduct international market research, identify prospective enterprise IT & US property management clients, support B2B outreach and proposal generation, and assist leadership with strategic growth initiatives.'
     }
 ];
 
