@@ -27,6 +27,7 @@ import ScrollReveal from '../components/UI/ScrollReveal';
 import AnimatedCounter from '../components/UI/AnimatedCounter';
 import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
 import CyberBackground from '../components/UI/CyberBackground';
+import USCoverageMap from '../components/Property/USCoverageMap';
 import propertyDroneImg from '../assets/property-preservation-drone.webp';
 
 import beforeImg from '../assets/Photos/DSC05844.webp';
@@ -297,6 +298,11 @@ const PropertyServices = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* Interactive 50-State US Property Field Coverage Map */}
+                <div className="mb-28">
+                    <USCoverageMap />
                 </div>
 
                 {/* Interactive Before & After Visual Slider */}
