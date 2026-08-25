@@ -13,6 +13,7 @@ import ServiceDetail from './pages/ServiceDetail';
 import LoadingScreen from './components/UI/LoadingScreen';
 import ScrollProgress from './components/UI/ScrollProgress';
 import BackToTop from './components/UI/BackToTop';
+import CursorSpotlight from './components/UI/CursorSpotlight';
 
 // Smooth Page transition variants
 const pageVariants = {
@@ -62,6 +63,9 @@ function App() {
 
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
+
+      {/* Interactive Mouse-Tracked Cyber Cursor Spotlight */}
+      <CursorSpotlight />
 
       <div className="min-h-screen flex flex-col font-sans text-slate-200 bg-black relative selection:bg-[#00E5BE] selection:text-black">
         <Navbar />
