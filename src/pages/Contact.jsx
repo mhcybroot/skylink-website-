@@ -55,14 +55,14 @@ const officeLocations = [
         address: 'Suite 400, Innovation Tower, Financial District',
         status: 'Active 24/7',
         phone: '+1 (800) 555-SKYLINK',
-        email: 'hq@skylinkinnovations.com'
+        email: 'hq@skylinkltd.ai'
     },
     {
         city: 'Technology & Cloud NOC',
         address: 'Cyberport Technology Park, Building B',
         status: '24/7 NOC Active',
         phone: '+1 (888) 234-SKYLINK',
-        email: 'noc@skylinkinnovations.com'
+        email: 'noc@skylinkltd.ai'
     }
 ];
 
@@ -94,7 +94,7 @@ Project Details / Requirements:
 ${formData.message}`
         );
 
-        const mailtoUrl = `mailto:hr@skylinltd.ai?subject=${subject}&body=${body}`;
+        const mailtoUrl = `mailto:hr@skylinkltd.ai?subject=${subject}&body=${body}`;
 
         // Trigger mailto client
         window.location.href = mailtoUrl;
@@ -145,7 +145,7 @@ ${formData.message}`
 
                             <div className="space-y-4">
                                 <a
-                                    href="mailto:hr@skylinltd.ai"
+                                    href="mailto:hr@skylinkltd.ai"
                                     className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#00E5BE]/40 hover:bg-[#00E5BE]/5 transition-all group"
                                 >
                                     <div className="w-10 h-10 rounded-xl bg-[#00E5BE]/10 border border-[#00E5BE]/30 flex items-center justify-center text-[#00E5BE] shrink-0">
@@ -154,10 +154,10 @@ ${formData.message}`
                                     <div>
                                         <div className="text-xs font-mono uppercase text-slate-400 mb-0.5">Email Inquiries</div>
                                         <div className="text-sm font-semibold text-white group-hover:text-[#00E5BE] transition-colors">
-                                            hr@skylinltd.ai
+                                            hr@skylinkltd.ai
                                         </div>
                                         <div className="text-xs text-slate-400 mt-0.5">
-                                            contact@skylinltd.ai
+                                            contact@skylinkltd.ai
                                         </div>
                                     </div>
                                 </a>

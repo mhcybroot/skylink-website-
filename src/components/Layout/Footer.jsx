@@ -94,7 +94,7 @@ const Footer = () => {
                         {/* Quick Contact & Address */}
                         <div className="text-xs text-slate-400 space-y-1.5 font-mono">
                             <div className="text-slate-300">
-                                ✉ <a href="mailto:hr@skylinltd.ai" className="hover:text-[#00E5BE] transition-colors">hr@skylinltd.ai</a> • <a href="mailto:contact@skylinltd.ai" className="hover:text-[#00E5BE] transition-colors">contact@skylinltd.ai</a>
+                                ✉ <a href="mailto:hr@skylinkltd.ai" className="hover:text-[#00E5BE] transition-colors">hr@skylinkltd.ai</a> • <a href="mailto:contact@skylinkltd.ai" className="hover:text-[#00E5BE] transition-colors">contact@skylinkltd.ai</a>
                             </div>
                             <div className="text-slate-300">
                                 ✆ <a href="tel:+12125550123" className="hover:text-[#00E5BE] transition-colors">+1 (212) 555-0123</a> • <a href="tel:+15551234567" className="hover:text-[#00E5BE] transition-colors">+1 (555) 123-4567</a>
