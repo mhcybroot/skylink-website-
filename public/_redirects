@@ -1,1 +1,6 @@
+# ==============================================================================
+# SPA Fallback Routing Directives for Skylink Innovations Ltd.
+# Redirects all deep paths to /index.html with 200 HTTP status for React Router
+# ==============================================================================
+
 /*    /index.html   200

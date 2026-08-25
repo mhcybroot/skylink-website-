@@ -7,6 +7,7 @@ import LoadingScreen from './components/UI/LoadingScreen';
 import ScrollProgress from './components/UI/ScrollProgress';
 import BackToTop from './components/UI/BackToTop';
 import CursorSpotlight from './components/UI/CursorSpotlight';
+import RedirectManager from './components/UI/RedirectManager';
 
 // Route Code Splitting (Lazy-loaded chunks)
 const Home = lazy(() => import('./pages/Home'));
@@ -16,6 +17,7 @@ const About = lazy(() => import('./pages/About'));
 const Careers = lazy(() => import('./pages/Careers'));
 const Contact = lazy(() => import('./pages/Contact'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Smooth Page transition variants
 const pageVariants = {
@@ -63,6 +65,9 @@ function App() {
       {/* Loading Screen */}
       <LoadingScreen isLoading={isLoading} minDuration={1200} />
 
+      {/* URL Normalizer & Typo Redirect Manager */}
+      <RedirectManager />
+
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
 
@@ -87,14 +92,45 @@ function App() {
                 exit="exit"
               >
                 <Routes location={location}>
+                  {/* Primary Verified Routes */}
                   <Route path="/" element={<Home />} />
                   <Route path="/services/:serviceSlug" element={<ServiceDetail />} />
-                  <Route path="/services" element={<Navigate to="/#services" replace />} />
                   <Route path="/property" element={<PropertyServices />} />
                   <Route path="/ites" element={<ITESServices />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/careers" element={<Careers />} />
                   <Route path="/contact" element={<Contact />} />
+
+                  {/* Explicit Typo & Alias Redirections */}
+                  <Route path="/about-us" element={<Navigate to="/about" replace />} />
+                  <Route path="/company" element={<Navigate to="/about" replace />} />
+                  <Route path="/who-we-are" element={<Navigate to="/about" replace />} />
+                  
+                  <Route path="/contact-us" element={<Navigate to="/contact" replace />} />
+                  <Route path="/get-in-touch" element={<Navigate to="/contact" replace />} />
+                  <Route path="/reach-us" element={<Navigate to="/contact" replace />} />
+                  
+                  <Route path="/career" element={<Navigate to="/careers" replace />} />
+                  <Route path="/jobs" element={<Navigate to="/careers" replace />} />
+                  <Route path="/job" element={<Navigate to="/careers" replace />} />
+                  <Route path="/join-us" element={<Navigate to="/careers" replace />} />
+                  <Route path="/hiring" element={<Navigate to="/careers" replace />} />
+                  
+                  <Route path="/property-preservation" element={<Navigate to="/property" replace />} />
+                  <Route path="/preservation" element={<Navigate to="/property" replace />} />
+                  <Route path="/reo" element={<Navigate to="/property" replace />} />
+                  <Route path="/us-property" element={<Navigate to="/property" replace />} />
+                  
+                  <Route path="/bpo" element={<Navigate to="/ites" replace />} />
+                  <Route path="/bpo-services" element={<Navigate to="/ites" replace />} />
+                  <Route path="/ites-services" element={<Navigate to="/ites" replace />} />
+                  <Route path="/ites-bpo" element={<Navigate to="/ites" replace />} />
+                  
+                  <Route path="/services" element={<Navigate to="/#services" replace />} />
+                  <Route path="/service" element={<Navigate to="/#services" replace />} />
+
+                  {/* 404 Cyber Fallback Catch-All */}
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </motion.div>
             </AnimatePresence>
