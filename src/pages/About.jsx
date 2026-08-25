@@ -147,13 +147,13 @@ const About = () => {
                                 key={i}
                                 className="aura-glass-card overflow-hidden bg-zinc-950/70 border border-white/10 hover:border-[#00E5BE]/40 transition-all flex flex-col group"
                             >
-                                <div className="h-72 w-full overflow-hidden relative bg-black">
+                                <div className="aspect-[4/5] w-full overflow-hidden relative bg-zinc-950 flex items-center justify-center">
                                     <img
                                         src={leader.image}
                                         alt={leader.name}
-                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 brightness-95"
+                                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 brightness-100"
                                     />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent pointer-events-none" />
                                 </div>
 
                                 <div className="p-6 flex-1 flex flex-col justify-between">
