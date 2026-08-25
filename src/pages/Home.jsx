@@ -11,11 +11,27 @@ import AuraCTA from '../components/Home/AuraCTA';
 import ScrollReveal from '../components/UI/ScrollReveal';
 
 const Home = () => {
+    const homeStructuredData = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Skylink Innovations Ltd.',
+            url: 'https://skylinkltd.ai',
+            potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://skylinkltd.ai/#services?q={search_term_string}',
+                'query-input': 'required name=search_term_string'
+            }
+        }
+    ];
+
     return (
         <div className="flex flex-col min-h-screen relative z-10 bg-black">
             <SEO
-                title="Skylink Innovations Ltd. | Next-Generation IT Solutions & ITES"
+                title="Skylink Innovations Ltd. | Next-Generation IT Solutions & US Property Preservation"
                 description="We transform complex technological challenges into scalable, efficient, and secure digital workflows. Partner with Skylink Innovations Ltd to accelerate your digital transformation."
+                canonical="https://skylinkltd.ai"
+                structuredData={homeStructuredData}
             />
 
             {/* Aura Hero Section */}

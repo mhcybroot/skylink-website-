@@ -187,11 +187,51 @@ const BeforeAfterSlider = () => {
 const PropertyServices = () => {
     const [openFaq, setOpenFaq] = useState(null);
 
+    const propertyStructuredData = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Nationwide US Property Preservation & REO Management',
+            serviceType: 'Property Preservation & Asset Management',
+            provider: {
+                '@type': 'Organization',
+                name: 'Skylink Innovations Ltd.',
+                url: 'https://skylinkltd.ai'
+            },
+            areaServed: {
+                '@type': 'Country',
+                name: 'United States'
+            },
+            description: 'Comprehensive property preservation, inspection, debris removal, winterization, and REO rehab management across all 50 US states with strict HUD/GSE guideline adherence.',
+            hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'Property Preservation Services',
+                itemListElement: [
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Initial Securing & Lock Changes' } },
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'HUD / GSE Conveyance Inspections' } },
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Debris & Hazard Removal' } },
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Winterization & Snow Removal' } },
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'REO Rehab & Turnkey Repairs' } }
+                ]
+            }
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skylinkltd.ai' },
+                { '@type': 'ListItem', position: 2, name: 'US Property Preservation', item: 'https://skylinkltd.ai/property' }
+            ]
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
-                title="Nationwide US Property Preservation & REO Management | Skylink"
+                title="Nationwide US Property Preservation & REO Management"
                 description="Comprehensive property preservation, inspection, and REO rehab management across all 50 US states with real-time geotagged photographic audits and strict SLA adherence."
+                canonical="https://skylinkltd.ai/property"
+                structuredData={propertyStructuredData}
             />
 
             {/* Cybernetic Data Highway & Ambient Cyan Spotlight Background */}

@@ -64,11 +64,43 @@ const coreValues = [
 ];
 
 const About = () => {
+    const aboutStructuredData = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'AboutPage',
+            name: 'About Skylink Innovations Ltd.',
+            description: 'Corporate overview, executive leadership, and mission of Skylink Innovations Ltd. in pioneering IT enablement and US property preservation.',
+            url: 'https://skylinkltd.ai/about',
+            mainEntity: {
+                '@type': 'Organization',
+                name: 'Skylink Innovations Ltd.',
+                foundingLocation: 'Dhaka, Bangladesh',
+                knowsAbout: [
+                    'US Property Preservation',
+                    'Cloud Infrastructure Engineering',
+                    'ITES & BPO Outsourcing',
+                    'Enterprise Custom Software',
+                    'Information Security Compliance'
+                ]
+            }
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skylinkltd.ai' },
+                { '@type': 'ListItem', position: 2, name: 'About Us', item: 'https://skylinkltd.ai/about' }
+            ]
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
-                title="About Us | Skylink Innovations Ltd."
-                description="Learn about Skylink Innovations Ltd, our strategic mission, visionary leadership team, and our commitment to next-generation IT solutions and US property preservation."
+                title="About Us"
+                description="Learn about Skylink Innovations Ltd, our strategic mission, executive leadership, and our commitment to next-generation IT solutions and US property preservation."
+                canonical="https://skylinkltd.ai/about"
+                structuredData={aboutStructuredData}
             />
 
             {/* Cybernetic Hex Matrix & Ambient Cyan Spotlight Background */}

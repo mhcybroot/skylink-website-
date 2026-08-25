@@ -94,11 +94,47 @@ const ITESServices = () => {
     const [openFaq, setOpenFaq] = useState(null);
     const [isVideoOpen, setIsVideoOpen] = useState(false);
 
+    const itesStructuredData = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: 'Global IT-Enabled Services & 24/7 BPO Operations',
+            serviceType: 'ITES / BPO Support & Operations',
+            provider: {
+                '@type': 'Organization',
+                name: 'Skylink Innovations Ltd.',
+                url: 'https://skylinkltd.ai'
+            },
+            areaServed: 'Worldwide',
+            description: 'Scalable 24/7 follow-the-sun technical support, customer experience, data processing, and back-office outsourcing.',
+            hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'ITES Capabilities',
+                itemListElement: [
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: '24/7 Technical Helpdesk (Tier 1-3)' } },
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Omni-Channel Customer Experience' } },
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automated Data Processing & Extraction' } },
+                    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Financial & Accounting Back-Office Operations' } }
+                ]
+            }
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skylinkltd.ai' },
+                { '@type': 'ListItem', position: 2, name: 'Global ITES & BPO', item: 'https://skylinkltd.ai/ites' }
+            ]
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
-                title="Global ITES & BPO Solutions | Skylink Innovations Ltd."
+                title="Global ITES & BPO Solutions"
                 description="Scalable 24/7 IT-Enabled Services, Omni-Channel Customer Experience, Data Processing, and Back-Office Operations powered by Skylink Innovations Ltd."
+                canonical="https://skylinkltd.ai/ites"
+                structuredData={itesStructuredData}
             />
 
             {/* Cybernetic Global Hologram & Ambient Cyan Spotlight Background */}

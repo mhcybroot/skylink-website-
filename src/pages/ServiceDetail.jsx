@@ -399,11 +399,38 @@ const ServiceDetail = () => {
         }
     };
 
+    const serviceStructuredData = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'Service',
+            name: service.title,
+            serviceType: service.badge,
+            provider: {
+                '@type': 'Organization',
+                name: 'Skylink Innovations Ltd.',
+                url: 'https://skylinkltd.ai'
+            },
+            description: service.subtitle,
+            url: `https://skylinkltd.ai/services/${serviceSlug}`
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skylinkltd.ai' },
+                { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://skylinkltd.ai/#services' },
+                { '@type': 'ListItem', position: 3, name: service.title, item: `https://skylinkltd.ai/services/${serviceSlug}` }
+            ]
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
-                title={`${service.title} | Skylink Innovations Ltd.`}
+                title={service.title}
                 description={service.subtitle}
+                canonical={`https://skylinkltd.ai/services/${serviceSlug}`}
+                structuredData={serviceStructuredData}
             />
 
             {/* Contextual Cybernetic Mesh & Ambient Cyan Spotlight Background */}

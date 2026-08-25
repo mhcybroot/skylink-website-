@@ -114,11 +114,50 @@ ${candidateNote}`
         }, 1000);
     };
 
+    // Generate Google Jobs structured data (JSON-LD)
+    const jobSchemas = openPositions.map((job) => ({
+        '@context': 'https://schema.org',
+        '@type': 'JobPosting',
+        title: job.title,
+        description: `<p>${job.description}</p><p><strong>Qualifications:</strong> ${job.experience}</p><p><strong>Work Mode:</strong> ${job.location}</p><p><strong>Shift & Type:</strong> ${job.type}</p>`,
+        datePosted: '2026-08-25',
+        validThrough: '2027-08-25',
+        employmentType: 'FULL_TIME',
+        workHours: 'Night Shift (US Business Hours)',
+        hiringOrganization: {
+            '@type': 'Organization',
+            name: 'Skylink Innovations Ltd.',
+            sameAs: 'https://skylinkltd.ai',
+            logo: 'https://skylinkltd.ai/logo.png'
+        },
+        jobLocation: {
+            '@type': 'Place',
+            address: {
+                '@type': 'PostalAddress',
+                streetAddress: '7th Floor, Badar Heights, House# 262-263, Road# 1, Block# B, Bashundhara R/A',
+                addressLocality: 'Dhaka',
+                postalCode: '1229',
+                addressCountry: 'BD'
+            }
+        },
+        baseSalary: {
+            '@type': 'MonetaryAmount',
+            currency: 'BDT',
+            value: {
+                '@type': 'QuantitativeValue',
+                unitText: 'MONTH'
+            }
+        },
+        directApply: true
+    }));
+
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
-                title="Careers & Culture | Skylink Innovations Ltd."
-                description="Join the elite team at Skylink Innovations Ltd. Explore career opportunities in software engineering, cloud architecture, and global IT operations."
+                title="Careers & Culture"
+                description="Explore active full-time night-shift career opportunities in US Property Preservation, Field Operations, and Business Development at Skylink Innovations Ltd."
+                canonical="https://skylinkltd.ai/careers"
+                structuredData={jobSchemas}
             />
 
             {/* Cybernetic Fluid Waves & Ambient Cyan Spotlight Background */}

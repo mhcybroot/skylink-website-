@@ -104,11 +104,37 @@ ${formData.message}`
         }, 1000);
     };
 
+    const contactStructuredData = [
+        {
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
+            name: 'Contact Skylink Innovations Ltd.',
+            description: 'Schedule a free consultation or contact Skylink solutions architects for software engineering, cloud migration, and US property preservation inquiries.',
+            url: 'https://skylinkltd.ai/contact',
+            mainEntity: {
+                '@type': 'Organization',
+                name: 'Skylink Innovations Ltd.',
+                email: 'hr@skylinkltd.ai',
+                telephone: '+1 (800) 555-SKYLINK'
+            }
+        },
+        {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://skylinkltd.ai' },
+                { '@type': 'ListItem', position: 2, name: 'Contact Us', item: 'https://skylinkltd.ai/contact' }
+            ]
+        }
+    ];
+
     return (
         <div className="min-h-screen bg-black text-white pt-28 pb-20 px-6 font-sans relative overflow-hidden">
             <SEO
-                title="Contact Us | Free IT Consultation & Solutions"
+                title="Contact Us | Free IT & Property Consultation"
                 description="Get in touch with Skylink Innovations Ltd. Let's discuss your next-generation custom software, cloud migration, or managed IT infrastructure needs."
+                canonical="https://skylinkltd.ai/contact"
+                structuredData={contactStructuredData}
             />
 
             {/* Cybernetic Hex Matrix & Ambient Cyan Spotlight Background */}
