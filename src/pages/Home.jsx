@@ -4,6 +4,7 @@ import TechMarquee from '../components/UI/TechMarquee';
 import AuraAbout from '../components/Home/AuraAbout';
 import AuraFeatures from '../components/Home/AuraFeatures';
 import AuraWhyChoose from '../components/Home/AuraWhyChoose';
+import SecurityTrustVault from '../components/Home/SecurityTrustVault';
 import AuraWorkflow from '../components/Home/AuraWorkflow';
 import AuraShowcase from '../components/Home/AuraShowcase';
 import AuraTestimonials from '../components/Home/AuraTestimonials';
@@ -55,6 +56,11 @@ const Home = () => {
             {/* Why Choose Skylink Innovations */}
             <ScrollReveal type="fadeUp">
                 <AuraWhyChoose />
+            </ScrollReveal>
+
+            {/* Enterprise Compliance & Security Trust Vault */}
+            <ScrollReveal type="fadeUp">
+                <SecurityTrustVault />
             </ScrollReveal>
 
             {/* Execution Methodology & Workflow */}

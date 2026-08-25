@@ -8,7 +8,7 @@ const footerLinks = {
         { label: 'US Property Preservation', to: '/property' },
         { label: 'Global ITES & BPO', to: '/ites' },
         { label: 'Custom Software & Apps', to: '/services/software-development' },
-        { label: 'Cloud Infrastructure & Migration', to: '/services/cloud-infrastructure' },
+        { label: 'Cloud Infrastructure & Migration', to: '/services/cloud-solutions' },
         { label: 'Managed IT Services & Support', to: '/services/managed-it' },
         { label: 'Cybersecurity & Compliance', to: '/services/cybersecurity' },
         { label: 'Data Analytics & BI', to: '/services/data-analytics' },
@@ -17,14 +17,15 @@ const footerLinks = {
     company: [
         { label: 'About Us', to: '/about' },
         { label: 'Why Choose Skylink', to: '/#why-choose-us' },
+        { label: 'Security & Trust Vault', to: '/#compliance' },
         { label: 'Execution Methodology', to: '/#how-it-works' },
         { label: 'Careers & Culture', to: '/careers' },
         { label: 'Contact Us', to: '/contact' }
     ],
     resources: [
         { label: 'Free Consultation', to: '/contact' },
-        { label: 'Security & Compliance', to: '/#services' },
-        { label: 'SRE & Availability SLA', to: '/#how-it-works' },
+        { label: 'Security & Compliance Vault', to: '/#compliance' },
+        { label: 'SRE & Availability SLA', to: '/#telemetry' },
         { label: 'Client Support Portal (Sign In)', to: 'https://app.skylinkltd.ai/login', external: true }
     ]
 };
