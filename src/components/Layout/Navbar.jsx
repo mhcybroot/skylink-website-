@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import logoSvg from '../../assets/logo.svg';
 
 const navLinks = [
-    { label: 'About Us', to: '/#about', isAnchor: true },
+    { label: 'About Us', to: '/about', isAnchor: false },
     { label: 'Core Services', to: '/#services', isAnchor: true },
     { label: 'US Property Preservation', to: '/property', isAnchor: false },
     { label: 'Why Skylink', to: '/#why-choose-us', isAnchor: true },
@@ -34,11 +34,20 @@ const Navbar = () => {
     // Handle smooth anchor scroll or page route
     const handleNavClick = (link) => {
         setIsMobileMenuOpen(false);
-        if (link.isAnchor && location.pathname === '/') {
+        if (link.isAnchor) {
             const id = link.to.replace('/#', '');
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+            if (location.pathname === '/') {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                setTimeout(() => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 350);
             }
         }
     };
