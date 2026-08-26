@@ -28,6 +28,7 @@ import AnimatedCounter from '../components/UI/AnimatedCounter';
 import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
 import CyberBackground from '../components/UI/CyberBackground';
 import USCoverageMap from '../components/Property/USCoverageMap';
+import FieldPhotoGallery from '../components/Property/FieldPhotoGallery';
 import propertyDroneImg from '../assets/property-preservation-drone.webp';
 
 import beforeImg from '../assets/Photos/DSC05844.webp';
@@ -321,6 +322,11 @@ const PropertyServices = () => {
                     </div>
 
                     <BeforeAfterSlider />
+                </div>
+
+                {/* Real US Property Field Work & Turnkey Photo Gallery */}
+                <div className="mb-28">
+                    <FieldPhotoGallery />
                 </div>
 
                 {/* Comprehensive Service Capabilities Grid */}

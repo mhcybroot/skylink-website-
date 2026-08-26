@@ -19,6 +19,7 @@ import {
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import CyberBackground from '../components/UI/CyberBackground';
+import CultureBentoGallery from '../components/About/CultureBentoGallery';
 
 const openPositions = [
     {
@@ -216,6 +217,11 @@ ${candidateNote}`
                             );
                         })}
                     </div>
+                </div>
+
+                {/* 24/7 Operations & Culture Bento Photo Gallery */}
+                <div className="mb-28">
+                    <CultureBentoGallery />
                 </div>
 
                 {/* Open Positions List */}

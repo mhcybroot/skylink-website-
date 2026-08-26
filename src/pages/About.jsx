@@ -16,6 +16,7 @@ import SEO from '../components/SEO';
 import CyberBackground from '../components/UI/CyberBackground';
 import { Link } from 'react-router-dom';
 import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
+import CultureBentoGallery from '../components/About/CultureBentoGallery';
 
 import chairmanImg from '../assets/chairman.webp';
 import ceoImg from '../assets/ceo.webp';
@@ -248,6 +249,11 @@ const About = () => {
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* 24/7 Dhaka HQ & Team Culture Bento Gallery */}
+                <div className="mb-28">
+                    <CultureBentoGallery />
                 </div>
 
                 {/* Bottom Call to Action */}
