@@ -16,10 +16,11 @@ const footerLinks = {
     ],
     company: [
         { label: 'About Us', to: '/about' },
+        { label: 'Corporate Culture & Gallery', to: '/culture' },
         { label: 'Why Choose Skylink', to: '/#why-choose-us' },
         { label: 'Security & Trust Vault', to: '/#compliance' },
         { label: 'Execution Methodology', to: '/#how-it-works' },
-        { label: 'Careers & Culture', to: '/careers' },
+        { label: 'Careers & Hiring', to: '/careers' },
         { label: 'Contact Us', to: '/contact' }
     ],
     resources: [

@@ -10,6 +10,14 @@ const aliasMap = {
     '/who-we-are': '/about',
     '/team': '/about',
     
+    // Culture & Gallery aliases
+    '/gallery': '/culture',
+    '/culture-and-gallery': '/culture',
+    '/life-at-skylink': '/culture',
+    '/our-culture': '/culture',
+    '/photos': '/culture',
+    '/workplace': '/culture',
+    
     // Contact aliases
     '/contact-us': '/contact',
     '/get-in-touch': '/contact',

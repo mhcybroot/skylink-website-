@@ -38,8 +38,16 @@
     <!-- Careers (Active Job Openings) -->
     <url>
         <loc>https://skylinkltd.ai/careers</loc>
-        <lastmod>2026-08-25</lastmod>
+        <lastmod>2026-08-31</lastmod>
         <changefreq>daily</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <!-- Corporate Culture & Gallery -->
+    <url>
+        <loc>https://skylinkltd.ai/culture</loc>
+        <lastmod>2026-08-31</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.90</priority>
     </url>
 

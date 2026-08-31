@@ -14,6 +14,7 @@ const Home = lazy(() => import('./pages/Home'));
 const PropertyServices = lazy(() => import('./pages/PropertyServices'));
 const ITESServices = lazy(() => import('./pages/ITESServices'));
 const About = lazy(() => import('./pages/About'));
+const Culture = lazy(() => import('./pages/Culture'));
 const Careers = lazy(() => import('./pages/Careers'));
 const Contact = lazy(() => import('./pages/Contact'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
@@ -98,6 +99,8 @@ function App() {
                   <Route path="/property" element={<PropertyServices />} />
                   <Route path="/ites" element={<ITESServices />} />
                   <Route path="/about" element={<About />} />
+                  <Route path="/culture" element={<Culture />} />
+                  <Route path="/gallery" element={<Culture />} />
                   <Route path="/careers" element={<Careers />} />
                   <Route path="/contact" element={<Contact />} />
 
@@ -105,6 +108,9 @@ function App() {
                   <Route path="/about-us" element={<Navigate to="/about" replace />} />
                   <Route path="/company" element={<Navigate to="/about" replace />} />
                   <Route path="/who-we-are" element={<Navigate to="/about" replace />} />
+                  <Route path="/life-at-skylink" element={<Navigate to="/culture" replace />} />
+                  <Route path="/our-culture" element={<Navigate to="/culture" replace />} />
+                  <Route path="/photos" element={<Navigate to="/culture" replace />} />
                   
                   <Route path="/contact-us" element={<Navigate to="/contact" replace />} />
                   <Route path="/get-in-touch" element={<Navigate to="/contact" replace />} />

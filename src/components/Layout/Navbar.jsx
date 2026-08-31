@@ -7,9 +7,9 @@ import logoSvg from '../../assets/logo.svg';
 const navLinks = [
     { label: 'About Us', to: '/about', isAnchor: false },
     { label: 'Core Services', to: '/#services', isAnchor: true },
-    { label: 'US Property Preservation', to: '/property', isAnchor: false },
+    { label: 'US Property', to: '/property', isAnchor: false },
+    { label: 'Culture & Gallery', to: '/culture', isAnchor: false },
     { label: 'Why Skylink', to: '/#why-choose-us', isAnchor: true },
-    { label: 'Methodology', to: '/#how-it-works', isAnchor: true },
     { label: 'Contact', to: '/contact', isAnchor: false },
 ];
 
