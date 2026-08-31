@@ -29,6 +29,8 @@ import AutoplayVideoBanner from '../components/UI/AutoplayVideoBanner';
 import CyberBackground from '../components/UI/CyberBackground';
 import USCoverageMap from '../components/Property/USCoverageMap';
 import FieldPhotoGallery from '../components/Property/FieldPhotoGallery';
+import EnterpriseClientMarquee from '../components/UI/EnterpriseClientMarquee';
+import ClientNetworkDirectory from '../components/Property/ClientNetworkDirectory';
 import propertyDroneImg from '../assets/property-preservation-drone.webp';
 
 import beforeImg from '../assets/Photos/DSC05844.webp';
@@ -284,6 +286,11 @@ const PropertyServices = () => {
                     heightClass="h-72 sm:h-96 md:h-[440px]"
                 />
 
+                {/* Dual-Track Enterprise Client Trust Marquee */}
+                <div className="mb-20">
+                    <EnterpriseClientMarquee />
+                </div>
+
                 {/* Metrics Highlights Bar */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-5 sm:p-8 rounded-2xl bg-zinc-950/70 border border-white/10 mb-28 shadow-2xl">
                     {propertyStats.map((stat, i) => (
@@ -429,6 +436,11 @@ const PropertyServices = () => {
                             </p>
                         </div>
                     </div>
+                </div>
+
+                {/* Searchable Client Network & MMS Portal Integration Directory */}
+                <div className="mb-28">
+                    <ClientNetworkDirectory />
                 </div>
 
                 {/* FAQ Accordion */}

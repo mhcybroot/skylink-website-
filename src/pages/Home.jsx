@@ -1,6 +1,7 @@
 import SEO from '../components/SEO';
 import AuraHero from '../components/Home/AuraHero';
 import TechMarquee from '../components/UI/TechMarquee';
+import EnterpriseClientMarquee from '../components/UI/EnterpriseClientMarquee';
 import AuraAbout from '../components/Home/AuraAbout';
 import AuraFeatures from '../components/Home/AuraFeatures';
 import AuraWhyChoose from '../components/Home/AuraWhyChoose';
@@ -70,6 +71,9 @@ const Home = () => {
             <ScrollReveal type="fadeUp">
                 <AuraShowcase />
             </ScrollReveal>
+
+            {/* 200+ Institutional Client Trust Marquee */}
+            <EnterpriseClientMarquee />
 
             {/* Social Proof & Testimonials */}
             <ScrollReveal type="fadeUp">
