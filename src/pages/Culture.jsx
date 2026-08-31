@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
     Camera, 
@@ -20,149 +20,99 @@ import {
     Zap,
     ArrowRight,
     CheckCircle2,
-    Briefcase
+    Briefcase,
+    Layers,
+    Filter
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import CyberBackground from '../components/UI/CyberBackground';
 import ScrollReveal from '../components/UI/ScrollReveal';
-import AnimatedCounter from '../components/UI/AnimatedCounter';
 
-// Photo Assets
-import hqNightImg from '../assets/Photos/hq-night-operations.webp';
-import teamLoungeImg from '../assets/Photos/team-lounge.webp';
-import executiveMeetingImg from '../assets/Photos/executive-meeting.webp';
-import nocTelemetryImg from '../assets/Photos/noc-telemetry.webp';
-import boardroomImg from '../assets/boardroom-governance.webp';
-import officeTeam1 from '../assets/Photos/DSC05814.webp';
-import officeTeam2 from '../assets/Photos/DSC05844.webp';
-import officeTeam3 from '../assets/Photos/DSC05848.webp';
-import officeTeam4 from '../assets/Photos/DSC05809.webp';
+// Dynamic eager import of ALL Photos in src/assets/Photos/*.webp using Vite
+const allPhotoModules = import.meta.glob('../assets/Photos/*.webp', { eager: true });
+
+// Structured titles and categorization for known photos, with smart fallbacks for all DSC files
+const photoMetadataMap = {
+    'hq-night-operations': { title: '24/7 US Night-Shift Operations Floor', category: 'night-shift', tag: 'Follow-The-Sun Sync', badge: '24/7 US SHIFT' },
+    'team-lounge': { title: 'Modern Innovation & Coffee Lounge', category: 'hq', tag: 'Workplace Wellness', badge: 'COMMUNITY' },
+    'executive-meeting': { title: 'Strategic Boardroom Governance', category: 'innovation', tag: 'Leadership', badge: 'GOVERNANCE' },
+    'noc-telemetry': { title: 'Tier-3 SRE Telemetry Command Center', category: 'innovation', tag: 'Cloud Telemetry', badge: 'NOC WALL' },
+    'cloud-architect': { title: 'Cloud Solutions & Microservices Lab', category: 'innovation', tag: 'Engineering', badge: 'TECH STACK' },
+    'field-inspector': { title: 'US Field Inspector Audit', category: 'field', tag: 'Field QA', badge: 'GPS AUDIT' },
+    'reo-rehab': { title: 'REO Turnkey Restoration & Cleanout', category: 'field', tag: 'Rehab', badge: 'MARKET READY' },
+    'winter-securing': { title: 'HUD Pressure Testing & Lockbox', category: 'field', tag: 'Compliance', badge: 'ZERO FREEZE' }
+};
+
+// Build the complete array of 70+ photos from all imported assets
+const allGalleryItems = Object.entries(allPhotoModules).map(([path, module]) => {
+    const filename = path.split('/').pop().replace('.webp', '');
+    const meta = photoMetadataMap[filename];
+
+    if (meta) {
+        return {
+            id: filename,
+            src: module.default,
+            title: meta.title,
+            category: meta.category,
+            tag: meta.tag,
+            badge: meta.badge,
+            location: 'Dhaka Global HQ, Level 7',
+            description: `High-resolution visual capture from Skylink Innovations Ltd. operations floor and facilities.`
+        };
+    }
+
+    // Categorize DSC photoshoot series
+    const num = parseInt(filename.replace(/\D/g, ''), 10) || 0;
+    let category = 'team';
+    let title = `Dhaka HQ Team Operations & Collaboration (${filename})`;
+    let tag = 'Team Culture';
+    let badge = 'OFFICE LIFE';
+
+    if (num >= 5807 && num <= 5820) {
+        category = 'leadership';
+        title = `Executive Leadership & Strategic Discussion (${filename})`;
+        tag = 'Leadership Session';
+        badge = 'STRATEGY';
+    } else if (num >= 5821 && num <= 5845) {
+        category = 'team';
+        title = `Software Engineering & BPO Floor Collaboration (${filename})`;
+        tag = 'Workplace Pods';
+        badge = 'HQ PODS';
+    } else if (num >= 5846 && num <= 5870) {
+        category = 'events';
+        title = `Team Engagement, Culture & Milestones (${filename})`;
+        tag = 'Team Life';
+        badge = 'COMMUNITY';
+    }
+
+    return {
+        id: filename,
+        src: module.default,
+        title: title,
+        category: category,
+        tag: tag,
+        badge: badge,
+        location: 'Badar Heights, Dhaka HQ',
+        description: `Authentic on-site photography documenting our high-performance workplace and team environment.`
+    };
+});
 
 const cultureStats = [
     { value: '24/7/365', label: 'Follow-The-Sun Sync', detail: 'Zero lag with US mortgage and tech markets' },
+    { value: '70+', label: 'Verified Photo Assets', detail: 'Authentic captures from our Dhaka HQ & team' },
     { value: '150+', label: 'Engineers & Field Leads', detail: 'Elite software architects & BPO specialists' },
-    { value: '99.4%', label: 'Leadership Retention', detail: 'Career ladders with continuous upskilling' },
-    { value: '100%', label: 'Merit-Based Culture', detail: 'Equal opportunity & transparent growth' }
-];
-
-const galleryItems = [
-    {
-        id: 'night-ops',
-        category: 'night-shift',
-        title: '24/7 US Night-Shift Operations Floor',
-        tag: 'Follow-The-Sun Sync',
-        location: 'Dhaka Global HQ, Level 7',
-        time: 'Active US Hours (8:00 PM - 5:00 AM)',
-        description: 'Our software engineering, quality assurance, and US property preservation teams operating synchronously during active US banking hours with zero latency.',
-        badge: '24/7 LIVE • US SHIFT',
-        image: hqNightImg,
-        span: 'col-span-1 md:col-span-2'
-    },
-    {
-        id: 'team-lounge',
-        category: 'hq',
-        title: 'Modern Innovation & Coffee Lounge',
-        tag: 'Workplace Wellness',
-        location: 'Badar Heights, Dhaka',
-        time: '24/7 Open Access',
-        description: 'Ergonomic breakout spaces designed for impromptu whiteboarding, sprint retrospectives, and relaxation with gourmet coffee.',
-        badge: 'WORKPLACE CULTURE',
-        image: teamLoungeImg,
-        span: 'col-span-1 md:col-span-1'
-    },
-    {
-        id: 'executive-meeting',
-        category: 'innovation',
-        title: 'Strategic Boardroom & Executive Governance',
-        tag: 'Corporate Strategy',
-        location: 'Executive Suite',
-        time: 'Quarterly Alignment',
-        description: 'Senior directors and technology heads reviewing international client SLAs, bank-grade compliance benchmarks, and enterprise growth roadmaps.',
-        badge: 'GOVERNANCE',
-        image: executiveMeetingImg,
-        span: 'col-span-1 md:col-span-1'
-    },
-    {
-        id: 'noc-floor',
-        category: 'innovation',
-        title: 'Tier-3 SRE & Cloud Telemetry Command Center',
-        tag: 'Cloud & Tech Hub',
-        location: 'NOC Command Center',
-        time: 'Continuous 99.99% SLA Monitoring',
-        description: 'Multi-screen video wall tracking multi-cloud latency, database replication, and cybersecurity threat matrices across global regions.',
-        badge: 'NOC COMMAND WALL',
-        image: nocTelemetryImg,
-        span: 'col-span-1 md:col-span-2'
-    },
-    {
-        id: 'office-celebration',
-        category: 'celebrations',
-        title: 'Annual Team Gala & Excellence Awards',
-        tag: 'Recognition & Joy',
-        location: 'Grand Ballroom, Dhaka',
-        time: 'Annual Gala',
-        description: 'Celebrating extraordinary engineering milestones, top-performing property coordinators, and long-tenured team members.',
-        badge: 'TEAM RECOGNITION',
-        image: officeTeam1,
-        span: 'col-span-1 md:col-span-1'
-    },
-    {
-        id: 'boardroom-session',
-        category: 'hq',
-        title: 'Collaborative Sprint Planning & Code Reviews',
-        tag: 'Engineering Excellence',
-        location: 'Tech Floor Suite A',
-        time: 'Daily Standups',
-        description: 'Engineers, UI/UX designers, and QA leads collaborating over architecture diagrams and system refactoring.',
-        badge: 'COLLABORATION',
-        image: boardroomImg,
-        span: 'col-span-1 md:col-span-2'
-    },
-    {
-        id: 'team-event-2',
-        category: 'celebrations',
-        title: 'Cultural Festival & Holiday Celebrations',
-        tag: 'Vibrant Community',
-        location: 'HQ Terrace & Lounge',
-        time: 'Seasonal Celebrations',
-        description: 'Fostering unity, camaraderie, and joy across diverse cultural festivals, games, and culinary experiences.',
-        badge: 'COMMUNITY',
-        image: officeTeam2,
-        span: 'col-span-1 md:col-span-1'
-    },
-    {
-        id: 'team-awards',
-        category: 'celebrations',
-        title: 'Quarterly Star Performer Honors',
-        tag: 'Meritocracy',
-        location: 'Main Auditorium',
-        time: 'Quarterly Town Hall',
-        description: 'Recognizing team members who demonstrate outstanding dedication, client praise, and continuous technical mastery.',
-        badge: 'STAR PERFORMERS',
-        image: officeTeam3,
-        span: 'col-span-1 md:col-span-1'
-    },
-    {
-        id: 'office-atmosphere',
-        category: 'night-shift',
-        title: 'Ergonomic Night-Shift Workstations',
-        tag: 'Comfort & Focus',
-        location: 'Operations Pods',
-        time: 'Night Operations',
-        description: 'High-back ergonomic mesh seating, curved ultrawide monitors, and ambient eye-comfort lighting tailored for peak night-shift performance.',
-        badge: 'ERGONOMICS',
-        image: officeTeam4,
-        span: 'col-span-1 md:col-span-1'
-    }
+    { value: '99.4%', label: 'Leadership Retention', detail: 'Career ladders with continuous upskilling' }
 ];
 
 const cultureFilters = [
-    { id: 'all', label: 'All Moments' },
-    { id: 'night-shift', label: '🌙 24/7 US Night Shift' },
-    { id: 'innovation', label: '💡 Tech & Innovation Pods' },
-    { id: 'hq', label: '🏢 Dhaka HQ & Facilities' },
-    { id: 'celebrations', label: '🎉 Celebrations & Awards' }
+    { id: 'all', label: 'All Photos (70+)' },
+    { id: 'team', label: '👥 Team & Workstations' },
+    { id: 'leadership', label: '🏛️ Leadership & Boardroom' },
+    { id: 'events', label: '🎉 Culture & Celebrations' },
+    { id: 'night-shift', label: '🌙 24/7 Night Shift' },
+    { id: 'innovation', label: '💡 Tech & Innovation' },
+    { id: 'field', label: '🏡 Field Operations' }
 ];
 
 const culturalPillars = [
@@ -199,11 +149,15 @@ const perksList = [
 
 const Culture = () => {
     const [activeFilter, setActiveFilter] = useState('all');
+    const [visibleCount, setVisibleCount] = useState(24);
     const [lightboxIndex, setLightboxIndex] = useState(null);
 
-    const filteredItems = activeFilter === 'all'
-        ? galleryItems
-        : galleryItems.filter(item => item.category === activeFilter);
+    const filteredItems = useMemo(() => {
+        if (activeFilter === 'all') return allGalleryItems;
+        return allGalleryItems.filter(item => item.category === activeFilter);
+    }, [activeFilter]);
+
+    const displayedItems = filteredItems.slice(0, visibleCount);
 
     const openLightbox = (index) => setLightboxIndex(index);
     const closeLightbox = () => setLightboxIndex(null);
@@ -221,7 +175,7 @@ const Culture = () => {
             '@context': 'https://schema.org',
             '@type': 'AboutPage',
             name: 'Corporate Culture & Life at Skylink Innovations Ltd.',
-            description: 'Explore the 24/7 high-performance work culture, Dhaka headquarters, night-shift life, and team celebrations at Skylink Innovations Ltd.',
+            description: 'Explore the 24/7 high-performance work culture, Dhaka headquarters, night-shift life, and complete 70+ photo collection at Skylink Innovations Ltd.',
             publisher: {
                 '@type': 'Organization',
                 name: 'Skylink Innovations Ltd.',
@@ -231,8 +185,8 @@ const Culture = () => {
         {
             '@context': 'https://schema.org',
             '@type': 'ImageGallery',
-            name: 'Skylink Innovations Corporate Culture Gallery',
-            description: 'Photographic showcase of life at Skylink Innovations Ltd. Dhaka HQ, team collaboration, and follow-the-sun operations.',
+            name: 'Skylink Innovations Corporate Culture Complete Photo Gallery',
+            description: 'Full photographic collection of 70+ images documenting life at Skylink Innovations Ltd. Dhaka HQ, team collaboration, and follow-the-sun operations.',
             url: 'https://skylinkltd.ai/culture'
         }
     ];
@@ -240,8 +194,8 @@ const Culture = () => {
     return (
         <div className="flex flex-col min-h-screen relative z-10 bg-black text-white selection:bg-[#00E5BE] selection:text-black">
             <SEO
-                title="Corporate Culture & Life at Skylink | 24/7 Innovation & Team Gallery"
-                description="Step inside Skylink Innovations Ltd. Explore our world-class 24/7 Dhaka HQ, vibrant night-shift culture, engineering hackathons, employee wellness, and corporate milestones."
+                title="Corporate Culture & Photo Gallery (70+ Real Photos) | Skylink Innovations"
+                description="Step inside Skylink Innovations Ltd. Browse our complete collection of 70+ authentic photographs documenting our world-class 24/7 Dhaka HQ, team culture, leadership, and night-shift life."
                 canonical="https://skylinkltd.ai/culture"
                 structuredData={cultureStructuredData}
             />
@@ -250,10 +204,10 @@ const Culture = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24 relative z-10">
                 {/* Hero Header */}
-                <div className="text-center max-w-4xl mx-auto mb-20">
+                <div className="text-center max-w-4xl mx-auto mb-16">
                     <div className="aura-badge mb-4 mx-auto">
-                        <Sparkles size={14} className="text-[#00E5BE]" />
-                        <span>Inside Skylink Innovations</span>
+                        <Camera size={14} className="text-[#00E5BE]" />
+                        <span>Inside Skylink Innovations • Complete Visual Archive</span>
                     </div>
                     <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
                         Where Global Standards Meet{' '}
@@ -262,12 +216,12 @@ const Culture = () => {
                         </span>
                     </h1>
                     <p className="text-slate-300 text-base sm:text-xl leading-relaxed max-w-3xl mx-auto">
-                        We don't just deliver enterprise software and nationwide US property preservation — we cultivate a culture of relentless excellence, genuine friendship, and round-the-clock innovation.
+                        Explore our full archive of 70+ authentic photographs capturing life inside our 24/7 Dhaka headquarters at Badar Heights, Bashundhara R/A.
                     </p>
                 </div>
 
                 {/* Culture Metrics Highlights */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-6 sm:p-8 rounded-3xl bg-zinc-950/80 border border-white/10 mb-28 shadow-2xl backdrop-blur-xl">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-6 sm:p-8 rounded-3xl bg-zinc-950/80 border border-white/10 mb-20 shadow-2xl backdrop-blur-xl">
                     {cultureStats.map((stat, i) => (
                         <div key={i} className="text-center">
                             <div className="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5BE] font-mono mb-1">
@@ -285,26 +239,16 @@ const Culture = () => {
 
                 {/* Multi-Category Interactive Photo Gallery */}
                 <div id="gallery" className="mb-28">
-                    <div className="text-center max-w-3xl mx-auto mb-10">
-                        <div className="aura-badge mb-3">
-                            <Camera size={14} className="text-[#00E5BE]" />
-                            <span>Visual Story & Photo Showcase</span>
-                        </div>
-                        <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-                            Life at Skylink HQ & Beyond
-                        </h2>
-                        <p className="text-slate-400 text-sm sm:text-base">
-                            Click any photograph to enter the full-screen immersive gallery inspection.
-                        </p>
-                    </div>
-
                     {/* Filter Tabs */}
-                    <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+                    <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
                         {cultureFilters.map((tab) => (
                             <button
                                 key={tab.id}
-                                onClick={() => setActiveFilter(tab.id)}
-                                className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold font-mono transition-all ${
+                                onClick={() => {
+                                    setActiveFilter(tab.id);
+                                    setVisibleCount(24);
+                                }}
+                                className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-semibold font-mono transition-all ${
                                     activeFilter === tab.id
                                         ? 'bg-[#00E5BE] text-black shadow-aura-sm'
                                         : 'bg-zinc-950 text-slate-400 hover:text-white border border-white/10 hover:border-white/20'
@@ -315,56 +259,71 @@ const Culture = () => {
                         ))}
                     </div>
 
-                    {/* Masonry-Style Photo Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[280px] sm:auto-rows-[340px]">
+                    <div className="text-center mb-8 text-xs font-mono text-slate-400">
+                        Showing <strong className="text-[#00E5BE]">{displayedItems.length}</strong> of{' '}
+                        <strong>{filteredItems.length}</strong> photos in archive
+                    </div>
+
+                    {/* Responsive Grid of All Photos */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                         <AnimatePresence>
-                            {filteredItems.map((item, index) => (
+                            {displayedItems.map((item, index) => (
                                 <motion.div
                                     key={item.id}
                                     layout
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
-                                    transition={{ duration: 0.3 }}
+                                    transition={{ duration: 0.2, delay: (index % 12) * 0.02 }}
                                     onClick={() => openLightbox(index)}
-                                    className={`aura-glass-card rounded-3xl overflow-hidden border border-white/10 hover:border-[#00E5BE]/50 transition-all duration-500 group relative cursor-pointer bg-zinc-950 ${item.span}`}
+                                    className="aura-glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-[#00E5BE]/50 transition-all duration-300 group relative cursor-pointer bg-zinc-950 aspect-[4/3] flex flex-col justify-end"
                                 >
                                     <img
-                                        src={item.image}
+                                        src={item.src}
                                         alt={item.title}
-                                        className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                                        className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                                         loading="lazy"
                                     />
 
                                     {/* Gradient Overlay */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent transition-opacity duration-300" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent transition-opacity duration-300" />
 
                                     {/* Top Badge */}
-                                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                                        <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-black/70 backdrop-blur-md border border-[#00E5BE]/40 text-[#00E5BE]">
+                                    <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none z-10">
+                                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-black/70 backdrop-blur-md border border-white/20 text-[#00E5BE]">
                                             {item.badge}
                                         </span>
-                                        <div className="w-8 h-8 rounded-full bg-black/70 backdrop-blur-md border border-white/20 flex items-center justify-center text-slate-300 group-hover:text-[#00E5BE] group-hover:scale-110 transition-all">
-                                            <Maximize2 size={14} />
+                                        <div className="w-7 h-7 rounded-full bg-black/70 backdrop-blur-md border border-white/20 flex items-center justify-center text-slate-300 group-hover:text-[#00E5BE] group-hover:scale-110 transition-all">
+                                            <Maximize2 size={12} />
                                         </div>
                                     </div>
 
-                                    {/* Bottom Content Card */}
-                                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                                        <div className="text-[11px] font-mono uppercase tracking-wider text-[#00E5BE] mb-1">
-                                            {item.tag} • {item.location}
+                                    {/* Bottom Info */}
+                                    <div className="relative z-10 p-4">
+                                        <div className="text-[10px] font-mono uppercase text-[#00E5BE] mb-0.5">
+                                            {item.tag}
                                         </div>
-                                        <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 group-hover:text-[#00E5BE] transition-colors">
+                                        <h3 className="text-sm font-bold text-white group-hover:text-[#00E5BE] transition-colors line-clamp-1">
                                             {item.title}
                                         </h3>
-                                        <p className="text-xs text-slate-300 line-clamp-2 leading-relaxed">
-                                            {item.description}
-                                        </p>
                                     </div>
                                 </motion.div>
                             ))}
                         </AnimatePresence>
                     </div>
+
+                    {/* Load More Button */}
+                    {visibleCount < filteredItems.length && (
+                        <div className="text-center mt-12">
+                            <button
+                                onClick={() => setVisibleCount(prev => prev + 24)}
+                                className="btn-aura-primary text-xs sm:text-sm !py-3.5 !px-8 font-mono shadow-aura"
+                            >
+                                <span>Load More Photos ({filteredItems.length - visibleCount} Remaining)</span>
+                                <ArrowRight size={15} />
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* Cultural Pillars & Operating Creed */}
@@ -468,7 +427,7 @@ const Culture = () => {
                 </div>
             </div>
 
-            {/* Lightbox Modal */}
+            {/* Fullscreen Lightbox Modal */}
             <AnimatePresence>
                 {lightboxIndex !== null && (
                     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/90 backdrop-blur-xl">
@@ -504,23 +463,23 @@ const Culture = () => {
                             className="max-w-5xl w-full max-h-[85vh] rounded-3xl overflow-hidden border border-white/20 bg-zinc-950 flex flex-col shadow-2xl relative"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="relative flex-grow min-h-[50vh] max-h-[65vh] bg-black">
+                            <div className="relative flex-grow min-h-[50vh] max-h-[65vh] bg-black flex items-center justify-center">
                                 <img
-                                    src={filteredItems[lightboxIndex].image}
+                                    src={filteredItems[lightboxIndex].src}
                                     alt={filteredItems[lightboxIndex].title}
-                                    className="w-full h-full object-contain"
+                                    className="max-w-full max-h-[65vh] object-contain"
                                 />
                             </div>
 
-                            <div className="p-6 bg-zinc-900/90 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                            <div className="p-6 bg-zinc-900/90 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono">
                                 <div>
-                                    <div className="text-xs font-mono uppercase text-[#00E5BE] font-bold">
+                                    <div className="text-xs uppercase text-[#00E5BE] font-bold">
                                         {filteredItems[lightboxIndex].badge} • {filteredItems[lightboxIndex].location}
                                     </div>
-                                    <h4 className="text-xl font-bold text-white mt-0.5">
+                                    <h4 className="text-lg sm:text-xl font-bold text-white mt-1 font-sans">
                                         {filteredItems[lightboxIndex].title}
                                     </h4>
-                                    <p className="text-xs text-slate-400 mt-1 max-w-2xl">
+                                    <p className="text-xs text-slate-400 mt-1 max-w-2xl font-sans">
                                         {filteredItems[lightboxIndex].description}
                                     </p>
                                 </div>
